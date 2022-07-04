@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		519E21D3287316CC00DADA73 /* Launch in Resources */ = {isa = PBXBuildFile; fileRef = 519E21D2287316CC00DADA73 /* Launch */; };
+		519E21D6287317F100DADA73 /* Tabbar in Resources */ = {isa = PBXBuildFile; fileRef = 519E21D5287317F100DADA73 /* Tabbar */; };
 		51BBD11C2872E37800BBE992 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BBD11B2872E37800BBE992 /* AppDelegate.swift */; };
 		51BBD11E2872E37800BBE992 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BBD11D2872E37800BBE992 /* SceneDelegate.swift */; };
 		51BBD1202872E37800BBE992 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BBD11F2872E37800BBE992 /* ViewController.swift */; };
@@ -18,6 +20,8 @@
 
 /* Begin PBXFileReference section */
 		2C792B62BB27596C13DAFBFF /* Pods-Cookie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cookie.release.xcconfig"; path = "Target Support Files/Pods-Cookie/Pods-Cookie.release.xcconfig"; sourceTree = "<group>"; };
+		519E21D2287316CC00DADA73 /* Launch */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Launch; sourceTree = "<group>"; };
+		519E21D5287317F100DADA73 /* Tabbar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tabbar; sourceTree = "<group>"; };
 		51BBD1182872E37800BBE992 /* Cookie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BBD11B2872E37800BBE992 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51BBD11D2872E37800BBE992 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +46,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		519E21D4287316DB00DADA73 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				519E21D2287316CC00DADA73 /* Launch */,
+				519E21D5287317F100DADA73 /* Tabbar */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
 		51BBD10F2872E37800BBE992 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +80,7 @@
 				51BBD11D2872E37800BBE992 /* SceneDelegate.swift */,
 				51BBD11F2872E37800BBE992 /* ViewController.swift */,
 				51BBD1212872E37800BBE992 /* Main.storyboard */,
+				519E21D4287316DB00DADA73 /* Domain */,
 				51BBD1242872E37900BBE992 /* Assets.xcassets */,
 				51BBD1262872E37900BBE992 /* LaunchScreen.storyboard */,
 				51BBD1292872E37900BBE992 /* Info.plist */,
@@ -88,7 +102,6 @@
 				F8B9C5415B4C8B993136D88E /* Pods-Cookie.debug.xcconfig */,
 				2C792B62BB27596C13DAFBFF /* Pods-Cookie.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -152,7 +165,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				519E21D6287317F100DADA73 /* Tabbar in Resources */,
 				51BBD1282872E37900BBE992 /* LaunchScreen.storyboard in Resources */,
+				519E21D3287316CC00DADA73 /* Launch in Resources */,
 				51BBD1252872E37900BBE992 /* Assets.xcassets in Resources */,
 				51BBD1232872E37800BBE992 /* Main.storyboard in Resources */,
 			);
