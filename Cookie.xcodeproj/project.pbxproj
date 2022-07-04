@@ -11,6 +11,10 @@
 		519E21D6287317F100DADA73 /* Tabbar in Resources */ = {isa = PBXBuildFile; fileRef = 519E21D5287317F100DADA73 /* Tabbar */; };
 		519E21D82873358C00DADA73 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 519E21D72873358C00DADA73 /* Base */; };
 		519E21DA2873399D00DADA73 /* Util in Resources */ = {isa = PBXBuildFile; fileRef = 519E21D92873399D00DADA73 /* Util */; };
+		519E21DE28733A7100DADA73 /* Services in Resources */ = {isa = PBXBuildFile; fileRef = 519E21DC28733A7100DADA73 /* Services */; };
+		519E21E428733B5700DADA73 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E328733B5700DADA73 /* MovieResponse.swift */; };
+		519E21E72873502F00DADA73 /* TabBarTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E52873502E00DADA73 /* TabBarTag.swift */; };
+		519E21E82873502F00DADA73 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E62873502F00DADA73 /* Movie.swift */; };
 		51BBD11C2872E37800BBE992 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BBD11B2872E37800BBE992 /* AppDelegate.swift */; };
 		51BBD11E2872E37800BBE992 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BBD11D2872E37800BBE992 /* SceneDelegate.swift */; };
 		51BBD1202872E37800BBE992 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BBD11F2872E37800BBE992 /* ViewController.swift */; };
@@ -26,6 +30,10 @@
 		519E21D5287317F100DADA73 /* Tabbar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tabbar; sourceTree = "<group>"; };
 		519E21D72873358C00DADA73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base; sourceTree = "<group>"; };
 		519E21D92873399D00DADA73 /* Util */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Util; sourceTree = "<group>"; };
+		519E21DC28733A7100DADA73 /* Services */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Services; sourceTree = "<group>"; };
+		519E21E328733B5700DADA73 /* MovieResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
+		519E21E52873502E00DADA73 /* TabBarTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarTag.swift; sourceTree = "<group>"; };
+		519E21E62873502F00DADA73 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		51BBD1182872E37800BBE992 /* Cookie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BBD11B2872E37800BBE992 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51BBD11D2872E37800BBE992 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -60,6 +68,40 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
+		519E21DF28733AEE00DADA73 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				519E21E62873502F00DADA73 /* Movie.swift */,
+				519E21E52873502E00DADA73 /* TabBarTag.swift */,
+				519E21E028733AFF00DADA73 /* Dto */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		519E21E028733AFF00DADA73 /* Dto */ = {
+			isa = PBXGroup;
+			children = (
+				519E21E128733B2100DADA73 /* Request */,
+				519E21E228733B4000DADA73 /* Response */,
+			);
+			path = Dto;
+			sourceTree = "<group>";
+		};
+		519E21E128733B2100DADA73 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		519E21E228733B4000DADA73 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				519E21E328733B5700DADA73 /* MovieResponse.swift */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		51BBD10F2872E37800BBE992 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +127,8 @@
 				51BBD11D2872E37800BBE992 /* SceneDelegate.swift */,
 				51BBD11F2872E37800BBE992 /* ViewController.swift */,
 				51BBD1212872E37800BBE992 /* Main.storyboard */,
+				519E21DF28733AEE00DADA73 /* Model */,
+				519E21DC28733A7100DADA73 /* Services */,
 				519E21D92873399D00DADA73 /* Util */,
 				519E21D4287316DB00DADA73 /* Domain */,
 				51BBD1242872E37900BBE992 /* Assets.xcassets */,
@@ -175,6 +219,7 @@
 				519E21D82873358C00DADA73 /* Base in Resources */,
 				519E21DA2873399D00DADA73 /* Util in Resources */,
 				51BBD1282872E37900BBE992 /* LaunchScreen.storyboard in Resources */,
+				519E21DE28733A7100DADA73 /* Services in Resources */,
 				519E21D3287316CC00DADA73 /* Launch in Resources */,
 				51BBD1252872E37900BBE992 /* Assets.xcassets in Resources */,
 				51BBD1232872E37800BBE992 /* Main.storyboard in Resources */,
@@ -232,7 +277,10 @@
 			files = (
 				51BBD1202872E37800BBE992 /* ViewController.swift in Sources */,
 				51BBD11C2872E37800BBE992 /* AppDelegate.swift in Sources */,
+				519E21E82873502F00DADA73 /* Movie.swift in Sources */,
 				51BBD11E2872E37800BBE992 /* SceneDelegate.swift in Sources */,
+				519E21E72873502F00DADA73 /* TabBarTag.swift in Sources */,
+				519E21E428733B5700DADA73 /* MovieResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +424,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F8B9C5415B4C8B993136D88E /* Pods-Cookie.debug.xcconfig */;
 			buildSettings = {
+				API_URL = "http://3.34.223.58:9000";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -405,6 +454,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C792B62BB27596C13DAFBFF /* Pods-Cookie.release.xcconfig */;
 			buildSettings = {
+				API_URL = "http://3.34.223.58:9000";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

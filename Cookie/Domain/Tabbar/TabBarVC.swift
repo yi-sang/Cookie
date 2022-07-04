@@ -41,7 +41,6 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
     private func setupTabBarController() {
         self.setViewControllers([
             HomeVC.instance(),
-            MyPageVC.instance(),
         ], animated: true)
         
         self.tabBar.tintColor = R.color.red()
