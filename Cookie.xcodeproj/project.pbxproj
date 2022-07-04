@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		519E21D3287316CC00DADA73 /* Launch in Resources */ = {isa = PBXBuildFile; fileRef = 519E21D2287316CC00DADA73 /* Launch */; };
 		519E21D6287317F100DADA73 /* Tabbar in Resources */ = {isa = PBXBuildFile; fileRef = 519E21D5287317F100DADA73 /* Tabbar */; };
+		519E21D82873358C00DADA73 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 519E21D72873358C00DADA73 /* Base */; };
 		51BBD11C2872E37800BBE992 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BBD11B2872E37800BBE992 /* AppDelegate.swift */; };
 		51BBD11E2872E37800BBE992 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BBD11D2872E37800BBE992 /* SceneDelegate.swift */; };
 		51BBD1202872E37800BBE992 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BBD11F2872E37800BBE992 /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 		2C792B62BB27596C13DAFBFF /* Pods-Cookie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cookie.release.xcconfig"; path = "Target Support Files/Pods-Cookie/Pods-Cookie.release.xcconfig"; sourceTree = "<group>"; };
 		519E21D2287316CC00DADA73 /* Launch */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Launch; sourceTree = "<group>"; };
 		519E21D5287317F100DADA73 /* Tabbar */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tabbar; sourceTree = "<group>"; };
+		519E21D72873358C00DADA73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base; sourceTree = "<group>"; };
 		51BBD1182872E37800BBE992 /* Cookie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BBD11B2872E37800BBE992 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51BBD11D2872E37800BBE992 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 			children = (
 				519E21D2287316CC00DADA73 /* Launch */,
 				519E21D5287317F100DADA73 /* Tabbar */,
+				519E21D72873358C00DADA73 /* Base */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				519E21D6287317F100DADA73 /* Tabbar in Resources */,
+				519E21D82873358C00DADA73 /* Base in Resources */,
 				51BBD1282872E37900BBE992 /* LaunchScreen.storyboard in Resources */,
 				519E21D3287316CC00DADA73 /* Launch in Resources */,
 				51BBD1252872E37900BBE992 /* Assets.xcassets in Resources */,
