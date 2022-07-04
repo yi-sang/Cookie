@@ -30,9 +30,4 @@ final class LaunchViewModel: BaseViewModel {
             })
             .disposed(by: disposeBag)
     }
-    
-    func goToSignIn() {
-        window?.rootViewController = TabBarVC.instance()
-        window?.makeKeyAndVisible()
-    }
 }

@@ -9,11 +9,11 @@ import Alamofire
 import RxSwift
 
 protocol MovieProtocol {
-  func getMovieInfo() -> Observable<TodayMovieResponse>
+  func getMovieInfo() -> Observable<MovieResponse>
 }
 
 struct MovieService: MovieProtocol {
-    func getMovieInfo() -> Observable<TodayMovieResponse> {
+    func getMovieInfo() -> Observable<MovieResponse> {
         return Observable.create { observer -> Disposable in
             let urlString = HTTPUtils.url + "/movies/today"
             let headers = HTTPUtils.jsonHeader()
@@ -22,7 +22,7 @@ struct MovieService: MovieProtocol {
                 method: .get,
                 parameters: nil,
                 headers: headers
-            ).responseDecodable(of: TodayMovieResponse.self) { response in
+            ).responseDecodable(of: MovieResponse.self) { response in
                 switch response.result {
                 case .success(let response):
                     observer.onNext(response)
