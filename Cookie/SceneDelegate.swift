@@ -18,9 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = LaunchVC.instance()
         window?.makeKeyAndVisible()
-//        UITabBar.appearance().unselectedItemTintColor = .blue
-//        UITabBar.appearance().tintColor = .white
-//        UITabBar.appearance().barTintColor = .blue
+        UITabBar.appearance().unselectedItemTintColor = .blue
+        UITabBar.appearance().tintColor = .white
+        UITabBar.appearance().barTintColor = .blue
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

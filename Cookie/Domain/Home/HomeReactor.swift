@@ -42,7 +42,6 @@ final class HomeReactor: BaseReactor, Reactor {
             return movieService.getMovieInfo()
                 .map{ $0.result }
                 .map{ Mutation.movieList($0) }
-                
             }
     }
     
