@@ -6,24 +6,14 @@
 //
 
 struct MovieResponse: Decodable {
-  
-    let isSuccess: Bool
-    let code: Int
-    let message: String
-    let result: [Movie]
+    let results: [Movie]
     
     enum CodingKeys: String, CodingKey {
-        case isSuccess
-        case code
-        case message
-        case result
+        case results
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.isSuccess = try values.decodeIfPresent(Bool.self, forKey: .isSuccess) ?? false
-        self.code = try values.decodeIfPresent(Int.self, forKey: .code) ?? 0
-        self.message = try values.decodeIfPresent(String.self, forKey: .message) ?? ""
-        self.result = try values.decodeIfPresent([Movie].self, forKey: .result) ?? []
+        self.results = try values.decodeIfPresent([Movie].self, forKey: .results) ?? [Movie]()
     }
 }

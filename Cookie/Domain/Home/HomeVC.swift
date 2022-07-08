@@ -6,16 +6,15 @@
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 import ReactorKit
+import RxSwift
 
 final class HomeVC: BaseVC, View {
     private let homeReactor = HomeReactor(
         movieService: MovieService()
     )
     private let homeView = HomeView()
-
+    
     override func loadView() {
       self.view = self.homeView
     }
@@ -24,6 +23,7 @@ final class HomeVC: BaseVC, View {
         super.viewDidLoad()
         
         self.reactor = self.homeReactor
+        homeReactor.action.onNext(.viewDidLoad)
     }
     
     static func instance() -> UINavigationController {
@@ -36,22 +36,37 @@ final class HomeVC: BaseVC, View {
         }
         return UINavigationController(rootViewController: viewController)
     }
-    
+
     func bind(reactor: HomeReactor) {
-        homeReactor.action.onNext(.viewDidLoad)
-        
         reactor.state
             .map { $0.movieList }
-            .map { $0.first?.movieName }
-            .asDriver(onErrorJustReturn: "")
-            .drive(homeView.textLabel.rx.text)
+            .asDriver(onErrorJustReturn: [])
+            .drive(
+                self.homeView.movieCollectionView.rx.items
+            ) { collectionView, row, movie in
+                let indexPath = IndexPath(row: row, section: 0)
+                
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: MovieCell.registerId,
+                    for: indexPath
+                ) as? MovieCell else { return BaseCollectionViewCell()
+                }
+                cell.bind(movie: movie)
+                return cell
+            }
             .disposed(by: self.disposeBag)
         
-        reactor.state
-            .map { $0.movieList }
-            .map { $0.description }
-            .asDriver(onErrorJustReturn: "")
-            .drive(homeView.textLabel.rx.text)
+        homeView.movieCollectionView.rx.contentOffset
+            .filter { [weak self] offset in
+            guard let self = self else { return false }
+            let collectionView = self.homeView.movieCollectionView
+            guard collectionView.frame.width > 0 else { return false }
+            return offset.x + collectionView.frame.size.width >= collectionView.contentSize.width - 100
+            }
+            .map { _ in
+                Reactor.Action.loadNextPage
+            }
+            .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
     }
 }

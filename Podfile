@@ -13,6 +13,7 @@ target 'Cookie' do
     pod 'ReactorKit'
     pod 'RxCocoa'
     pod 'RxSwift'
+	pod 'RxDataSources'
     pod 'SnapKit'
     pod 'Then'
     pod 'R.swift'

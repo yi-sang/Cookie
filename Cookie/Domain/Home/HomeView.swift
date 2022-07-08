@@ -10,19 +10,32 @@ import Then
 import SnapKit
 
 class HomeView: BaseView {
-    let textLabel = UILabel().then {
-        $0.text = "qq"
-        $0.textColor = .red
+    let movieCollectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: UICollectionViewFlowLayout()
+    ).then {
+        let layout = HomeStoreFlowLayout()
+        
+        layout.scrollDirection = .horizontal
+        layout.minimumInteritemSpacing = 17
+        layout.itemSize = MovieCell.itemSize
+        $0.collectionViewLayout = layout
+        $0.register(
+            MovieCell.self,
+            forCellWithReuseIdentifier: MovieCell.registerId
+        )
     }
     
     override func setup() {
         self.backgroundColor = .white
-        self.addSubview(textLabel)
+        self.addSubview(movieCollectionView)
     }
     
     override func bindConstraints() {
-        textLabel.snp.makeConstraints {
-            $0.center.equalTo(self.snp.center)
+        movieCollectionView.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(350)
         }
     }
 }

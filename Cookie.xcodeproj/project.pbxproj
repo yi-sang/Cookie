@@ -29,6 +29,16 @@
 		519E221A28736DD500DADA73 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 519E221928736DD500DADA73 /* Colors.xcassets */; };
 		519E22222873756900DADA73 /* Jalnan.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 519E21E92873516A00DADA73 /* Jalnan.ttf */; };
 		519E22272873862B00DADA73 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E22262873862B00DADA73 /* R.generated.swift */; };
+		519E222B2875DE9500DADA73 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E222A2875DE9500DADA73 /* Storage.swift */; };
+		519E222F2877132600DADA73 /* MyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E222E2877132600DADA73 /* MyLogger.swift */; };
+		519E22322877335700DADA73 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E22312877335700DADA73 /* MovieCell.swift */; };
+		519E22352877347000DADA73 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E22342877347000DADA73 /* UIFontExtension.swift */; };
+		519E2239287740DC00DADA73 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 519E2237287740CB00DADA73 /* NotoSansKR-Medium.otf */; };
+		519E223A287740DE00DADA73 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 519E2238287740CB00DADA73 /* NotoSansKR-Bold.otf */; };
+		519E223B287740E000DADA73 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 519E2236287740CB00DADA73 /* NotoSansKR-Regular.otf */; };
+		519E223D2877424400DADA73 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E223C2877424400DADA73 /* UIViewExtension.swift */; };
+		519E22422877719400DADA73 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E22412877719400DADA73 /* UIImageViewExtension.swift */; };
+		519E22442877749300DADA73 /* HomeFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E22432877749300DADA73 /* HomeFlowLayout.swift */; };
 		51BBD11C2872E37800BBE992 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BBD11B2872E37800BBE992 /* AppDelegate.swift */; };
 		51BBD11E2872E37800BBE992 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BBD11D2872E37800BBE992 /* SceneDelegate.swift */; };
 		51BBD1252872E37900BBE992 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51BBD1242872E37900BBE992 /* Assets.xcassets */; };
@@ -60,6 +70,16 @@
 		519E221628736B7300DADA73 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		519E221928736DD500DADA73 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		519E22262873862B00DADA73 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		519E222A2875DE9500DADA73 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		519E222E2877132600DADA73 /* MyLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLogger.swift; sourceTree = "<group>"; };
+		519E22312877335700DADA73 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		519E22342877347000DADA73 /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
+		519E2236287740CB00DADA73 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
+		519E2237287740CB00DADA73 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		519E2238287740CB00DADA73 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		519E223C2877424400DADA73 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		519E22412877719400DADA73 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		519E22432877749300DADA73 /* HomeFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFlowLayout.swift; sourceTree = "<group>"; };
 		51BBD1182872E37800BBE992 /* Cookie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cookie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BBD11B2872E37800BBE992 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51BBD11D2872E37800BBE992 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +117,7 @@
 		519E21DF28733AEE00DADA73 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				519E223E2877458500DADA73 /* Presentation */,
 				519E21E62873502F00DADA73 /* Movie.swift */,
 				519E21E52873502E00DADA73 /* TabBarTag.swift */,
 				519E221228736AD400DADA73 /* Error */,
@@ -133,6 +154,7 @@
 		519E21EE2873605800DADA73 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				519E2230287732D100DADA73 /* components */,
 				519E21EF2873606A00DADA73 /* HomeReactor.swift */,
 				519E21F02873606A00DADA73 /* HomeVC.swift */,
 				519E21F12873606A00DADA73 /* HomeView.swift */,
@@ -182,6 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				519E220E2873615D00DADA73 /* HTTPUtils.swift */,
+				519E222E2877132600DADA73 /* MyLogger.swift */,
+				519E222A2875DE9500DADA73 /* Storage.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -207,8 +231,37 @@
 				51BBD1242872E37900BBE992 /* Assets.xcassets */,
 				519E221928736DD500DADA73 /* Colors.xcassets */,
 				519E21E92873516A00DADA73 /* Jalnan.ttf */,
+				519E2238287740CB00DADA73 /* NotoSansKR-Bold.otf */,
+				519E2237287740CB00DADA73 /* NotoSansKR-Medium.otf */,
+				519E2236287740CB00DADA73 /* NotoSansKR-Regular.otf */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		519E2230287732D100DADA73 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				519E22312877335700DADA73 /* MovieCell.swift */,
+				519E22432877749300DADA73 /* HomeFlowLayout.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		519E22332877344400DADA73 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				519E22342877347000DADA73 /* UIFontExtension.swift */,
+				519E223C2877424400DADA73 /* UIViewExtension.swift */,
+				519E22412877719400DADA73 /* UIImageViewExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		519E223E2877458500DADA73 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		51BBD10F2872E37800BBE992 = {
@@ -235,6 +288,7 @@
 			children = (
 				51BBD11B2872E37800BBE992 /* AppDelegate.swift */,
 				51BBD11D2872E37800BBE992 /* SceneDelegate.swift */,
+				519E22332877344400DADA73 /* Extension */,
 				519E21DF28733AEE00DADA73 /* Model */,
 				519E220A2873611900DADA73 /* Service */,
 				519E220D2873614900DADA73 /* Util */,
@@ -326,8 +380,11 @@
 			files = (
 				519E22222873756900DADA73 /* Jalnan.ttf in Resources */,
 				51BBD1282872E37900BBE992 /* LaunchScreen.storyboard in Resources */,
+				519E2239287740DC00DADA73 /* NotoSansKR-Medium.otf in Resources */,
 				519E221A28736DD500DADA73 /* Colors.xcassets in Resources */,
+				519E223A287740DE00DADA73 /* NotoSansKR-Bold.otf in Resources */,
 				51BBD1252872E37900BBE992 /* Assets.xcassets in Resources */,
+				519E223B287740E000DADA73 /* NotoSansKR-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +459,8 @@
 				519E21F42873606A00DADA73 /* HomeView.swift in Sources */,
 				519E21F92873608C00DADA73 /* LaunchView.swift in Sources */,
 				519E21F32873606A00DADA73 /* HomeVC.swift in Sources */,
+				519E22422877719400DADA73 /* UIImageViewExtension.swift in Sources */,
+				519E22442877749300DADA73 /* HomeFlowLayout.swift in Sources */,
 				519E21FA2873608C00DADA73 /* LaunchVC.swift in Sources */,
 				519E2207287360DD00DADA73 /* BaseViewModel.swift in Sources */,
 				519E2206287360DD00DADA73 /* BaseCollectionViewCell.swift in Sources */,
@@ -411,9 +470,14 @@
 				519E22272873862B00DADA73 /* R.generated.swift in Sources */,
 				519E220C2873613000DADA73 /* MovieService.swift in Sources */,
 				519E21E82873502F00DADA73 /* Movie.swift in Sources */,
+				519E22352877347000DADA73 /* UIFontExtension.swift in Sources */,
+				519E22322877335700DADA73 /* MovieCell.swift in Sources */,
 				519E221428736AEC00DADA73 /* CommonError.swift in Sources */,
+				519E223D2877424400DADA73 /* UIViewExtension.swift in Sources */,
 				519E21FE287360B000DADA73 /* TabBarVC.swift in Sources */,
 				519E2208287360DD00DADA73 /* BaseReactor.swift in Sources */,
+				519E222F2877132600DADA73 /* MyLogger.swift in Sources */,
+				519E222B2875DE9500DADA73 /* Storage.swift in Sources */,
 				51BBD11E2872E37800BBE992 /* SceneDelegate.swift in Sources */,
 				519E220F2873615D00DADA73 /* HTTPUtils.swift in Sources */,
 				519E21E72873502F00DADA73 /* TabBarTag.swift in Sources */,
@@ -556,7 +620,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F8B9C5415B4C8B993136D88E /* Pods-Cookie.debug.xcconfig */;
 			buildSettings = {
-				API_URL = "http://3.34.223.58:9000";
+				API_URL = "https://api.themoviedb.org/";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -585,7 +649,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2C792B62BB27596C13DAFBFF /* Pods-Cookie.release.xcconfig */;
 			buildSettings = {
-				API_URL = "http://3.34.223.58:9000";
+				API_URL = "https://api.themoviedb.org/";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

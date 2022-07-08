@@ -6,30 +6,18 @@
 //
 
 struct Movie: Decodable {
-    let movieIdx: Int
-    let movieName: String
-    let moviePhotoList: [String]
-    let movieGenreList: [String]
-    let likeCnt: Int
-    let liked: Bool
+    let title: String
+    let posterPath: String
     
     enum Codingkeys: String, CodingKey {
-        case movieIdx
-        case movieName
-        case moviePhotoList
-        case movieGenreList
-        case likeCnt
-        case liked
+        case title
+        case poster_path
     }
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: Codingkeys.self)
         
-        self.movieIdx = try values.decodeIfPresent(Int.self, forKey: .movieIdx) ?? 0
-        self.movieName = try values.decodeIfPresent(String.self, forKey: .movieName) ?? ""
-        self.moviePhotoList = try values.decodeIfPresent([String].self, forKey: .moviePhotoList) ?? []
-        self.movieGenreList = try values.decodeIfPresent([String].self, forKey: .movieGenreList) ?? []
-        self.likeCnt = try values.decodeIfPresent(Int.self, forKey: .likeCnt) ?? 0
-        self.liked = try values.decodeIfPresent(Bool.self, forKey: .liked) ?? false
+        self.title = try values.decodeIfPresent(String.self, forKey: .title) ?? ""
+        self.posterPath = "https://image.tmdb.org/t/p/original\(try values.decodeIfPresent(String.self, forKey: .poster_path) ?? "")"
     }
 }

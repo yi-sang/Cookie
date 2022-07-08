@@ -9,18 +9,24 @@ import Alamofire
 import RxSwift
 
 protocol MovieProtocol {
-  func getMovieInfo() -> Observable<MovieResponse>
+    func getMovieInfo(page: Int) -> Observable<MovieResponse>
 }
 
 struct MovieService: MovieProtocol {
-    func getMovieInfo() -> Observable<MovieResponse> {
+    func getMovieInfo(page: Int) -> Observable<MovieResponse> {
         return Observable.create { observer -> Disposable in
-            let urlString = HTTPUtils.url + "/movies/today"
+            let urlString = HTTPUtils.url + "3/movie/popular"
             let headers = HTTPUtils.jsonHeader()
+            let parameters: Parameters = [
+                "api_key" : Storage.shared.apiKey,
+                "language" : Storage.shared.language,
+                "page" : page,
+                "region" : Storage.shared.region
+            ]
             HTTPUtils.defaultSession.request(
                 urlString,
                 method: .get,
-                parameters: nil,
+                parameters: parameters,
                 headers: headers
             ).responseDecodable(of: MovieResponse.self) { response in
                 switch response.result {

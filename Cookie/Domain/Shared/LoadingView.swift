@@ -11,6 +11,7 @@ import SnapKit
 
 class LoadingView: UIView {
     let loadingImageView = UIImageView().then {
+        $0.image = R.image.dish()
         $0.contentMode = .scaleAspectFit
     }
     
@@ -32,7 +33,6 @@ class LoadingView: UIView {
         loadingImageView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
             make.width.height.equalTo(150)
-            make.edges.equalToSuperview()
         }
     }
 }
