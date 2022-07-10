@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class MovieCell: BaseCollectionViewCell {
+    
     static let registerId = "\(MovieCell.self)"
     
     static let itemSize: CGSize = CGSize(width: 175, height: 260)
@@ -24,6 +26,7 @@ final class MovieCell: BaseCollectionViewCell {
     private let categoryImageView = UIImageView().then {
         $0.layer.cornerRadius = 30
         $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
     }
     
     private let titleLabel = UILabel().then {
@@ -57,8 +60,16 @@ final class MovieCell: BaseCollectionViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.categoryImageView.image = nil
+    }
+    
     func bind(movie: Movie) {
-        categoryImageView.downloadImageFrom(link: movie.posterPath, contentMode: .scaleAspectFill)
+        if let url = URL(string: movie.posterPath) {
+            self.categoryImageView.kf.setImage(with: url)
+        }
         titleLabel.text = movie.title
     }
 }

@@ -17,4 +17,5 @@ target 'Cookie' do
     pod 'SnapKit'
     pod 'Then'
     pod 'R.swift'
+	pod 'Kingfisher'
 end

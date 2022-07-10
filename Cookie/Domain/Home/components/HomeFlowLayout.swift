@@ -13,11 +13,11 @@ final class HomeStoreFlowLayout: UICollectionViewFlowLayout {
     let currentIndex = PublishRelay<Int>()
     
     var pageWidth: CGFloat {
-        return self.itemSize.width + self.minimumLineSpacing
+        return (self.itemSize.width + self.minimumLineSpacing)*2
     }
     
     var flickVelocity: CGFloat {
-        return 0.6
+        return 1.0
     }
     
     override func targetContentOffset(
