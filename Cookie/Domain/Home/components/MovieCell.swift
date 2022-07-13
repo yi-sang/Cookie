@@ -12,7 +12,9 @@ final class MovieCell: BaseCollectionViewCell {
     
     static let registerId = "\(MovieCell.self)"
     
-    static let itemSize: CGSize = CGSize(width: 175, height: 260)
+//    static let itemSize: CGSize = CGSize(width: 175, height: 260)
+    static let itemSize: CGSize = CGSize(width: (UIScreen.main.bounds.width - 10*4 - 20)/2,
+                                         height: (UIScreen.main.bounds.width - 10*4 - 20)/2 * 1.5)
     
     private let containerView = UIView().then {
         $0.layer.cornerRadius = 30

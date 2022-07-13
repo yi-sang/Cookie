@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class HomeStoreFlowLayout: UICollectionViewFlowLayout {
+final class HomeFlowLayout: UICollectionViewFlowLayout {
     let currentIndex = PublishRelay<Int>()
     
     var pageWidth: CGFloat {

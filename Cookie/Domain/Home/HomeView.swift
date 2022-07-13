@@ -10,8 +10,6 @@ import Then
 import SnapKit
 
 class HomeView: BaseView {
-    let scrollView = UIScrollView().then{ _ in }
-    let contentView = UIView().then{ _ in }
     var nowPlayingButton = UIButton().then{
         $0.setTitle("상영중인 영화", for: .normal)
         $0.setTitleColor(.black, for: .selected)
@@ -30,10 +28,9 @@ class HomeView: BaseView {
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     ).then {
-        let layout = HomeStoreFlowLayout()
+        let layout = HomeFlowLayout()
         
         layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 17
         layout.itemSize = MovieCell.itemSize
         $0.showsHorizontalScrollIndicator = false
         $0.collectionViewLayout = layout
@@ -45,24 +42,16 @@ class HomeView: BaseView {
     
     override func setup() {
         self.backgroundColor = .white
-        self.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        contentView.addSubview(nowPlayingButton)
-        contentView.addSubview(upcomingButton)
-        contentView.addSubview(movieCollectionView)
+        self.addSubViews(
+            nowPlayingButton,
+            upcomingButton,
+            movieCollectionView
+        )
     }
     
     override func bindConstraints() {
-        scrollView.snp.makeConstraints {
-            $0.edges.equalTo(safeAreaLayoutGuide)
-        }
-        contentView.snp.makeConstraints {
-            $0.edges.width.equalTo(scrollView)
-            $0.bottom.equalTo(movieCollectionView)
-        }
         nowPlayingButton.snp.makeConstraints {
-            $0.top.equalTo(contentView).offset(20)
-            $0.leading.equalTo(contentView).offset(15)
+            $0.top.leading.equalTo(self.safeAreaLayoutGuide).offset(15)
         }
         upcomingButton.snp.makeConstraints {
             $0.top.equalTo(nowPlayingButton)
@@ -70,8 +59,8 @@ class HomeView: BaseView {
         }
         movieCollectionView.snp.makeConstraints {
             $0.top.equalTo(nowPlayingButton.snp.bottom).offset(10)
-            $0.leading.trailing.width.equalTo(scrollView)
-            $0.height.equalTo(260)
+            $0.leading.trailing.width.equalTo(self.safeAreaLayoutGuide)
+            $0.height.equalTo(((UIScreen.main.bounds.width - 10*4 - 20)/2 * 1.5)*2 + 10)
         }
     }
 }
