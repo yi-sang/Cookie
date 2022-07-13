@@ -12,35 +12,21 @@ import SnapKit
 class HomeView: BaseView {
     let scrollView = UIScrollView().then{ _ in }
     let contentView = UIView().then{ _ in }
-    let nowPlayingLabel = UILabel().then{
-        $0.text = "상영중인 영화"
-        $0.textColor = .black
-        $0.font = .jalnan(size: 16)
-    }
-    let upcomingLabel = UILabel().then{
-        $0.text = "개봉 예정 영화"
-        $0.textColor = .black
-        $0.font = .jalnan(size: 16)
-    }
-
-    let upcomingMovieCollectionView = UICollectionView(
-        frame: .zero,
-        collectionViewLayout: UICollectionViewFlowLayout()
-    ).then {
-        let layout = HomeStoreFlowLayout()
-        
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = 17
-        layout.itemSize = MovieCell.itemSize
-        $0.showsHorizontalScrollIndicator = false
-        $0.collectionViewLayout = layout
-        $0.register(
-            MovieCell.self,
-            forCellWithReuseIdentifier: MovieCell.registerId
-        )
+    var nowPlayingButton = UIButton().then{
+        $0.setTitle("상영중인 영화", for: .normal)
+        $0.setTitleColor(.black, for: .selected)
+        $0.setTitleColor(.darkGray, for: .normal)
+        $0.titleLabel?.font = .jalnan(size: 16)
     }
     
-    let nowPlayingMovieCollectionView = UICollectionView(
+    var upcomingButton = UIButton().then{
+        $0.setTitle("개봉 예정 영화", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.setTitleColor(.darkGray, for: .selected)
+        $0.titleLabel?.font = .jalnan(size: 16)
+    }
+
+    let movieCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     ).then {
@@ -61,10 +47,9 @@ class HomeView: BaseView {
         self.backgroundColor = .white
         self.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        contentView.addSubview(nowPlayingLabel)
-        contentView.addSubview(nowPlayingMovieCollectionView)
-        contentView.addSubview(upcomingLabel)
-        contentView.addSubview(upcomingMovieCollectionView)
+        contentView.addSubview(nowPlayingButton)
+        contentView.addSubview(upcomingButton)
+        contentView.addSubview(movieCollectionView)
     }
     
     override func bindConstraints() {
@@ -73,23 +58,18 @@ class HomeView: BaseView {
         }
         contentView.snp.makeConstraints {
             $0.edges.width.equalTo(scrollView)
-            $0.bottom.equalTo(upcomingMovieCollectionView)
+            $0.bottom.equalTo(movieCollectionView)
         }
-        nowPlayingLabel.snp.makeConstraints {
+        nowPlayingButton.snp.makeConstraints {
             $0.top.equalTo(contentView).offset(20)
             $0.leading.equalTo(contentView).offset(15)
         }
-        nowPlayingMovieCollectionView.snp.makeConstraints {
-            $0.top.equalTo(nowPlayingLabel).offset(20)
-            $0.leading.trailing.width.equalTo(scrollView)
-            $0.height.equalTo(260)
+        upcomingButton.snp.makeConstraints {
+            $0.top.equalTo(nowPlayingButton)
+            $0.leading.equalTo(nowPlayingButton.snp.trailing).offset(15)
         }
-        upcomingLabel.snp.makeConstraints {
-            $0.top.equalTo(nowPlayingMovieCollectionView.snp.bottom).offset(20)
-            $0.leading.equalTo(contentView).offset(15)
-        }
-        upcomingMovieCollectionView.snp.makeConstraints {
-            $0.top.equalTo(upcomingLabel.snp.bottom).offset(20)
+        movieCollectionView.snp.makeConstraints {
+            $0.top.equalTo(nowPlayingButton.snp.bottom).offset(10)
             $0.leading.trailing.width.equalTo(scrollView)
             $0.height.equalTo(260)
         }

@@ -14,31 +14,25 @@ final class HomeReactor: BaseReactor, Reactor {
 
     enum Action {
         case viewDidLoad
-        case loadupcomingNextPage
-        case loadNowPlayingNextPage
+        case loadNextPage
+        case buttonClicked(section: MovieSection)
     }
     
     enum Mutation {
-        case fetchMovieList([Movie], nextPage: Int, section: SectionType)
-        case appendMovieList([Movie], nextPage: Int, section: SectionType)
-        case setLoadingNextPage(Bool, section: SectionType)
+        case fetchMovieList([Movie], section: MovieSection)
+        case appendMovieList([Movie], nextPage: Int)
+        case setLoadingNextPage(Bool)
     }
     
     struct State {
-        var upcomingMovieList: [Movie] = []
-        var nowPlayingMovieList: [Movie] = []
-        var upcomingNextPage: Int?
-        var nowPlayingNextPage: Int?
-        var isLoadingupcomingNextPage: Bool = false
-        var isLoadingNowPlayingNextPage: Bool = false
+        var movieList: [Movie] = []
+        var nextPage: Int = 1
+        var isLoadingNextPage: Bool = false
+        var movieSection: MovieSection = .nowPlaying
+        var retry: Bool = true
     }
     
     let initialState: State
-    enum SectionType: Int {
-        case upcoming
-        case nowPlaying
-    }
-    
     init(
         movieService: MovieProtocol
     ) {
@@ -51,66 +45,52 @@ final class HomeReactor: BaseReactor, Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .viewDidLoad:
-            return Observable.merge([movieService.getupcomingMovieInfo(page: 1)
+            return movieService.getMovieInfo(page: 1, section: .nowPlaying)
                 .map{ $0.results }
-                .map{ Mutation.fetchMovieList($0, nextPage: 1, section: .upcoming) },
-                                     movieService.getNowPlayingMovieInfo(page: 1)
-                .map{ $0.results }
-                .map{ Mutation.fetchMovieList($0, nextPage: 1, section: .nowPlaying) }
-            ])
+                .map{ Mutation.fetchMovieList($0, section: .nowPlaying) }
+        case let .buttonClicked(section):
+            let sectionToggled: Bool =  self.currentState.movieSection == section ? false : true
+            if sectionToggled {
+                return movieService.getMovieInfo(page: 1, section: section)
+                    .map{ $0.results }
+                    .map{ Mutation.fetchMovieList($0, section: section) }
+            } else {
+                return Observable.empty()
+            }
                     
-        case .loadupcomingNextPage:
-            guard !self.currentState.isLoadingupcomingNextPage else { return Observable.empty() }
-            guard let page = self.currentState.upcomingNextPage else { return Observable.empty() }
-            return Observable.concat([
-                Observable.just(Mutation.setLoadingNextPage(true, section: .upcoming)),
-                movieService.getupcomingMovieInfo(page: page)
-                    .map{ $0.results }
-                    .map{ Mutation.appendMovieList($0, nextPage: page, section: .upcoming) },
-                Observable.just(Mutation.setLoadingNextPage(false, section: .upcoming))
-            ])
-        case .loadNowPlayingNextPage:
-            guard !self.currentState.isLoadingNowPlayingNextPage else { return Observable.empty() }
-            guard let page = self.currentState.nowPlayingNextPage else { return Observable.empty() }
-            return Observable.concat([
-                Observable.just(Mutation.setLoadingNextPage(true, section: .nowPlaying)),
-                movieService.getNowPlayingMovieInfo(page: page)
-                    .map{ $0.results }
-                    .map{ Mutation.appendMovieList($0, nextPage: page, section: .nowPlaying) },
-                Observable.just(Mutation.setLoadingNextPage(false, section: .nowPlaying))
-            ])
+        case .loadNextPage:
+            guard !self.currentState.isLoadingNextPage else { return Observable.empty() }
+            let page = self.currentState.nextPage
+            let movieSection = self.currentState.movieSection
+            if self.currentState.retry == true {
+                return Observable.concat([
+                    Observable.just(Mutation.setLoadingNextPage(true)),
+                    movieService.getMovieInfo(page: page, section: movieSection)
+                        .map{ $0.results }
+                        .map{ Mutation.appendMovieList($0, nextPage: page)},
+                    Observable.just(Mutation.setLoadingNextPage(false))
+                ])
+            } else {
+                return Observable.empty()
+            }
         }
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         var newState = state
         switch mutation {
-        case let .fetchMovieList(movieList, page, sectionType):
-            switch sectionType {
-            case .upcoming:
-                newState.upcomingMovieList = movieList
-                newState.upcomingNextPage = page + 1
-            case .nowPlaying:
-                newState.nowPlayingMovieList = movieList
-                newState.nowPlayingNextPage = page + 1
-            }
-        case let .appendMovieList(movieList, nextPage, sectionType):
-            switch sectionType {
-            case .upcoming:
-                newState.upcomingMovieList.append(contentsOf: movieList)
-                newState.upcomingNextPage = nextPage + 1
-            case .nowPlaying:
-                newState.nowPlayingMovieList.append(contentsOf: movieList)
-                newState.nowPlayingNextPage = nextPage + 1
-            }
-            
-        case let .setLoadingNextPage(isLoadingNextPage, sectionType):
-            switch sectionType {
-            case .upcoming:
-                newState.isLoadingupcomingNextPage = isLoadingNextPage
-            case .nowPlaying:
-                newState.isLoadingNowPlayingNextPage = isLoadingNextPage
-            }
+        case let .fetchMovieList(movieList, section):
+            newState.movieList = movieList
+            newState.movieSection = section
+            newState.nextPage = 2
+            newState.retry = true
+        case let .appendMovieList(movieList, nextPage):
+            let isEmpty = movieList.isEmpty ? false : true
+            newState.retry = isEmpty
+            newState.movieList.append(contentsOf: movieList)
+            newState.nextPage = nextPage + 1
+        case let .setLoadingNextPage(isLoadingNextPage):
+            newState.isLoadingNextPage = isLoadingNextPage
         }
         return newState
     }

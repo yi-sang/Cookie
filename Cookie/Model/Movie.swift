@@ -21,3 +21,8 @@ struct Movie: Decodable {
         self.posterPath = "https://image.tmdb.org/t/p/original\(try values.decodeIfPresent(String.self, forKey: .poster_path) ?? "")"
     }
 }
+
+enum MovieSection: String {
+    case nowPlaying = "now_playing"
+    case upcoming = "upcoming"
+}

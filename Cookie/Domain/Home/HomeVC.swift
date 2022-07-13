@@ -14,7 +14,7 @@ final class HomeVC: BaseVC, View {
     private let homeReactor = HomeReactor(
         movieService: MovieService()
     )
-    private let homeView = HomeView()
+    private var homeView = HomeView()
     
     override func loadView() {
       self.view = self.homeView
@@ -36,13 +36,47 @@ final class HomeVC: BaseVC, View {
         }
         return UINavigationController(rootViewController: viewController)
     }
-
+    
     func bind(reactor: HomeReactor) {
+        // Action
+        homeView.movieCollectionView.rx.contentOffset
+            .filter { [weak self] offset in
+            guard let self = self else { return false }
+            let collectionView = self.homeView.movieCollectionView
+            guard collectionView.frame.width > 0 else { return false }
+            return offset.x + collectionView.frame.size.width >= collectionView.contentSize.width - 100
+            }
+            .map { _ in Reactor.Action.loadNextPage }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+        
+        homeView.nowPlayingButton.rx.tap
+            .map { Reactor.Action.buttonClicked(section: .nowPlaying) }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+        
+        homeView.upcomingButton.rx.tap
+            .map { Reactor.Action.buttonClicked(section: .upcoming) }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+    
         reactor.state
-            .map { $0.upcomingMovieList }
+            .map { $0.movieSection }
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: .nowPlaying)
+            .drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.homeView.nowPlayingButton.isSelected.toggle()
+                self.homeView.upcomingButton.isSelected.toggle()
+                self.homeView.movieCollectionView.contentOffset = CGPoint(x: 0, y: 0)
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.movieList }
             .asDriver(onErrorJustReturn: [])
             .drive(
-                self.homeView.upcomingMovieCollectionView.rx.items
+                self.homeView.movieCollectionView.rx.items
             ) { collectionView, row, movie in
                 let indexPath = IndexPath(row: row, section: 0)
                 guard let cell = collectionView.dequeueReusableCell(
@@ -53,49 +87,6 @@ final class HomeVC: BaseVC, View {
                 cell.bind(movie: movie)
                 return cell
             }
-            .disposed(by: self.disposeBag)
-        
-        reactor.state
-            .map { $0.nowPlayingMovieList }
-            .asDriver(onErrorJustReturn: [])
-            .drive(
-                self.homeView.nowPlayingMovieCollectionView.rx.items
-            ) { collectionView, row, movie in
-                let indexPath = IndexPath(row: row, section: 0)
-
-                guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: MovieCell.registerId,
-                    for: indexPath
-                ) as? MovieCell else { return BaseCollectionViewCell()
-                }
-                cell.bind(movie: movie)
-                return cell
-            }
-            .disposed(by: self.disposeBag)
-        
-        homeView.upcomingMovieCollectionView.rx.contentOffset
-            .filter { [weak self] offset in
-            guard let self = self else { return false }
-            let collectionView = self.homeView.upcomingMovieCollectionView
-            guard collectionView.frame.width > 0 else { return false }
-            return offset.x + collectionView.frame.size.width >= collectionView.contentSize.width - 100
-            }
-            .map { offset in
-                Reactor.Action.loadupcomingNextPage
-            }
-            .bind(to: reactor.action)
-            .disposed(by: self.disposeBag)
-        homeView.nowPlayingMovieCollectionView.rx.contentOffset
-            .filter { [weak self] offset in
-            guard let self = self else { return false }
-            let collectionView = self.homeView.nowPlayingMovieCollectionView
-            guard collectionView.frame.width > 0 else { return false }
-            return offset.x + collectionView.frame.size.width >= collectionView.contentSize.width - 100
-            }
-            .map { offset in
-                Reactor.Action.loadNowPlayingNextPage
-            }
-            .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
     }
 }
