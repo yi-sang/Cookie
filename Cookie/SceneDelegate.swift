@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         window?.rootViewController = LaunchVC.instance()
         window?.makeKeyAndVisible()
+        window?.backgroundColor = .white
         UITabBar.appearance().unselectedItemTintColor = .blue
         UITabBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = .blue

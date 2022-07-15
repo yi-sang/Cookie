@@ -7,9 +7,8 @@
 
 import UIKit
 import ReactorKit
-import RxDataSources
 import RxSwift
-
+import RxCocoa
 final class HomeVC: BaseVC, View {
     private let homeReactor = HomeReactor(
         movieService: MovieService()
@@ -17,13 +16,14 @@ final class HomeVC: BaseVC, View {
     private var homeView = HomeView()
     
     override func loadView() {
-      self.view = self.homeView
-    }
+        self.view = self.homeView
+    }  
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reactor = self.homeReactor
         homeReactor.action.onNext(.viewDidLoad)
+        navigationItem.titleView = homeView.searchBar
     }
     
     static func instance() -> UINavigationController {
@@ -35,6 +35,46 @@ final class HomeVC: BaseVC, View {
             )
         }
         return UINavigationController(rootViewController: viewController)
+    }
+    
+    override func bindEvent() {
+        homeView.searchBar.rx.textDidBeginEditing
+            .asDriver()
+            .drive (onNext: { _ in
+                UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
+                    self.homeView.searchBar.searchTextField.backgroundColor = UIColor(rgb: 0xCBCBD0)
+                } completion: { Bool in
+                    self.homeView.searchBar.searchTextField.backgroundColor = UIColor(rgb: 0xECECEE)
+                    self.homeView.searchBar.searchTextField.tintColor = .darkGray
+                    self.homeView.searchBar.showsCancelButton = true
+                    self.homeView.removeSubviews()
+                }
+            }).disposed(by: eventDisposeBag)
+
+        homeView.searchBar.rx.cancelButtonClicked
+            .asDriver()
+            .drive (onNext: { _ in
+                self.homeView.searchBar.resignFirstResponder()
+                self.homeView.searchBar.text = ""
+                self.homeView.searchBar.showsCancelButton = false
+                self.homeView.addSubViews(
+                    self.homeView.nowPlayingButton,
+                    self.homeView.upcomingButton,
+                    self.homeView.movieCollectionView
+                )
+                self.homeView.bindConstraints()
+            }).disposed(by: eventDisposeBag)
+//        homeView.searchButton.rx.tap
+//            .asDriver()
+//            .drive { [weak self] tap in
+//               guard let self = self else { return }
+//                self.homeView.removeFromSuperview()
+//                self.homeView.removeFromSuperview()
+//                self.homeView.removeFromSuperview()
+//                self.navigationItem.titleView?.removeFromSuperview()
+//                self.navigationItem.titleView = self.homeView.searchBar
+//            }
+//            .disposed(by: eventDisposeBag)
     }
     
     func bind(reactor: HomeReactor) {
@@ -59,12 +99,19 @@ final class HomeVC: BaseVC, View {
             .map { Reactor.Action.buttonClicked(section: .upcoming) }
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
-    
+        
+//        searchBar.rx.text
+//            .orEmpty
+//            .skip(1)
+//            .map { text in Reactor.Action.searchTextDidChanged(query: text)}
+//            .bind(to: reactor.action)
+//            .disposed(by: self.disposeBag)
+        
         reactor.state
             .map { $0.movieSection }
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: .nowPlaying)
-            .drive(onNext: { [weak self] _ in
+            .drive(onNext: { [weak self] section in
                 guard let self = self else { return }
                 self.homeView.nowPlayingButton.isSelected.toggle()
                 self.homeView.upcomingButton.isSelected.toggle()

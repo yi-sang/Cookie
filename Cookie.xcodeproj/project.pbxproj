@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		511C676228817C7D004D18C9 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C676128817C7C004D18C9 /* UIColorExtension.swift */; };
+		511C676428819557004D18C9 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C676328819557004D18C9 /* UIImageExtension.swift */; };
+		511C676628819662004D18C9 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C676528819662004D18C9 /* SearchButton.swift */; };
 		519E21E428733B5700DADA73 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E328733B5700DADA73 /* MovieResponse.swift */; };
 		519E21E72873502F00DADA73 /* TabBarTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E52873502E00DADA73 /* TabBarTag.swift */; };
 		519E21E82873502F00DADA73 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E62873502F00DADA73 /* Movie.swift */; };
@@ -47,6 +50,9 @@
 
 /* Begin PBXFileReference section */
 		2C792B62BB27596C13DAFBFF /* Pods-Cookie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cookie.release.xcconfig"; path = "Target Support Files/Pods-Cookie/Pods-Cookie.release.xcconfig"; sourceTree = "<group>"; };
+		511C676128817C7C004D18C9 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		511C676328819557004D18C9 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		511C676528819662004D18C9 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		519E21E328733B5700DADA73 /* MovieResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		519E21E52873502E00DADA73 /* TabBarTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarTag.swift; sourceTree = "<group>"; };
 		519E21E62873502F00DADA73 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -241,6 +247,7 @@
 			children = (
 				519E22312877335700DADA73 /* MovieCell.swift */,
 				519E22432877749300DADA73 /* HomeFlowLayout.swift */,
+				511C676528819662004D18C9 /* SearchButton.swift */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -249,7 +256,9 @@
 			isa = PBXGroup;
 			children = (
 				519E22342877347000DADA73 /* UIFontExtension.swift */,
+				511C676128817C7C004D18C9 /* UIColorExtension.swift */,
 				519E223C2877424400DADA73 /* UIViewExtension.swift */,
+				511C676328819557004D18C9 /* UIImageExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -469,6 +478,7 @@
 				519E22352877347000DADA73 /* UIFontExtension.swift in Sources */,
 				519E22322877335700DADA73 /* MovieCell.swift in Sources */,
 				519E221428736AEC00DADA73 /* CommonError.swift in Sources */,
+				511C676228817C7D004D18C9 /* UIColorExtension.swift in Sources */,
 				519E223D2877424400DADA73 /* UIViewExtension.swift in Sources */,
 				519E21FE287360B000DADA73 /* TabBarVC.swift in Sources */,
 				519E2208287360DD00DADA73 /* BaseReactor.swift in Sources */,
@@ -481,6 +491,8 @@
 				519E21E428733B5700DADA73 /* MovieResponse.swift in Sources */,
 				519E21FB2873608C00DADA73 /* LaunchViewModel.swift in Sources */,
 				519E221728736B7300DADA73 /* LoadingView.swift in Sources */,
+				511C676428819557004D18C9 /* UIImageExtension.swift in Sources */,
+				511C676628819662004D18C9 /* SearchButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

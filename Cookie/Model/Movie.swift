@@ -25,4 +25,5 @@ struct Movie: Decodable {
 enum MovieSection: String {
     case nowPlaying = "now_playing"
     case upcoming = "upcoming"
+    case searching = "searching"
 }

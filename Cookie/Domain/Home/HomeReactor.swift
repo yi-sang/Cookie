@@ -16,6 +16,7 @@ final class HomeReactor: BaseReactor, Reactor {
         case viewDidLoad
         case loadNextPage
         case buttonClicked(section: MovieSection)
+        case searchTextDidChanged(query: String)
     }
     
     enum Mutation {
@@ -30,6 +31,7 @@ final class HomeReactor: BaseReactor, Reactor {
         var isLoadingNextPage: Bool = false
         var movieSection: MovieSection = .nowPlaying
         var retry: Bool = true
+        
     }
     
     let initialState: State
@@ -57,7 +59,6 @@ final class HomeReactor: BaseReactor, Reactor {
             } else {
                 return Observable.empty()
             }
-                    
         case .loadNextPage:
             guard !self.currentState.isLoadingNextPage else { return Observable.empty() }
             let page = self.currentState.nextPage
@@ -73,6 +74,10 @@ final class HomeReactor: BaseReactor, Reactor {
             } else {
                 return Observable.empty()
             }
+        case let .searchTextDidChanged(query):
+            return movieService.getSearchMovieInfo(page: 1, query: query)
+                .map{ $0.results }
+                .map{ Mutation.fetchMovieList($0, section: .searching) }
         }
     }
     

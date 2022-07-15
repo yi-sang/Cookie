@@ -10,6 +10,7 @@ import RxSwift
 
 protocol MovieProtocol {
     func getMovieInfo(page: Int, section: MovieSection) -> Observable<MovieResponse>
+    func getSearchMovieInfo(page: Int, query: String) -> Observable<MovieResponse>
 }
 
 struct MovieService: MovieProtocol {
@@ -21,6 +22,38 @@ struct MovieService: MovieProtocol {
                 "api_key" : Storage.shared.apiKey,
                 "language" : Storage.shared.language,
                 "page" : page,
+                "region" : Storage.shared.region
+            ]
+            HTTPUtils.defaultSession.request(
+                urlString,
+                method: .get,
+                parameters: parameters,
+                headers: headers
+            ).responseDecodable(of: MovieResponse.self) { response in
+                switch response.result {
+                case .success(let response):
+                    observer.onNext(response)
+                    observer.onCompleted()
+
+                case .failure:
+                    let error = CommonError(description: "데이터를 파싱할 수 없습니다.")
+                    observer.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func getSearchMovieInfo(page: Int, query: String) -> Observable<MovieResponse> {
+        return Observable.create { observer -> Disposable in
+            let urlString = HTTPUtils.url + "3/search/movie/"
+            let headers = HTTPUtils.jsonHeader()
+            let parameters: Parameters = [
+                "api_key" : Storage.shared.apiKey,
+                "language" : Storage.shared.language,
+                "query" : query,
+                "page" : page,
+                "include_adult" : true,
                 "region" : Storage.shared.region
             ]
             HTTPUtils.defaultSession.request(
