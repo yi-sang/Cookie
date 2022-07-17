@@ -1,19 +1,15 @@
 //
-//  HomeFlowLayout.swift
+//  HomeHorizontalFlowLayout.swift
 //  Cookie
 //
 //  Created by 이상현 on 2022/07/08.
 //
 
 import UIKit
-import RxSwift
-import RxCocoa
 
-final class HomeFlowLayout: UICollectionViewFlowLayout {
-    let currentIndex = PublishRelay<Int>()
-    
+final class HomeHorizontalFlowLayout: UICollectionViewFlowLayout {
     var pageWidth: CGFloat {
-        return (self.itemSize.width + self.minimumLineSpacing)*2
+        return (self.itemSize.width+self.minimumInteritemSpacing)*2
     }
     
     var flickVelocity: CGFloat {
@@ -36,22 +32,8 @@ final class HomeFlowLayout: UICollectionViewFlowLayout {
             
             if (pannedLessThanAPage && flicked) == true {
                 resultContentOffset.x = nextPage * self.pageWidth
-                
-                var currentIndex = Int(round(nextPage))
-                
-                if currentIndex < 0 {
-                    currentIndex = 0
-                }
-                self.currentIndex.accept(currentIndex)
             } else {
                 resultContentOffset.x = round(rawPageValue) * self.pageWidth
-                
-                var currentIndex = Int(round(rawPageValue))
-                
-                if currentIndex < 0 {
-                    currentIndex = 0
-                }
-                self.currentIndex.accept(currentIndex)
             }
             resultContentOffset.x -= self.collectionView?.contentInset.left ?? 0
         }

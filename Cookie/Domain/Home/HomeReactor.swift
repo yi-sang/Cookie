@@ -21,12 +21,14 @@ final class HomeReactor: BaseReactor, Reactor {
     
     enum Mutation {
         case fetchMovieList([Movie], section: MovieSection)
+        case fetchSearchingMovieList([Movie])
         case appendMovieList([Movie], nextPage: Int)
         case setLoadingNextPage(Bool)
     }
     
     struct State {
         var movieList: [Movie] = []
+        var searchMovieList: [Movie] = []
         var nextPage: Int = 1
         var isLoadingNextPage: Bool = false
         var movieSection: MovieSection = .nowPlaying
@@ -77,7 +79,7 @@ final class HomeReactor: BaseReactor, Reactor {
         case let .searchTextDidChanged(query):
             return movieService.getSearchMovieInfo(page: 1, query: query)
                 .map{ $0.results }
-                .map{ Mutation.fetchMovieList($0, section: .searching) }
+                .map{ Mutation.fetchSearchingMovieList($0) }
         }
     }
     
@@ -96,6 +98,8 @@ final class HomeReactor: BaseReactor, Reactor {
             newState.nextPage = nextPage + 1
         case let .setLoadingNextPage(isLoadingNextPage):
             newState.isLoadingNextPage = isLoadingNextPage
+        case let .fetchSearchingMovieList(movieList):
+            newState.searchMovieList = movieList
         }
         return newState
     }

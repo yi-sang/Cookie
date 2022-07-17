@@ -1,19 +1,19 @@
 //
-//  movieCell.swift
+//  SearchMovieCell.swift
 //  Cookie
 //
-//  Created by 이상현 on 2022/07/08.
+//  Created by 이상현 on 2022/07/17.
 //
 
 import UIKit
 import Kingfisher
 
-final class MovieCell: BaseCollectionViewCell {
+final class SearchMovieCell: BaseCollectionViewCell {
     
     static let registerId = "\(MovieCell.self)"
     
-    static let itemSize: CGSize = CGSize(width: (UIScreen.main.bounds.width - 10*4 - 10)/2,
-                                         height: (UIScreen.main.bounds.width - 10*4 - 10)/2 * 1.5)
+    static let itemSize: CGSize = CGSize(width: (UIScreen.main.bounds.width - 10*4 - 10)/3,
+                                         height: (UIScreen.main.bounds.width - 10*4 - 10)/3 * 1.5)
     
     private let containerView = UIView().then {
         $0.layer.cornerRadius = 30
@@ -31,7 +31,7 @@ final class MovieCell: BaseCollectionViewCell {
     }
     
     private let titleLabel = UILabel().then {
-        $0.font = .jalnan(size: 14)
+        $0.font = .jalnan(size: 12)
         $0.textColor = .black
         $0.sizeToFit()
         $0.textAlignment = .center
@@ -63,6 +63,7 @@ final class MovieCell: BaseCollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
         self.titleLabel.text = ""
         self.categoryImageView.image = nil
     }

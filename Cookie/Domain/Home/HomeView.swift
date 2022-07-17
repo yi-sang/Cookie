@@ -35,11 +35,11 @@ class HomeView: BaseView {
         $0.sizeToFit()
     }
 
-    let movieCollectionView = UICollectionView(
+    let movieHorizontalCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     ).then {
-        let layout = HomeFlowLayout()
+        let layout = HomeHorizontalFlowLayout()
         
         layout.scrollDirection = .horizontal
         layout.itemSize = MovieCell.itemSize
@@ -51,13 +51,28 @@ class HomeView: BaseView {
         )
     }
     
+    let movieVerticalCollectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: UICollectionViewFlowLayout()
+    ).then {
+        let layout = UICollectionViewFlowLayout()
+        
+        layout.scrollDirection = .vertical
+        layout.itemSize = SearchMovieCell.itemSize
+        $0.showsVerticalScrollIndicator = false
+        $0.collectionViewLayout = layout
+        $0.register(
+            SearchMovieCell.self,
+            forCellWithReuseIdentifier: SearchMovieCell.registerId
+        )
+    }
+    
     override func setup() {
         self.addSubViews(
             nowPlayingButton,
             upcomingButton,
-            movieCollectionView
+            movieHorizontalCollectionView
         )
-        
     }
     
     override func bindConstraints() {
@@ -69,16 +84,25 @@ class HomeView: BaseView {
             $0.top.equalTo(nowPlayingButton)
             $0.leading.equalTo(nowPlayingButton.snp.trailing).offset(15)
         }
-        movieCollectionView.snp.makeConstraints {
+        movieHorizontalCollectionView.snp.makeConstraints {
             $0.top.equalTo(nowPlayingButton.snp.bottom).offset(10)
             $0.leading.trailing.width.equalTo(self.safeAreaLayoutGuide)
-            $0.height.equalTo(((UIScreen.main.bounds.width - 10*4 - 20)/2 * 1.5)*2 + 10)
+            $0.height.equalTo(((UIScreen.main.bounds.width - 10*4 - 10)/2 * 1.5)*2 + 10)
+        }
+    }
+    
+    func additionalSetup() {
+        self.addSubview(self.movieVerticalCollectionView)
+        movieVerticalCollectionView.snp.makeConstraints {
+            $0.top.equalTo(self.safeAreaLayoutGuide).offset(10)
+            $0.leading.trailing.width.equalTo(self.safeAreaLayoutGuide)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide)
         }
     }
     
     func removeSubviews() {
         self.nowPlayingButton.removeFromSuperview()
         self.upcomingButton.removeFromSuperview()
-        self.movieCollectionView.removeFromSuperview()
+        self.movieHorizontalCollectionView.removeFromSuperview()
     }
 }
