@@ -90,6 +90,7 @@ final class HomeReactor: BaseReactor, Reactor {
             newState.movieList = movieList
             newState.movieSection = section
             newState.nextPage = 2
+            newState.searchMovieList = []
             newState.retry = true
         case let .appendMovieList(movieList, nextPage):
             let isEmpty = movieList.isEmpty ? false : true

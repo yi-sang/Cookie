@@ -9,7 +9,8 @@ import UIKit
 import ReactorKit
 import RxSwift
 import RxCocoa
-import 
+import RxKeyboard
+
 final class HomeVC: BaseVC, View {
     private let homeReactor = HomeReactor(
         movieService: MovieService()
@@ -46,10 +47,9 @@ final class HomeVC: BaseVC, View {
                     self.homeView.searchBar.searchTextField.backgroundColor = UIColor(rgb: 0xCBCBD0)
                 } completion: { Bool in
                     self.homeView.searchBar.searchTextField.backgroundColor = UIColor(rgb: 0xECECEE)
-                    self.homeView.searchBar.searchTextField.tintColor = .darkGray
                     self.homeView.searchBar.showsCancelButton = true
+                    self.homeView.searchBar.searchTextField.tintColor = .darkGray
                     self.homeView.removeSubviews()
-                    self.homeView.additionalSetup()
                 }
             }).disposed(by: eventDisposeBag)
                 
@@ -57,6 +57,7 @@ final class HomeVC: BaseVC, View {
             .asDriver()
             .drive (onNext: { _ in
                 self.homeView.searchBar.resignFirstResponder()
+                self.homeView.movieVerticalCollectionView.removeFromSuperview()
                 self.homeView.searchBar.text = ""
                 self.homeView.searchBar.showsCancelButton = false
                 self.homeView.addSubViews(
@@ -64,15 +65,25 @@ final class HomeVC: BaseVC, View {
                     self.homeView.upcomingButton,
                     self.homeView.movieHorizontalCollectionView
                 )
-                self.homeView.movieVerticalCollectionView.removeFromSuperview()
                 self.homeView.bindConstraints()
             }).disposed(by: eventDisposeBag)
+        
+        RxKeyboard.instance.visibleHeight
+            .asDriver()
+            .filter { $0.isNormal }
+            .drive (onNext: { [unowned self] keyboardHeight in
+                let height = -keyboardHeight + homeView.safeAreaInsets.bottom
+                self.homeView.additionalSetup(offset: height)
+            })
+            .disposed(by: eventDisposeBag)
     }
     
     func bind(reactor: HomeReactor) {
         // Action
         homeView.searchBar.rx.text
-            .compactMap { keyword in Reactor.Action.searchTextDidChanged(query: keyword!) }
+            .orEmpty
+            .distinctUntilChanged()
+            .compactMap { keyword in Reactor.Action.searchTextDidChanged(query: keyword) }
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
         
@@ -97,12 +108,10 @@ final class HomeVC: BaseVC, View {
             .bind(to: reactor.action)
             .disposed(by: self.disposeBag)
         
-//        searchBar.rx.text
-//            .orEmpty
-//            .skip(1)
-//            .map { text in Reactor.Action.searchTextDidChanged(query: text)}
-//            .bind(to: reactor.action)
-//            .disposed(by: self.disposeBag)
+        homeView.searchBar.rx.cancelButtonClicked
+            .map { Reactor.Action.viewDidLoad }
+            .bind(to: reactor.action)
+            .disposed(by: eventDisposeBag)
         
         reactor.state
             .map { $0.movieSection }

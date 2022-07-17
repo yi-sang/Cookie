@@ -91,12 +91,12 @@ class HomeView: BaseView {
         }
     }
     
-    func additionalSetup() {
+    func additionalSetup(offset: CGFloat) {
         self.addSubview(self.movieVerticalCollectionView)
         movieVerticalCollectionView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(10)
             $0.leading.trailing.width.equalTo(self.safeAreaLayoutGuide)
-            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(offset)
         }
     }
     

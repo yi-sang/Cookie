@@ -18,4 +18,5 @@ target 'Cookie' do
     pod 'Then'
     pod 'R.swift'
 	pod 'Kingfisher'
+	pod 'RxKeyboard'
 end
