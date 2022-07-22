@@ -17,6 +17,8 @@ final class HomeReactor: BaseReactor, Reactor {
         case loadNextPage
         case buttonClicked(section: MovieSection)
         case searchTextDidChanged(query: String)
+        case verticalItemSelected(index: Int?)
+        case horizontalItemSelected(index: Int?)
     }
     
     enum Mutation {
@@ -24,6 +26,7 @@ final class HomeReactor: BaseReactor, Reactor {
         case fetchSearchingMovieList([Movie])
         case appendMovieList([Movie], nextPage: Int)
         case setLoadingNextPage(Bool)
+        case fetchDetail(movieInfo: Movie?)
     }
     
     struct State {
@@ -33,7 +36,7 @@ final class HomeReactor: BaseReactor, Reactor {
         var isLoadingNextPage: Bool = false
         var movieSection: MovieSection = .nowPlaying
         var retry: Bool = true
-        
+        var movieInfo = RevisionedData<Movie>(revision: 0, data: nil)
     }
     
     let initialState: State
@@ -49,13 +52,13 @@ final class HomeReactor: BaseReactor, Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .viewDidLoad:
-            return movieService.getMovieInfo(page: 1, section: .nowPlaying)
+            return movieService.getMovies(page: 1, section: .nowPlaying)
                 .map{ $0.results }
                 .map{ Mutation.fetchMovieList($0, section: .nowPlaying) }
         case let .buttonClicked(section):
             let sectionToggled: Bool =  self.currentState.movieSection == section ? false : true
             if sectionToggled {
-                return movieService.getMovieInfo(page: 1, section: section)
+                return movieService.getMovies(page: 1, section: section)
                     .map{ $0.results }
                     .map{ Mutation.fetchMovieList($0, section: section) }
             } else {
@@ -68,7 +71,7 @@ final class HomeReactor: BaseReactor, Reactor {
             if self.currentState.retry == true {
                 return Observable.concat([
                     Observable.just(Mutation.setLoadingNextPage(true)),
-                    movieService.getMovieInfo(page: page, section: movieSection)
+                    movieService.getMovies(page: page, section: movieSection)
                         .map{ $0.results }
                         .map{ Mutation.appendMovieList($0, nextPage: page)},
                     Observable.just(Mutation.setLoadingNextPage(false))
@@ -77,9 +80,13 @@ final class HomeReactor: BaseReactor, Reactor {
                 return Observable.empty()
             }
         case let .searchTextDidChanged(query):
-            return movieService.getSearchMovieInfo(page: 1, query: query)
+            return movieService.getSearchMovies(page: 1, query: query)
                 .map{ $0.results }
                 .map{ Mutation.fetchSearchingMovieList($0) }
+        case let .verticalItemSelected(index):
+            return Observable.just(Mutation.fetchDetail(movieInfo: currentState.searchMovieList[index!]))
+        case let .horizontalItemSelected(index):
+            return Observable.just(Mutation.fetchDetail(movieInfo: currentState.movieList[index!]))
         }
     }
     
@@ -101,6 +108,8 @@ final class HomeReactor: BaseReactor, Reactor {
             newState.isLoadingNextPage = isLoadingNextPage
         case let .fetchSearchingMovieList(movieList):
             newState.searchMovieList = movieList
+        case let .fetchDetail(movieInfo):
+            newState.movieInfo = state.movieInfo.update(movieInfo)
         }
         return newState
     }

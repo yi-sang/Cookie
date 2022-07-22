@@ -11,7 +11,10 @@ import RxSwift
 import RxCocoa
 import RxKeyboard
 
-final class HomeVC: BaseVC, View {
+final class HomeVC: BaseVC, View, HomeCoordinator {
+    var completioHandler : ((Movie) -> (Void))?
+    private weak var coordinator: HomeCoordinator?
+
     private let homeReactor = HomeReactor(
         movieService: MovieService()
     )
@@ -24,8 +27,9 @@ final class HomeVC: BaseVC, View {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reactor = self.homeReactor
-        homeReactor.action.onNext(.viewDidLoad)
-        navigationItem.titleView = homeView.searchBar
+        self.homeReactor.action.onNext(.viewDidLoad)
+        self.navigationItem.titleView = homeView.searchBar
+        self.coordinator = self
     }
     
     static func instance() -> UINavigationController {
@@ -43,13 +47,15 @@ final class HomeVC: BaseVC, View {
         homeView.searchBar.rx.textDidBeginEditing
             .asDriver()
             .drive (onNext: { _ in
+                self.homeView.removeSubviews()
+                self.homeView.additionalSetup()
                 UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
                     self.homeView.searchBar.searchTextField.backgroundColor = UIColor(rgb: 0xCBCBD0)
                 } completion: { Bool in
                     self.homeView.searchBar.searchTextField.backgroundColor = UIColor(rgb: 0xECECEE)
                     self.homeView.searchBar.showsCancelButton = true
                     self.homeView.searchBar.searchTextField.tintColor = .darkGray
-                    self.homeView.removeSubviews()
+                    
                 }
             }).disposed(by: eventDisposeBag)
                 
@@ -73,7 +79,7 @@ final class HomeVC: BaseVC, View {
             .filter { $0.isNormal }
             .drive (onNext: { [unowned self] keyboardHeight in
                 let height = -keyboardHeight + homeView.safeAreaInsets.bottom
-                self.homeView.additionalSetup(offset: height)
+                self.homeView.updateAdditionalSetup(offset: height)
             })
             .disposed(by: eventDisposeBag)
     }
@@ -113,6 +119,17 @@ final class HomeVC: BaseVC, View {
             .bind(to: reactor.action)
             .disposed(by: eventDisposeBag)
         
+        homeView.movieHorizontalCollectionView.rx.itemSelected
+            .map { Reactor.Action.horizontalItemSelected(index: $0.row) }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+        
+        homeView.movieVerticalCollectionView.rx.itemSelected
+            .map { Reactor.Action.verticalItemSelected(index: $0.row) }
+            .bind(to: reactor.action)
+            .disposed(by: self.disposeBag)
+        
+        // State
         reactor.state
             .map { $0.movieSection }
             .distinctUntilChanged()
@@ -127,6 +144,7 @@ final class HomeVC: BaseVC, View {
         
         reactor.state
             .map { $0.movieList }
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: [])
             .drive(
                 self.homeView.movieHorizontalCollectionView.rx.items
@@ -144,6 +162,7 @@ final class HomeVC: BaseVC, View {
         
         reactor.state
             .map { $0.searchMovieList }
+            .distinctUntilChanged()
             .asDriver(onErrorJustReturn: [])
             .drive(
                 self.homeView.movieVerticalCollectionView.rx.items
@@ -158,5 +177,16 @@ final class HomeVC: BaseVC, View {
                 return cell
             }
             .disposed(by: self.disposeBag)
+        
+        reactor.state
+            .map { $0.movieInfo }
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: RevisionedData<Movie>(revision: 0, data: Movie()))
+            .drive(onNext: { [weak self] movieInfo in
+                print(movieInfo)
+                guard let self = self else { return }
+                self.coordinator?.showDetail(movie: movieInfo.data ?? Movie())
+            })
+            .disposed(by: disposeBag)
     }
 }

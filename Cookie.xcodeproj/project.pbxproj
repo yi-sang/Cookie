@@ -12,6 +12,13 @@
 		511C676628819662004D18C9 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C676528819662004D18C9 /* SearchButton.swift */; };
 		511C67682883C970004D18C9 /* HomeVerticalFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C67672883C970004D18C9 /* HomeVerticalFlowLayout.swift */; };
 		511C676A2883CCD2004D18C9 /* SearchMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C67692883CCD2004D18C9 /* SearchMovieCell.swift */; };
+		511C676D28853F9A004D18C9 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C676C28853F9A004D18C9 /* DetailVC.swift */; };
+		511C676F28853FB6004D18C9 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C676E28853FB6004D18C9 /* HomeCoordinator.swift */; };
+		511C677128853FFC004D18C9 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677028853FFC004D18C9 /* Coordinator.swift */; };
+		511C677328854273004D18C9 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677228854273004D18C9 /* DetailView.swift */; };
+		511C6775288542DA004D18C9 /* DetailReacor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C6774288542DA004D18C9 /* DetailReacor.swift */; };
+		511C677928893928004D18C9 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677828893928004D18C9 /* Store.swift */; };
+		511C677B288B0EFA004D18C9 /* RevisionedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677A288B0EFA004D18C9 /* RevisionedData.swift */; };
 		519E21E428733B5700DADA73 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E328733B5700DADA73 /* MovieResponse.swift */; };
 		519E21E72873502F00DADA73 /* TabBarTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E52873502E00DADA73 /* TabBarTag.swift */; };
 		519E21E82873502F00DADA73 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E62873502F00DADA73 /* Movie.swift */; };
@@ -57,6 +64,13 @@
 		511C676528819662004D18C9 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
 		511C67672883C970004D18C9 /* HomeVerticalFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVerticalFlowLayout.swift; sourceTree = "<group>"; };
 		511C67692883CCD2004D18C9 /* SearchMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieCell.swift; sourceTree = "<group>"; };
+		511C676C28853F9A004D18C9 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		511C676E28853FB6004D18C9 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		511C677028853FFC004D18C9 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		511C677228854273004D18C9 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		511C6774288542DA004D18C9 /* DetailReacor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReacor.swift; sourceTree = "<group>"; };
+		511C677828893928004D18C9 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		511C677A288B0EFA004D18C9 /* RevisionedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevisionedData.swift; sourceTree = "<group>"; };
 		519E21E328733B5700DADA73 /* MovieResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		519E21E52873502E00DADA73 /* TabBarTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarTag.swift; sourceTree = "<group>"; };
 		519E21E62873502F00DADA73 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -110,6 +124,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		511C676B28853F7A004D18C9 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				511C676C28853F9A004D18C9 /* DetailVC.swift */,
+				511C677228854273004D18C9 /* DetailView.swift */,
+				511C6774288542DA004D18C9 /* DetailReacor.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		519E21D4287316DB00DADA73 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +141,7 @@
 				519E21FF287360CE00DADA73 /* Base */,
 				519E21FC287360A700DADA73 /* Tabbar */,
 				519E21F52873608100DADA73 /* Launch */,
+				511C676B28853F7A004D18C9 /* Detail */,
 				519E21EE2873605800DADA73 /* Home */,
 			);
 			path = Domain;
@@ -127,6 +152,7 @@
 			children = (
 				519E223E2877458500DADA73 /* Presentation */,
 				519E21E62873502F00DADA73 /* Movie.swift */,
+				511C677A288B0EFA004D18C9 /* RevisionedData.swift */,
 				519E21E52873502E00DADA73 /* TabBarTag.swift */,
 				519E221228736AD400DADA73 /* Error */,
 				519E221328736AEC00DADA73 /* CommonError.swift */,
@@ -166,6 +192,7 @@
 				519E21EF2873606A00DADA73 /* HomeReactor.swift */,
 				519E21F02873606A00DADA73 /* HomeVC.swift */,
 				519E21F12873606A00DADA73 /* HomeView.swift */,
+				511C676E28853FB6004D18C9 /* HomeCoordinator.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -229,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				519E221628736B7300DADA73 /* LoadingView.swift */,
+				511C677028853FFC004D18C9 /* Coordinator.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -272,6 +300,7 @@
 		519E223E2877458500DADA73 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				511C677828893928004D18C9 /* Store.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -469,16 +498,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				519E21F42873606A00DADA73 /* HomeView.swift in Sources */,
+				511C676D28853F9A004D18C9 /* DetailVC.swift in Sources */,
 				519E21F92873608C00DADA73 /* LaunchView.swift in Sources */,
 				519E21F32873606A00DADA73 /* HomeVC.swift in Sources */,
 				519E22442877749300DADA73 /* HomeHorizontalFlowLayout.swift in Sources */,
 				519E21FA2873608C00DADA73 /* LaunchVC.swift in Sources */,
 				519E2207287360DD00DADA73 /* BaseViewModel.swift in Sources */,
 				519E2206287360DD00DADA73 /* BaseCollectionViewCell.swift in Sources */,
+				511C677128853FFC004D18C9 /* Coordinator.swift in Sources */,
+				511C677B288B0EFA004D18C9 /* RevisionedData.swift in Sources */,
 				519E2205287360DD00DADA73 /* BaseVC.swift in Sources */,
 				51BBD11C2872E37800BBE992 /* AppDelegate.swift in Sources */,
 				519E21F22873606A00DADA73 /* HomeReactor.swift in Sources */,
 				519E22272873862B00DADA73 /* R.generated.swift in Sources */,
+				511C676F28853FB6004D18C9 /* HomeCoordinator.swift in Sources */,
 				511C676A2883CCD2004D18C9 /* SearchMovieCell.swift in Sources */,
 				519E220C2873613000DADA73 /* MovieService.swift in Sources */,
 				519E21E82873502F00DADA73 /* Movie.swift in Sources */,
@@ -490,12 +523,15 @@
 				519E223D2877424400DADA73 /* UIViewExtension.swift in Sources */,
 				519E21FE287360B000DADA73 /* TabBarVC.swift in Sources */,
 				519E2208287360DD00DADA73 /* BaseReactor.swift in Sources */,
+				511C677328854273004D18C9 /* DetailView.swift in Sources */,
 				519E222F2877132600DADA73 /* MyLogger.swift in Sources */,
 				519E222B2875DE9500DADA73 /* Storage.swift in Sources */,
+				511C6775288542DA004D18C9 /* DetailReacor.swift in Sources */,
 				51BBD11E2872E37800BBE992 /* SceneDelegate.swift in Sources */,
 				519E220F2873615D00DADA73 /* HTTPUtils.swift in Sources */,
 				519E21E72873502F00DADA73 /* TabBarTag.swift in Sources */,
 				519E2209287360DD00DADA73 /* BaseView.swift in Sources */,
+				511C677928893928004D18C9 /* Store.swift in Sources */,
 				519E21E428733B5700DADA73 /* MovieResponse.swift in Sources */,
 				519E21FB2873608C00DADA73 /* LaunchViewModel.swift in Sources */,
 				519E221728736B7300DADA73 /* LoadingView.swift in Sources */,

@@ -9,12 +9,12 @@ import Alamofire
 import RxSwift
 
 protocol MovieProtocol {
-    func getMovieInfo(page: Int, section: MovieSection) -> Observable<MovieResponse>
-    func getSearchMovieInfo(page: Int, query: String) -> Observable<MovieResponse>
+    func getMovies(page: Int, section: MovieSection) -> Observable<MovieResponse>
+    func getSearchMovies(page: Int, query: String) -> Observable<MovieResponse>
 }
 
 struct MovieService: MovieProtocol {
-    func getMovieInfo(page: Int, section: MovieSection) -> Observable<MovieResponse> {
+    func getMovies(page: Int, section: MovieSection) -> Observable<MovieResponse> {
         return Observable.create { observer -> Disposable in
             let urlString = HTTPUtils.url + "3/movie/\(section.rawValue)"
             let headers = HTTPUtils.jsonHeader()
@@ -44,7 +44,7 @@ struct MovieService: MovieProtocol {
         }
     }
     
-    func getSearchMovieInfo(page: Int, query: String) -> Observable<MovieResponse> {
+    func getSearchMovies(page: Int, query: String) -> Observable<MovieResponse> {
         return Observable.create { observer -> Disposable in
             let urlString = HTTPUtils.url + "3/search/movie/"
             let headers = HTTPUtils.jsonHeader()
