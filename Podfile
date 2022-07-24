@@ -19,4 +19,5 @@ target 'Cookie' do
     pod 'R.swift'
 	pod 'Kingfisher'
 	pod 'RxKeyboard'
+	pod 'youtube-ios-player-helper'
 end

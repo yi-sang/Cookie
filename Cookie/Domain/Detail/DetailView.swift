@@ -11,6 +11,7 @@ import SnapKit
 import Kingfisher
 
 class DetailView: BaseView {
+    var playerView = UIPlay
     var imageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
     }
@@ -27,6 +28,7 @@ class DetailView: BaseView {
         $0.numberOfLines = 0
     }
     override func setup() {
+        
         self.addSubViews(
             imageView,
             titleLabel,

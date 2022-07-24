@@ -19,7 +19,7 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
         movieService: MovieService()
     )
     private var homeView = HomeView()
-    
+        
     override func loadView() {
         self.view = self.homeView
     }  
@@ -47,7 +47,6 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
         homeView.searchBar.rx.textDidBeginEditing
             .asDriver()
             .drive (onNext: { _ in
-                self.homeView.removeSubviews()
                 self.homeView.additionalSetup()
                 UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
                     self.homeView.searchBar.searchTextField.backgroundColor = UIColor(rgb: 0xCBCBD0)
@@ -55,14 +54,14 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
                     self.homeView.searchBar.searchTextField.backgroundColor = UIColor(rgb: 0xECECEE)
                     self.homeView.searchBar.showsCancelButton = true
                     self.homeView.searchBar.searchTextField.tintColor = .darkGray
-                    
+                    self.homeView.removeSubviews()
                 }
             }).disposed(by: eventDisposeBag)
                 
         homeView.searchBar.rx.cancelButtonClicked
             .asDriver()
             .drive (onNext: { _ in
-                self.homeView.searchBar.resignFirstResponder()
+                self.homeView.searchBar.searchTextField.resignFirstResponder()
                 self.homeView.movieVerticalCollectionView.removeFromSuperview()
                 self.homeView.searchBar.text = ""
                 self.homeView.searchBar.showsCancelButton = false
@@ -78,7 +77,7 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
             .asDriver()
             .filter { $0.isNormal }
             .drive (onNext: { [unowned self] keyboardHeight in
-                let height = -keyboardHeight + homeView.safeAreaInsets.bottom
+                let height = keyboardHeight - homeView.safeAreaInsets.bottom
                 self.homeView.updateAdditionalSetup(offset: height)
             })
             .disposed(by: eventDisposeBag)
@@ -183,7 +182,6 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: RevisionedData<Movie>(revision: 0, data: Movie()))
             .drive(onNext: { [weak self] movieInfo in
-                print(movieInfo)
                 guard let self = self else { return }
                 self.coordinator?.showDetail(movie: movieInfo.data ?? Movie())
             })

@@ -57,7 +57,7 @@ final class SearchMovieCell: BaseCollectionViewCell {
         }
         self.titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalTo(containerView)
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-10)
         }
     }
     

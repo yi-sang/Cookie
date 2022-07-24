@@ -57,6 +57,7 @@ PODS:
   - SnapKit (5.0.1)
   - Then (2.7.0)
   - WeakMapTable (1.2.0)
+  - youtube-ios-player-helper (1.0.4)
 
 DEPENDENCIES:
   - Alamofire
@@ -72,6 +73,7 @@ DEPENDENCIES:
   - RxSwift
   - SnapKit
   - Then
+  - youtube-ios-player-helper
 
 SPEC REPOS:
   trunk:
@@ -96,6 +98,7 @@ SPEC REPOS:
     - SnapKit
     - Then
     - WeakMapTable
+    - youtube-ios-player-helper
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
@@ -119,7 +122,8 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
+  youtube-ios-player-helper: e9b97535e816db3152179d84d999bc1807ecd689
 
-PODFILE CHECKSUM: 62af1eac6ea931b38c4c1de90e33029f785715fe
+PODFILE CHECKSUM: 0c5eba3ebb7c4e4e49768a6276ce6ad8e2451203
 
 COCOAPODS: 1.11.2

@@ -11,6 +11,8 @@ import SnapKit
 
 
 class HomeView: BaseView {
+    var virticalCollectionViewBottomConstraint: Constraint? = nil
+
     let searchBar = UISearchBar().then {
         $0.placeholder = "영화 제목을 검색해보세요"
         $0.searchTextField.tintColor = .clear
@@ -96,16 +98,12 @@ class HomeView: BaseView {
         movieVerticalCollectionView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(10)
             $0.leading.trailing.width.equalTo(self.safeAreaLayoutGuide)
-            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+            virticalCollectionViewBottomConstraint = $0.bottom.equalTo(self.safeAreaLayoutGuide).constraint
         }
     }
     
     func updateAdditionalSetup(offset: CGFloat) {
-        movieVerticalCollectionView.snp.updateConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide).offset(10)
-            $0.leading.trailing.width.equalTo(self.safeAreaLayoutGuide)
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(offset)
-        }
+        self.virticalCollectionViewBottomConstraint?.update(inset: offset)
     }
     
     func removeSubviews() {
