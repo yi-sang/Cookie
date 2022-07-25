@@ -12,7 +12,6 @@ import RxCocoa
 import RxKeyboard
 
 final class HomeVC: BaseVC, View, HomeCoordinator {
-    var completioHandler : ((Movie) -> (Void))?
     private weak var coordinator: HomeCoordinator?
 
     private let homeReactor = HomeReactor(
@@ -27,7 +26,7 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reactor = self.homeReactor
-        self.homeReactor.action.onNext(.viewDidLoad)
+        self.reactor?.action.onNext(.viewDidLoad)
         self.navigationItem.titleView = homeView.searchBar
         self.coordinator = self
     }
@@ -183,7 +182,7 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
             .asDriver(onErrorJustReturn: RevisionedData<Movie>(revision: 0, data: Movie()))
             .drive(onNext: { [weak self] movieInfo in
                 guard let self = self else { return }
-                self.coordinator?.showDetail(movie: movieInfo.data ?? Movie())
+                self.coordinator?.showDetail(movie: movieInfo.data!)
             })
             .disposed(by: disposeBag)
     }

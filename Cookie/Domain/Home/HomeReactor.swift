@@ -53,13 +53,13 @@ final class HomeReactor: BaseReactor, Reactor {
         switch action {
         case .viewDidLoad:
             return movieService.getMovies(page: 1, section: .nowPlaying)
-                .map{ $0.results }
+                .map{ $0.movieList }
                 .map{ Mutation.fetchMovieList($0, section: .nowPlaying) }
         case let .buttonClicked(section):
             let sectionToggled: Bool =  self.currentState.movieSection == section ? false : true
             if sectionToggled {
                 return movieService.getMovies(page: 1, section: section)
-                    .map{ $0.results }
+                    .map{ $0.movieList }
                     .map{ Mutation.fetchMovieList($0, section: section) }
             } else {
                 return Observable.empty()
@@ -72,7 +72,7 @@ final class HomeReactor: BaseReactor, Reactor {
                 return Observable.concat([
                     Observable.just(Mutation.setLoadingNextPage(true)),
                     movieService.getMovies(page: page, section: movieSection)
-                        .map{ $0.results }
+                        .map{ $0.movieList }
                         .map{ Mutation.appendMovieList($0, nextPage: page)},
                     Observable.just(Mutation.setLoadingNextPage(false))
                 ])
@@ -81,7 +81,7 @@ final class HomeReactor: BaseReactor, Reactor {
             }
         case let .searchTextDidChanged(query):
             return movieService.getSearchMovies(page: 1, query: query)
-                .map{ $0.results }
+                .map{ $0.movieList }
                 .map{ Mutation.fetchSearchingMovieList($0) }
         case let .verticalItemSelected(index):
             return Observable.just(Mutation.fetchDetail(movieInfo: currentState.searchMovieList[index!]))

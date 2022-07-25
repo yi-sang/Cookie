@@ -1,12 +1,12 @@
 //
-//  TodayMovieResponse.swift
+//  MovieResponse.swift
 //  CornFarmer
 //
 //  Created by 이상현 on 2022/05/07.
 //
 
 struct MovieResponse: Decodable {
-    let results: [Movie]
+    let movieList: [Movie]
     
     enum CodingKeys: String, CodingKey {
         case results
@@ -14,6 +14,6 @@ struct MovieResponse: Decodable {
     
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.results = try values.decodeIfPresent([Movie].self, forKey: .results) ?? [Movie]()
+        self.movieList = try values.decodeIfPresent([Movie].self, forKey: .results) ?? [Movie]()
     }
 }

@@ -9,5 +9,5 @@
 import RxCocoa
 
 class BaseReactor {
-//    let showLoadingPublisher = PublishRelay<Bool>()
+//    let retryPublisher = PublishRelay<Bool>()
 }

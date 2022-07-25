@@ -11,6 +11,8 @@ import RxSwift
 protocol MovieProtocol {
     func getMovies(page: Int, section: MovieSection) -> Observable<MovieResponse>
     func getSearchMovies(page: Int, query: String) -> Observable<MovieResponse>
+    func getKoreanVideo(id: Int) -> Observable<VideoResponse>
+    func getVideo(id: Int) -> Observable<VideoResponse>
 }
 
 struct MovieService: MovieProtocol {
@@ -62,6 +64,61 @@ struct MovieService: MovieProtocol {
                 parameters: parameters,
                 headers: headers
             ).responseDecodable(of: MovieResponse.self) { response in
+                switch response.result {
+                case .success(let response):
+                    observer.onNext(response)
+                    observer.onCompleted()
+
+                case .failure:
+                    let error = CommonError(description: "데이터를 파싱할 수 없습니다.")
+                    observer.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func getKoreanVideo(id: Int) -> Observable<VideoResponse> {
+        return Observable.create { observer -> Disposable in
+            let urlString = HTTPUtils.url + "3/movie/\(id)/videos"
+            let headers = HTTPUtils.jsonHeader()
+            let parameters: Parameters = [
+                "api_key" : Storage.shared.apiKey,
+                "language" : Storage.shared.language
+            ]
+            HTTPUtils.defaultSession.request(
+                urlString,
+                method: .get,
+                parameters: parameters,
+                headers: headers
+            ).responseDecodable(of: VideoResponse.self) { response in
+                switch response.result {
+                case .success(let response):
+                    observer.onNext(response)
+                    observer.onCompleted()
+
+                case .failure:
+                    let error = CommonError(description: "데이터를 파싱할 수 없습니다.")
+                    observer.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func getVideo(id: Int) -> Observable<VideoResponse> {
+        return Observable.create { observer -> Disposable in
+            let urlString = HTTPUtils.url + "3/movie/\(id)/videos"
+            let headers = HTTPUtils.jsonHeader()
+            let parameters: Parameters = [
+                "api_key" : Storage.shared.apiKey,
+            ]
+            HTTPUtils.defaultSession.request(
+                urlString,
+                method: .get,
+                parameters: parameters,
+                headers: headers
+            ).responseDecodable(of: VideoResponse.self) { response in
                 switch response.result {
                 case .success(let response):
                     observer.onNext(response)
