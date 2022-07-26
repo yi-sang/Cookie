@@ -58,9 +58,8 @@ final class DetailVC: BaseVC, View {
             .asDriver(onErrorJustReturn: String())
             .drive(onNext: { [weak self] key in
                 guard let self = self else { return }
-                if key == "" {
+                if key.isEmpty {
                     reactor.action.onNext(.retry(id: self.movie.id))
-                
                 } else {
                     self.detailView.playerView.load(withVideoId: key)
                 }
@@ -80,16 +79,9 @@ final class DetailVC: BaseVC, View {
     }
     
     func setupUI() {
-        if let url = URL(string: movie.posterPath) {
-            if url == URL(string: "https://image.tmdb.org/t/p/original") {
-                self.detailView.imageView.image = R.image.oneCookie()
-            } else {
-                self.detailView.imageView.kf.setImage(with: url)
-            }
-        } else {
-            self.detailView.imageView.image = R.image.oneCookie()
-        }
+        let releaseDate = movie.releaseDate.replacingOccurrences(of: "-", with: ".")
         self.detailView.titleLabel.text = movie.title
+        self.detailView.releaseDateLabel.text = "\(releaseDate) 개봉"
         self.detailView.overViewLabel.text = movie.overview
         self.detailView.playerView.load(withVideoId: "")
     }
