@@ -49,6 +49,17 @@ final class DetailVC: BaseVC, View {
     }
     
     override func bindEvent() {
+        self.detailView.foldButton.rx.tap
+            .asDriver()
+            .drive(onNext:  { _ in
+                if self.detailView.foldButton.isSelected {
+                    self.detailView.decreaseConstraint()
+                } else {
+                    self.detailView.increaseConstraint()
+                }
+                self.detailView.foldButton.isSelected.toggle()
+            })
+            .disposed(by: eventDisposeBag)
     }
     
     func bind(reactor: DetailReactor) {
