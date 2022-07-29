@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>732149999347-m0ens4970mahs9v7ul8gurek0vek3m88.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.732149999347-m0ens4970mahs9v7ul8gurek0vek3m88</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAcX-wfWVtmJz9hUE0nBTuaW3o2oZN0Wks</string>
+	<key>GCM_SENDER_ID</key>
+	<string>732149999347</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>io.github.yi-sang.Cookie</string>
+	<key>PROJECT_ID</key>
+	<string>cook-89bec</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cook-89bec.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:732149999347:ios:a70b2fe7a36b43d238b986</string>
+</dict>
+</plist>

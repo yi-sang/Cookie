@@ -15,16 +15,21 @@ final class DetailReactor: BaseReactor, Reactor {
     enum Action {
         case viewDidLoad(id: Int)
         case retry(id: Int)
+        case noCookieClicked(id: Int)
+        case oneCookieClicked(id: Int)
+        case twoCookieClicked(id: Int)
     }
     
     enum Mutation {
         case fetchKoreanVideo(key: String)
         case fetchVideo(key: String)
+        case fetchCookie(totalCookie: TotalCookie)
     }
     
     struct State {
         var key : String = ""
         var newKey : String = ""
+        var totalCookie: TotalCookie?
     }
     
     let initialState: State
@@ -40,14 +45,27 @@ final class DetailReactor: BaseReactor, Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case let .viewDidLoad(id):
-            return movieService.getKoreanVideo(id: id)
-                .map { $0.results.first?.key ?? "" }
-                .map { Mutation.fetchKoreanVideo(key: $0) }
+            return Observable.merge(
+                movieService.getCookieData(id: id)
+                    .map { Mutation.fetchCookie(totalCookie: $0) },
+                movieService.getKoreanVideo(id: id)
+                    .map { $0.results.first?.key ?? "" }
+                    .map { Mutation.fetchKoreanVideo(key: $0)}
+            )
         case let .retry(id):
             return movieService.getVideo(id: id)
                 .map { $0.results.first?.key ?? "" }
                 .map { Mutation.fetchVideo(key: $0) }
-
+            
+        case let .noCookieClicked(id):
+            return movieService.postNoCookieData(id: id)
+                .map { Mutation.fetchCookie(totalCookie: $0) }
+        case let .oneCookieClicked(id):
+            return movieService.postOneCookieData(id: id)
+                .map { Mutation.fetchCookie(totalCookie: $0) }
+        case let .twoCookieClicked(id):
+            return movieService.postTwoCookieData(id: id)
+                .map { Mutation.fetchCookie(totalCookie: $0) }
         }
     }
     
@@ -58,6 +76,8 @@ final class DetailReactor: BaseReactor, Reactor {
             newState.key = key
         case let .fetchVideo(key):
             newState.newKey = key
+        case let .fetchCookie(totalCookie):
+            newState.totalCookie = totalCookie
         }
         return newState
     }

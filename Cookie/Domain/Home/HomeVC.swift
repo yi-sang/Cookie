@@ -25,6 +25,7 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.reactor = self.homeReactor
         self.reactor?.action.onNext(.viewDidLoad)
         self.navigationItem.titleView = homeView.searchBar

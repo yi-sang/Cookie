@@ -72,13 +72,13 @@ final class SearchMovieCell: BaseCollectionViewCell {
         if let url = URL(string: movie.posterPath) {
             if url == URL(string: "https://image.tmdb.org/t/p/original") {
                 self.categoryImageView.contentMode = .scaleAspectFit
-                self.categoryImageView.image = R.image.oneCookie()
+                self.categoryImageView.image = R.image.soloCookie()
             } else {
                 self.categoryImageView.kf.setImage(with: url)
             }
         } else {
             self.categoryImageView.contentMode = .scaleAspectFit
-            self.categoryImageView.image = R.image.oneCookie()
+            self.categoryImageView.image = R.image.soloCookie()
         }
         titleLabel.text = movie.title
     }

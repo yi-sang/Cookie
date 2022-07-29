@@ -17,10 +17,12 @@
 		511C677128853FFC004D18C9 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677028853FFC004D18C9 /* Coordinator.swift */; };
 		511C677328854273004D18C9 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677228854273004D18C9 /* DetailView.swift */; };
 		511C6775288542DA004D18C9 /* DetailReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C6774288542DA004D18C9 /* DetailReactor.swift */; };
-		511C677928893928004D18C9 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677828893928004D18C9 /* Store.swift */; };
+		511C677928893928004D18C9 /* TotalCookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677828893928004D18C9 /* TotalCookie.swift */; };
 		511C677B288B0EFA004D18C9 /* RevisionedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677A288B0EFA004D18C9 /* RevisionedData.swift */; };
 		511C677D288E7E9D004D18C9 /* VideoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677C288E7E9D004D18C9 /* VideoResponse.swift */; };
 		511C677F288EEF89004D18C9 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677E288EEF88004D18C9 /* Key.swift */; };
+		511C67852891C4A4004D18C9 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C67842891C4A4004D18C9 /* Cookie.swift */; };
+		511C67872892786B004D18C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 511C67862892786B004D18C9 /* GoogleService-Info.plist */; };
 		519E21E428733B5700DADA73 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E328733B5700DADA73 /* MovieResponse.swift */; };
 		519E21E72873502F00DADA73 /* TabBarTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E52873502E00DADA73 /* TabBarTag.swift */; };
 		519E21E82873502F00DADA73 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E62873502F00DADA73 /* Movie.swift */; };
@@ -71,10 +73,12 @@
 		511C677028853FFC004D18C9 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		511C677228854273004D18C9 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		511C6774288542DA004D18C9 /* DetailReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReactor.swift; sourceTree = "<group>"; };
-		511C677828893928004D18C9 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		511C677828893928004D18C9 /* TotalCookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalCookie.swift; sourceTree = "<group>"; };
 		511C677A288B0EFA004D18C9 /* RevisionedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevisionedData.swift; sourceTree = "<group>"; };
 		511C677C288E7E9D004D18C9 /* VideoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoResponse.swift; sourceTree = "<group>"; };
 		511C677E288EEF88004D18C9 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
+		511C67842891C4A4004D18C9 /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
+		511C67862892786B004D18C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		519E21E328733B5700DADA73 /* MovieResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		519E21E52873502E00DADA73 /* TabBarTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarTag.swift; sourceTree = "<group>"; };
 		519E21E62873502F00DADA73 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -185,6 +189,7 @@
 		519E21E228733B4000DADA73 /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				511C67842891C4A4004D18C9 /* Cookie.swift */,
 				519E21E328733B5700DADA73 /* MovieResponse.swift */,
 				511C677C288E7E9D004D18C9 /* VideoResponse.swift */,
 			);
@@ -306,7 +311,7 @@
 		519E223E2877458500DADA73 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				511C677828893928004D18C9 /* Store.swift */,
+				511C677828893928004D18C9 /* TotalCookie.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -343,6 +348,7 @@
 				519E22232873790300DADA73 /* Resource */,
 				51BBD1262872E37900BBE992 /* LaunchScreen.storyboard */,
 				51BBD1292872E37900BBE992 /* Info.plist */,
+				511C67862892786B004D18C9 /* GoogleService-Info.plist */,
 			);
 			path = Cookie;
 			sourceTree = "<group>";
@@ -428,6 +434,7 @@
 				519E22222873756900DADA73 /* Jalnan.ttf in Resources */,
 				51BBD1282872E37900BBE992 /* LaunchScreen.storyboard in Resources */,
 				519E2239287740DC00DADA73 /* NotoSansKR-Medium.otf in Resources */,
+				511C67872892786B004D18C9 /* GoogleService-Info.plist in Resources */,
 				519E221A28736DD500DADA73 /* Colors.xcassets in Resources */,
 				519E223A287740DE00DADA73 /* NotoSansKR-Bold.otf in Resources */,
 				51BBD1252872E37900BBE992 /* Assets.xcassets in Resources */,
@@ -508,6 +515,7 @@
 				519E21F92873608C00DADA73 /* LaunchView.swift in Sources */,
 				519E21F32873606A00DADA73 /* HomeVC.swift in Sources */,
 				519E22442877749300DADA73 /* HomeHorizontalFlowLayout.swift in Sources */,
+				511C67852891C4A4004D18C9 /* Cookie.swift in Sources */,
 				519E21FA2873608C00DADA73 /* LaunchVC.swift in Sources */,
 				519E2207287360DD00DADA73 /* BaseViewModel.swift in Sources */,
 				519E2206287360DD00DADA73 /* BaseCollectionViewCell.swift in Sources */,
@@ -539,7 +547,7 @@
 				519E21E72873502F00DADA73 /* TabBarTag.swift in Sources */,
 				519E2209287360DD00DADA73 /* BaseView.swift in Sources */,
 				511C677F288EEF89004D18C9 /* Key.swift in Sources */,
-				511C677928893928004D18C9 /* Store.swift in Sources */,
+				511C677928893928004D18C9 /* TotalCookie.swift in Sources */,
 				519E21E428733B5700DADA73 /* MovieResponse.swift in Sources */,
 				519E21FB2873608C00DADA73 /* LaunchViewModel.swift in Sources */,
 				519E221728736B7300DADA73 /* LoadingView.swift in Sources */,
@@ -697,7 +705,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sanghyle.Cookie;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.yi-sang.Cookie";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -726,7 +734,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sanghyle.Cookie;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.yi-sang.Cookie";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

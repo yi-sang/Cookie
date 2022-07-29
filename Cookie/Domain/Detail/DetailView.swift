@@ -65,7 +65,7 @@ class DetailView: BaseView {
         $0.axis = .horizontal
     }
     
-    var dishButton = UIButton().then {
+    var noCookieButton = UIButton().then {
         $0.configuration = .plain()
         $0.configuration?.image = R.image.dish()?.resizeImage(size: CGSize(width: 75, height: 75))
         $0.configuration?.title = "쿠키 없음"
@@ -92,21 +92,44 @@ class DetailView: BaseView {
         $0.configuration?.imagePlacement = .top
     }
     
-        
+    var imageButton = UIButton().then {
+        $0.configuration = .plain()
+        $0.configuration?.title = ""
+        $0.configuration?.attributedTitle?.font =  .jalnan(size: 20)
+        $0.configuration?.baseForegroundColor = .black
+        $0.configuration?.imagePlacement = .top
+        $0.isUserInteractionEnabled = false
+    }
+    
+    var scrollView = UIScrollView().then {
+        $0.canCancelContentTouches = true
+    }
+    
+    var contentView = UIView()
+
+    
+    
     override func setup() {
         self.addSubViews(
             playerView,
+            scrollView
+        )
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubViews(
             titleLabel,
             releaseDateLabel,
             overViewLabel,
             foldButton,
-            grayView
+            grayView,
+            imageButton
         )
+        
         grayView.addSubViews(
             voteLabel,
             stackView
         )
-        self.stackView.addArrangedSubview(dishButton)
+        self.stackView.addArrangedSubview(noCookieButton)
         self.stackView.addArrangedSubview(oneCookieButton)
         self.stackView.addArrangedSubview(twoCookieButton)
 
@@ -120,44 +143,62 @@ class DetailView: BaseView {
             $0.height.equalTo(self.safeAreaLayoutGuide.snp.width).multipliedBy(0.6)
         }
         
-        titleLabel.snp.makeConstraints {
+        scrollView.snp.makeConstraints {
             $0.top.equalTo(self.playerView.snp.bottom).offset(10)
-            $0.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(10)
+            $0.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(scrollView)
+            $0.width.equalTo(scrollView)
+            $0.bottom.equalTo(imageButton.snp.bottom)
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(self.contentView)
+            $0.leading.trailing.equalTo(contentView).inset(10)
             $0.height.equalTo(20)
         }
         
         releaseDateLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(10)
-            $0.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(10)
+            $0.leading.trailing.equalTo(contentView).inset(10)
             $0.height.equalTo(20)
         }
         
         overViewLabel.snp.makeConstraints {
             $0.top.equalTo(releaseDateLabel.snp.bottom).offset(10)
-            $0.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(10)
+            $0.leading.trailing.equalTo(contentView).inset(10)
         }
         
         foldButton.snp.makeConstraints {
             $0.top.equalTo(overViewLabel.snp.bottom)
-            $0.leading.equalTo(self.safeAreaLayoutGuide).inset(10)
+            $0.leading.equalTo(contentView).inset(10)
         }
         
         grayView.snp.makeConstraints {
             $0.top.equalTo(voteLabel).offset(-5)
-            $0.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(10)
+            $0.leading.trailing.equalTo(contentView).inset(10)
             $0.bottom.equalTo(stackView).offset(5)
         }
         
         voteLabel.snp.makeConstraints {
             $0.top.equalTo(foldButton.snp.bottom).offset(10)
-            $0.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(10)
+            $0.leading.trailing.equalTo(contentView).inset(10)
             $0.height.equalTo(20)
         }
         
         stackView.snp.makeConstraints {
             $0.top.equalTo(voteLabel.snp.bottom)
-            $0.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(10)
+            $0.leading.trailing.equalTo(contentView).inset(10)
             $0.height.equalTo(100)
+        }
+        
+        imageButton.snp.makeConstraints {
+            $0.top.equalTo(stackView.snp.bottom)
+            $0.leading.trailing.equalTo(contentView).inset(10)
+            $0.height.equalTo(200)
         }
     }
     

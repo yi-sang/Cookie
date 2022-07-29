@@ -20,4 +20,5 @@ target 'Cookie' do
 	pod 'Kingfisher'
 	pod 'RxKeyboard'
 	pod 'youtube-ios-player-helper'
+	pod 'Firebase/Database'
 end
