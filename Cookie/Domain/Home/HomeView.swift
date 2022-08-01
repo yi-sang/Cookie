@@ -11,6 +11,12 @@ import SnapKit
 import GoogleMobileAds
 
 class HomeView: BaseView {
+    var scrollView = UIScrollView().then {
+        $0.showsVerticalScrollIndicator = false
+    }
+    
+    var contentView = UIView()
+    
     var virticalCollectionViewBottomConstraint: Constraint? = nil
 
     var bannerView = GADBannerView(adSize: GADAdSizeBanner)
@@ -73,6 +79,12 @@ class HomeView: BaseView {
     
     override func setup() {
         self.addSubViews(
+            scrollView
+        )
+        scrollView.addSubview(
+            contentView
+        )
+        contentView.addSubViews(
             nowPlayingButton,
             upcomingButton,
             movieHorizontalCollectionView
@@ -80,19 +92,31 @@ class HomeView: BaseView {
     }
     
     override func bindConstraints() {
+        scrollView.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-50)
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.top.bottom.width.equalTo(scrollView)
+        }
+        
         nowPlayingButton.snp.makeConstraints {
-            $0.top.equalTo(self.safeAreaLayoutGuide).offset(10)
-            $0.leading.equalTo(self.safeAreaLayoutGuide).offset(15)
+            $0.top.equalTo(contentView).offset(10)
+            $0.leading.equalTo(contentView).offset(15)
         }
         upcomingButton.snp.makeConstraints {
             $0.top.equalTo(nowPlayingButton)
             $0.leading.equalTo(nowPlayingButton.snp.trailing).offset(15)
+            $0.trailing.lessThanOrEqualTo(contentView)
         }
         movieHorizontalCollectionView.snp.makeConstraints {
             $0.top.equalTo(nowPlayingButton.snp.bottom).offset(10)
-            $0.leading.trailing.width.equalTo(self.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(contentView)
             $0.height.equalTo(((UIScreen.main.bounds.width - 10*4 - 10)/2 * 1.5)*2 + 10)
+            $0.bottom.equalTo(contentView)
         }
+        addBannerViewToView(self.bannerView, bottomHeight: 0)
     }
     
     func additionalSetup() {

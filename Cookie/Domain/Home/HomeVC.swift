@@ -37,13 +37,14 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
     }
     
     static func instance() -> UINavigationController {
-        let viewController = HomeVC.init(nibName: nil, bundle: nil).then {
-            $0.tabBarItem = UITabBarItem (
-                title: "홈화면",
-                image: nil,
-                tag: TabBarTag.home.rawValue
-            )
-        }
+        let viewController = HomeVC.init(nibName: nil, bundle: nil)
+//            .then {
+//            $0.tabBarItem = UITabBarItem (
+//                title: "홈화면",
+//                image: nil,
+//                tag: TabBarTag.home.rawValue
+//            )
+//        }
         return UINavigationController(rootViewController: viewController)
     }
     
@@ -84,6 +85,7 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
             .drive (onNext: { [unowned self] keyboardHeight in
                 let height = keyboardHeight - homeView.safeAreaInsets.bottom
                 self.homeView.updateAdditionalSetup(offset: height+50)
+                self.homeView.bannerView.removeFromSuperview()
                 self.homeView.addBannerViewToView(self.homeView.bannerView, bottomHeight: height)
             })
             .disposed(by: eventDisposeBag)

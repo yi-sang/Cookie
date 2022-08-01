@@ -86,7 +86,7 @@ class DetailView: BaseView {
     var twoCookieButton = UIButton().then {
         $0.configuration = .plain()
         $0.configuration?.image = R.image.twoCookie()?.resizeImage(size: CGSize(width: 75, height: 75))
-        $0.configuration?.title = "쿠키 둘"
+        $0.configuration?.title = "쿠키 두개"
         $0.configuration?.attributedTitle?.font =  .jalnan(size: 14)
         $0.configuration?.baseForegroundColor = .black
         $0.configuration?.imagePlacement = .top
@@ -107,6 +107,12 @@ class DetailView: BaseView {
     
     var contentView = UIView()
 
+    var pickerView = UIPickerView().then {
+        $0.isUserInteractionEnabled = false
+    }
+    
+    var faithList = ["", "might...?", "may..?", "should..!", "must!", "will!!!"]
+    
     override func setup() {
         self.addSubViews(
             playerView,
@@ -119,7 +125,8 @@ class DetailView: BaseView {
             overViewLabel,
             foldButton,
             grayView,
-            imageButton
+            imageButton,
+            pickerView
         )
         
         grayView.addSubViews(
@@ -130,6 +137,8 @@ class DetailView: BaseView {
         self.stackView.addArrangedSubview(oneCookieButton)
         self.stackView.addArrangedSubview(twoCookieButton)
         self.backgroundColor = .white
+        self.pickerView.delegate = self
+        self.pickerView.dataSource = self
     }
     
     override func bindConstraints() {
@@ -146,6 +155,7 @@ class DetailView: BaseView {
         
         contentView.snp.makeConstraints {
             $0.edges.width.equalTo(scrollView)
+            $0.width.equalTo(scrollView)
         }
         
         titleLabel.snp.makeConstraints {
@@ -188,10 +198,17 @@ class DetailView: BaseView {
             $0.height.equalTo(100)
         }
         
+        pickerView.snp.makeConstraints {
+            $0.centerY.equalTo(imageButton)
+            $0.height.equalTo(imageButton)
+            $0.trailing.equalTo(self.snp.centerX)
+            $0.leading.equalTo(self)
+        }
+        
         imageButton.snp.makeConstraints {
             $0.top.equalTo(stackView.snp.bottom).offset(10)
-            $0.leading.trailing.equalTo(contentView).inset(10)
-            $0.height.equalTo(200)
+            $0.leading.equalTo(contentView.snp.centerX)
+            $0.trailing.equalTo(self)
             $0.bottom.equalTo(contentView)
         }
     }
@@ -205,3 +222,24 @@ class DetailView: BaseView {
     }
 }
 
+extension DetailView: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.faithList.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return faithList[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        pickerLabel.font = .jalnan(size: 20)
+        pickerLabel.text = faithList[row]
+        pickerLabel.textAlignment = .center
+        return pickerLabel
+    }
+}

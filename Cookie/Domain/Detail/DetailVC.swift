@@ -28,7 +28,8 @@ final class DetailVC: BaseVC, View {
         super.viewDidLoad()
         self.reactor = self.detailRector
         self.reactor?.action.onNext(.viewDidLoad(id: movie.id))
-        setupUI()
+        self.setupUI()
+        self.scrollRandomly()
     }
     
     static func instance(movie: Movie) -> DetailVC {
@@ -138,7 +139,28 @@ final class DetailVC: BaseVC, View {
                     self.setButton(button: self.detailView.oneCookieButton, isSelected: true)
                     self.setButton(button: self.detailView.twoCookieButton, isSelected: true)
                 }
+                
+                let smallestValue: Int = min(totalCookie.noClue, totalCookie.noCookie, totalCookie.oneCookie, totalCookie.twoCookie)
+                
                 let biggestValue: Int = max(totalCookie.noClue, totalCookie.noCookie, totalCookie.oneCookie, totalCookie.twoCookie)
+                
+                let sumValue = totalCookie.noCookie + totalCookie.oneCookie + totalCookie.twoCookie
+                let difference = biggestValue - smallestValue
+                if sumValue != 0 {
+                    if difference < 3 {
+                        self.detailView.pickerView.selectRow(0, inComponent: 0, animated: true)
+                    } else if difference < 5 {
+                        self.detailView.pickerView.selectRow(1, inComponent: 0, animated: true)
+                    } else if difference < 7 {
+                        self.detailView.pickerView.selectRow(2, inComponent: 0, animated: true)
+                    } else if difference < 15 {
+                        self.detailView.pickerView.selectRow(3, inComponent: 0, animated: true)
+                    } else if difference > 15 {
+                        self.detailView.pickerView.selectRow(4, inComponent: 0, animated: true)
+                    }
+                } else {
+                    self.detailView.pickerView.selectRow(0, inComponent: 0, animated: true)
+                }
                 
                 if biggestValue == totalCookie.noClue {
                     self.detailView.imageButton.configuration?.title = ""
@@ -153,7 +175,7 @@ final class DetailVC: BaseVC, View {
                     self.detailView.imageButton.configuration?.attributedTitle!.font =  .jalnan(size: 20)
                     self.detailView.imageButton.configuration?.image = R.image.oneCookie()?.resizeImage(size: CGSize(width: 150, height: 150))
                 } else if biggestValue == totalCookie.twoCookie {
-                    self.detailView.imageButton.configuration?.title = "쿠키 둘"
+                    self.detailView.imageButton.configuration?.title = "쿠키 두개"
                     self.detailView.imageButton.configuration?.attributedTitle!.font =  .jalnan(size: 20)
                     self.detailView.imageButton.configuration?.image = R.image.twoCookie()?.resizeImage(size: CGSize(width: 150, height: 150))
 
@@ -180,4 +202,9 @@ final class DetailVC: BaseVC, View {
             button.layer.opacity = 0.5
         }
     }
+    
+    private func scrollRandomly() {        
+        let row:Int = .random(in: 1..<5)
+        self.detailView.pickerView.selectRow(row, inComponent: 0, animated: true)
+     }
 }
