@@ -8,11 +8,13 @@
 import UIKit
 import Then
 import SnapKit
-
+import GoogleMobileAds
 
 class HomeView: BaseView {
     var virticalCollectionViewBottomConstraint: Constraint? = nil
 
+    var bannerView = GADBannerView(adSize: GADAdSizeBanner)
+    
     let searchBar = UISearchBar().then {
         $0.placeholder = "영화 제목을 검색해보세요"
         $0.searchTextField.tintColor = .clear
@@ -110,5 +112,16 @@ class HomeView: BaseView {
         self.nowPlayingButton.removeFromSuperview()
         self.upcomingButton.removeFromSuperview()
         self.movieHorizontalCollectionView.removeFromSuperview()
+    }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView, bottomHeight: CGFloat) {
+        self.addSubview(bannerView)
+        
+        bannerView.snp.makeConstraints {
+            $0.centerX.equalTo(self)
+            $0.height.equalTo(50)
+            $0.width.equalTo(UIScreen.main.bounds.width)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-bottomHeight)
+        }
     }
 }

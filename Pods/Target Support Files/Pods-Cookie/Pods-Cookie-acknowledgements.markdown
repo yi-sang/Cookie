@@ -1214,6 +1214,14 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE, EVEN
 IF IBM IS APPRISED OF THE POSSIBILITY OF SUCH DAMAGES.
 
 
+## Google-Mobile-Ads-SDK
+
+Copyright 2022 Google
+
+## GoogleAppMeasurement
+
+Copyright 2022 Google
+
 ## GoogleDataTransport
 
 
@@ -1419,6 +1427,10 @@ IF IBM IS APPRISED OF THE POSSIBILITY OF SUCH DAMAGES.
    See the License for the specific language governing permissions and
    limitations under the License.
 
+
+## GoogleUserMessagingPlatform
+
+Copyright 2021 Google
 
 ## GoogleUtilities
 

@@ -10,6 +10,7 @@ import ReactorKit
 import RxSwift
 import RxCocoa
 import RxKeyboard
+import GoogleMobileAds
 
 final class HomeVC: BaseVC, View, HomeCoordinator {
     private weak var coordinator: HomeCoordinator?
@@ -30,6 +31,9 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
         self.reactor?.action.onNext(.viewDidLoad)
         self.navigationItem.titleView = homeView.searchBar
         self.coordinator = self
+        self.homeView.bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        self.homeView.bannerView.rootViewController = self
+        self.homeView.bannerView.load(GADRequest())
     }
     
     static func instance() -> UINavigationController {
@@ -63,6 +67,7 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
             .drive (onNext: { _ in
                 self.homeView.searchBar.searchTextField.resignFirstResponder()
                 self.homeView.movieVerticalCollectionView.removeFromSuperview()
+                self.homeView.bannerView.removeFromSuperview()
                 self.homeView.searchBar.text = ""
                 self.homeView.searchBar.showsCancelButton = false
                 self.homeView.addSubViews(
@@ -78,7 +83,8 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
             .filter { $0.isNormal }
             .drive (onNext: { [unowned self] keyboardHeight in
                 let height = keyboardHeight - homeView.safeAreaInsets.bottom
-                self.homeView.updateAdditionalSetup(offset: height)
+                self.homeView.updateAdditionalSetup(offset: height+50)
+                self.homeView.addBannerViewToView(self.homeView.bannerView, bottomHeight: height)
             })
             .disposed(by: eventDisposeBag)
     }

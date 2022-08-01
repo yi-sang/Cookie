@@ -1,4 +1,4 @@
-# Uncomment the next line to define a global platform for your project
+#Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
 target 'Cookie' do
@@ -21,4 +21,5 @@ target 'Cookie' do
 	pod 'RxKeyboard'
 	pod 'youtube-ios-player-helper'
 	pod 'Firebase/Database'
+	pod 'Google-Mobile-Ads-SDK'
 end

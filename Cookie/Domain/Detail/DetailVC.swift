@@ -122,35 +122,21 @@ final class DetailVC: BaseVC, View {
                 guard let self = self else { return }
                 guard let totalCookie = totalCookie else { return }
                 if totalCookie.personal.contains(Cookie(uuid: Storage.shared.uuid, cookieType: 0)) {
-                    self.detailView.noCookieButton.isUserInteractionEnabled = true
-                    self.detailView.oneCookieButton.isUserInteractionEnabled = false
-                    self.detailView.twoCookieButton.isUserInteractionEnabled = false
-                    self.detailView.noCookieButton.layer.opacity = 1
-                    self.detailView.oneCookieButton.layer.opacity = 0.5
-                    self.detailView.twoCookieButton.layer.opacity = 0.5
-
+                    self.setButton(button: self.detailView.noCookieButton, isSelected: true)
+                    self.setButton(button: self.detailView.oneCookieButton, isSelected: false)
+                    self.setButton(button: self.detailView.twoCookieButton, isSelected: false)
                 } else if totalCookie.personal.contains(Cookie(uuid: Storage.shared.uuid, cookieType: 1)) {
-                    self.detailView.noCookieButton.isUserInteractionEnabled = false
-                    self.detailView.oneCookieButton.isUserInteractionEnabled = true
-                    self.detailView.twoCookieButton.isUserInteractionEnabled = false
-                    self.detailView.noCookieButton.layer.opacity = 0.5
-                    self.detailView.oneCookieButton.layer.opacity = 1
-                    self.detailView.twoCookieButton.layer.opacity = 0.5
-
+                    self.setButton(button: self.detailView.noCookieButton, isSelected: false)
+                    self.setButton(button: self.detailView.oneCookieButton, isSelected: true)
+                    self.setButton(button: self.detailView.twoCookieButton, isSelected: false)
                 } else if totalCookie.personal.contains(Cookie(uuid: Storage.shared.uuid, cookieType: 2)) {
-                    self.detailView.noCookieButton.isUserInteractionEnabled = false
-                    self.detailView.oneCookieButton.isUserInteractionEnabled = false
-                    self.detailView.twoCookieButton.isUserInteractionEnabled = true
-                    self.detailView.noCookieButton.layer.opacity = 0.5
-                    self.detailView.oneCookieButton.layer.opacity = 0.5
-                    self.detailView.twoCookieButton.layer.opacity = 1
+                    self.setButton(button: self.detailView.noCookieButton, isSelected: false)
+                    self.setButton(button: self.detailView.oneCookieButton, isSelected: false)
+                    self.setButton(button: self.detailView.twoCookieButton, isSelected: true)
                 } else {
-                    self.detailView.noCookieButton.isUserInteractionEnabled = true
-                    self.detailView.oneCookieButton.isUserInteractionEnabled = true
-                    self.detailView.twoCookieButton.isUserInteractionEnabled = true
-                    self.detailView.noCookieButton.layer.opacity = 1
-                    self.detailView.oneCookieButton.layer.opacity = 1
-                    self.detailView.twoCookieButton.layer.opacity = 1
+                    self.setButton(button: self.detailView.noCookieButton, isSelected: true)
+                    self.setButton(button: self.detailView.oneCookieButton, isSelected: true)
+                    self.setButton(button: self.detailView.twoCookieButton, isSelected: true)
                 }
                 let biggestValue: Int = max(totalCookie.noClue, totalCookie.noCookie, totalCookie.oneCookie, totalCookie.twoCookie)
                 
@@ -177,11 +163,21 @@ final class DetailVC: BaseVC, View {
             .disposed(by: disposeBag)
     }
     
-    func setupUI() {
+    private func setupUI() {
         let releaseDate = movie.releaseDate.replacingOccurrences(of: "-", with: ".")
         self.detailView.titleLabel.text = movie.title
         self.detailView.releaseDateLabel.text = "\(releaseDate) 개봉"
         self.detailView.overViewLabel.text = movie.overview
         self.detailView.playerView.load(withVideoId: "")
+    }
+    
+    private func setButton(button: UIButton, isSelected: Bool) {
+        button.isUserInteractionEnabled = isSelected
+
+        if isSelected {
+            button.layer.opacity = 1
+        } else {
+            button.layer.opacity = 0.5
+        }
     }
 }

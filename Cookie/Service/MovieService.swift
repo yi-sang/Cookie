@@ -188,7 +188,6 @@ struct MovieService: MovieProtocol {
                         totalCookie.personal.append(cookie)
                         totalCookie.noCookie += 1
                         db.child(movieID).setValue(totalCookie.toDictionary())
-                        
                     }
                     observer.onNext(totalCookie)
                     observer.onCompleted()
