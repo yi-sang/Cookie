@@ -27,8 +27,8 @@ final class DetailReactor: BaseReactor, Reactor {
     }
     
     struct State {
-        var key : String = ""
-        var newKey : String = ""
+        var key : String?
+        var newKey : String?
         var totalCookie: TotalCookie?
     }
     
@@ -49,12 +49,12 @@ final class DetailReactor: BaseReactor, Reactor {
                 movieService.getCookieData(id: id)
                     .map { Mutation.fetchCookie(totalCookie: $0) },
                 movieService.getKoreanVideo(id: id)
-                    .map { $0.results.first?.key ?? "" }
+                    .map { $0.results.first?.key ?? "-" }
                     .map { Mutation.fetchKoreanVideo(key: $0)}
             )
         case let .retry(id):
             return movieService.getVideo(id: id)
-                .map { $0.results.first?.key ?? "" }
+                .map { $0.results.first?.key ?? "-" }
                 .map { Mutation.fetchVideo(key: $0) }
             
         case let .noCookieClicked(id):

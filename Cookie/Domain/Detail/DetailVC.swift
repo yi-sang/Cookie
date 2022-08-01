@@ -89,26 +89,28 @@ final class DetailVC: BaseVC, View {
         
         reactor.state
             .map { $0.key }
+            .filter { $0 != nil }
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: String())
             .drive(onNext: { [weak self] key in
                 guard let self = self else { return }
-                if key.isEmpty {
+                if key == "-" {
                     reactor.action.onNext(.retry(id: self.movie.id))
                 } else {
-                    self.detailView.playerView.load(withVideoId: key)
+                    self.detailView.playerView.load(withVideoId: key!)
                 }
             })
             .disposed(by: disposeBag)
         
         reactor.state
             .map { $0.newKey }
+            .filter { $0 != nil }
             .distinctUntilChanged()
             .asDriver(onErrorJustReturn: String())
-            .drive(onNext: { [weak self] key in
+            .drive(onNext: { [weak self] newKey in
                 guard let self = self else { return }
-                
-                self.detailView.playerView.load(withVideoId: key)
+                guard let newKey = newKey else { return }
+                self.detailView.playerView.load(withVideoId: newKey)
             })
             .disposed(by: disposeBag)
         

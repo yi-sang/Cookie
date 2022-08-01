@@ -119,6 +119,7 @@ struct MovieService: MovieProtocol {
             let headers = HTTPUtils.jsonHeader()
             let parameters: Parameters = [
                 "api_key" : Storage.shared.apiKey,
+                "language" : "en-US"
             ]
             HTTPUtils.defaultSession.request(
                 urlString,

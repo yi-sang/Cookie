@@ -102,20 +102,17 @@ class DetailView: BaseView {
     }
     
     var scrollView = UIScrollView().then {
-        $0.canCancelContentTouches = true
+        $0.showsVerticalScrollIndicator = false
     }
     
     var contentView = UIView()
 
-    
-    
     override func setup() {
         self.addSubViews(
             playerView,
             scrollView
         )
         scrollView.addSubview(contentView)
-        
         contentView.addSubViews(
             titleLabel,
             releaseDateLabel,
@@ -132,7 +129,6 @@ class DetailView: BaseView {
         self.stackView.addArrangedSubview(noCookieButton)
         self.stackView.addArrangedSubview(oneCookieButton)
         self.stackView.addArrangedSubview(twoCookieButton)
-
         self.backgroundColor = .white
     }
     
@@ -145,14 +141,11 @@ class DetailView: BaseView {
         
         scrollView.snp.makeConstraints {
             $0.top.equalTo(self.playerView.snp.bottom).offset(10)
-            $0.leading.trailing.equalTo(self.safeAreaLayoutGuide)
-            $0.bottom.equalTo(self.safeAreaLayoutGuide)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
         
         contentView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(scrollView)
-            $0.width.equalTo(scrollView)
-            $0.bottom.equalTo(imageButton.snp.bottom)
+            $0.edges.width.equalTo(scrollView)
         }
         
         titleLabel.snp.makeConstraints {
@@ -196,9 +189,10 @@ class DetailView: BaseView {
         }
         
         imageButton.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom)
+            $0.top.equalTo(stackView.snp.bottom).offset(10)
             $0.leading.trailing.equalTo(contentView).inset(10)
             $0.height.equalTo(200)
+            $0.bottom.equalTo(contentView)
         }
     }
     
@@ -209,6 +203,5 @@ class DetailView: BaseView {
     func decreaseConstraint() {
         overViewLabel.numberOfLines = 5
     }
-    
-    
 }
+
