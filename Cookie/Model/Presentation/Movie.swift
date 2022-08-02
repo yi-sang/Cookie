@@ -27,8 +27,8 @@ struct Movie: Decodable, Equatable {
         self.overview = try values.decodeIfPresent(String.self, forKey: .overview) ?? ""
         self.id = try values.decodeIfPresent(Int.self, forKey: .id) ?? 0
         self.releaseDate = try values.decodeIfPresent(String.self, forKey: .release_date) ?? ""
-
     }
+    
     init () {
         self.title = ""
         self.posterPath = ""

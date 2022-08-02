@@ -18,6 +18,8 @@ protocol MovieProtocol {
     func postNoCookieData(id: Int) -> Observable<TotalCookie>
     func postOneCookieData(id: Int) -> Observable<TotalCookie>
     func postTwoCookieData(id: Int) -> Observable<TotalCookie>
+    func postUserInfo (id: Int) -> Observable<User>
+    func getUserInfo() -> Observable<User>
 }
 
 struct MovieService: MovieProtocol {
@@ -140,7 +142,7 @@ struct MovieService: MovieProtocol {
             return Disposables.create()
         }
     }
-//    
+  
     func getCookieData(id: Int) -> Observable<TotalCookie> {
         return Observable.create { observer -> Disposable in
             let db = Database.database().reference(withPath: "movie")
@@ -243,25 +245,83 @@ struct MovieService: MovieProtocol {
                     guard let data = try? JSONSerialization.data(withJSONObject: value as Any) else { return }
                     let decoder = Firebase.JSONDecoder()
                     guard var totalCookie = try? decoder.decode(TotalCookie.self, from: data) else { return }
-                    
+                    let movie = db.child(movieID)
                     if let index = totalCookie.personal.firstIndex(of: Cookie(uuid: uuid, cookieType: 2)) {
-                        let movie = db.child(movieID)
                         movie.child("personal").child("\(index)").removeValue()
                         totalCookie.personal.remove(at: index)
                         totalCookie.twoCookie -= 1
                         movie.setValue(totalCookie.toDictionary())
+
                     } else {
                         let cookie = Cookie(uuid: uuid, cookieType: 2)
                         totalCookie.personal.append(cookie)
                         totalCookie.twoCookie += 1
-                        db.child(movieID).setValue(totalCookie.toDictionary())
+                        movie.setValue(totalCookie.toDictionary())
                         
                     }
                     observer.onNext(totalCookie)
                     observer.onCompleted()
                 }
             }) { error in
-                print(error)
+                let error = CommonError(description: "데이터를 파싱할 수 없습니다.")
+                observer.onError(error)
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func postUserInfo (id: Int) -> Observable<User> {
+        return Observable.create { observer -> Disposable in
+            let db = Database.database().reference(withPath: "user")
+            db.observeSingleEvent(of: .value, with: { snapshot in
+                let movieID = String(id)
+                if snapshot.hasChild(uuid) {
+                    let value = snapshot.childSnapshot(forPath: uuid).value
+                    guard let data = try? JSONSerialization.data(withJSONObject: value as Any) else { return }
+                    let decoder = Firebase.JSONDecoder()
+                    guard var user = try? decoder.decode(User.self, from: data) else { return }
+                    let userDb = db.child(uuid)
+                    if let index = user.movieList.firstIndex(of: movieID) {
+                        user.movieList.remove(at: index)
+                        user.experience -= 1
+                        userDb.setValue(user.toDictionary())
+                    } else {
+                        user.movieList.append(movieID)
+                        user.experience += 1
+                        userDb.setValue(user.toDictionary())
+                    }
+                    observer.onNext(user)
+                    observer.onCompleted()
+                }
+            }) { error in
+                let error = CommonError(description: "데이터를 파싱할 수 없습니다.")
+                observer.onError(error)
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func getUserInfo() -> Observable<User> {
+        return Observable.create { observer -> Disposable in
+            let db = Database.database().reference(withPath: "user")
+            db.observeSingleEvent(of: .value, with: { snapshot in
+                if snapshot.hasChild(uuid) {
+                    let value = snapshot.childSnapshot(forPath: uuid).value
+                    guard let data = try? JSONSerialization.data(withJSONObject: value as Any) else { return }
+                    let decoder = Firebase.JSONDecoder()
+                    guard let user = try? decoder.decode(User.self, from: data) else { return }
+                    observer.onNext(user)
+                    observer.onCompleted()
+                } else {
+                    let user = User(experience: 0, movieList: [""])
+                    let jsonUser = [uuid: user.toDictionary()]
+                    db.setValue(jsonUser)
+                    observer.onNext(user)
+                    observer.onCompleted()
+                }
+            }) { error in
+                let error = CommonError(description: "데이터를 파싱할 수 없습니다.")
+                observer.onError(error)
             }
             return Disposables.create()
         }

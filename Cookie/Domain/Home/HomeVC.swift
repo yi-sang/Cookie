@@ -11,6 +11,8 @@ import RxSwift
 import RxCocoa
 import RxKeyboard
 import GoogleMobileAds
+import AppTrackingTransparency
+import AdSupport
 
 final class HomeVC: BaseVC, View, HomeCoordinator {
     private weak var coordinator: HomeCoordinator?
@@ -33,7 +35,7 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
         self.coordinator = self
         self.homeView.bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         self.homeView.bannerView.rootViewController = self
-        self.homeView.bannerView.load(GADRequest())
+        self.loadAd()
     }
     
     static func instance() -> UINavigationController {
@@ -71,11 +73,7 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
                 self.homeView.bannerView.removeFromSuperview()
                 self.homeView.searchBar.text = ""
                 self.homeView.searchBar.showsCancelButton = false
-                self.homeView.addSubViews(
-                    self.homeView.nowPlayingButton,
-                    self.homeView.upcomingButton,
-                    self.homeView.movieHorizontalCollectionView
-                )
+                self.homeView.setup()
                 self.homeView.bindConstraints()
             }).disposed(by: eventDisposeBag)
         
@@ -95,6 +93,7 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
         // Action
         homeView.searchBar.rx.text
             .orEmpty
+            .filter { $0 != "" }
             .distinctUntilChanged()
             .compactMap { keyword in Reactor.Action.searchTextDidChanged(query: keyword) }
             .bind(to: reactor.action)
@@ -194,5 +193,18 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
                 self.coordinator?.showDetail(movie: movieInfo.data!)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func loadAd() {
+
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                if status == .authorized {
+                    self.homeView.bannerView.load(GADRequest())
+                }
+            })
+        } else {
+            self.homeView.bannerView.load(GADRequest())
+        }
     }
 }

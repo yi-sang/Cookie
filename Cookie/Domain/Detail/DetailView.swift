@@ -111,7 +111,20 @@ class DetailView: BaseView {
         $0.isUserInteractionEnabled = false
     }
     
-    var faithList = ["", "might...?", "may..?", "should..!", "must!", "will!!!"]
+    var experienceLabel = UILabel().then {
+        $0.text = ""
+        $0.textColor = .black
+        $0.font = .jalnan(size: 14)
+        $0.textAlignment = .left
+        $0.sizeToFit()
+    }
+    
+    var slider = Slider().then {
+        $0.minimumValue = 0
+        $0.maximumValue = 10
+    }
+    
+    var faithList = ["might...?", "may..?", "should..!", "must!", "will!!!"]
     
     override func setup() {
         self.addSubViews(
@@ -126,13 +139,16 @@ class DetailView: BaseView {
             foldButton,
             grayView,
             imageButton,
-            pickerView
+            pickerView,
+            experienceLabel,
+            slider
         )
         
         grayView.addSubViews(
             voteLabel,
             stackView
         )
+        
         self.stackView.addArrangedSubview(noCookieButton)
         self.stackView.addArrangedSubview(oneCookieButton)
         self.stackView.addArrangedSubview(twoCookieButton)
@@ -145,7 +161,7 @@ class DetailView: BaseView {
         playerView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide)
             $0.leading.trailing.equalTo(self.safeAreaLayoutGuide)
-            $0.height.equalTo(self.safeAreaLayoutGuide.snp.width).multipliedBy(0.6)
+            $0.height.equalTo(self.safeAreaLayoutGuide.snp.width).multipliedBy(0.5)
         }
         
         scrollView.snp.makeConstraints {
@@ -198,6 +214,16 @@ class DetailView: BaseView {
             $0.height.equalTo(100)
         }
         
+        experienceLabel.snp.makeConstraints {
+            $0.top.equalTo(grayView.snp.bottom).offset(10)
+            $0.leading.trailing.equalTo(contentView).inset(20)
+        }
+        
+        slider.snp.makeConstraints {
+            $0.top.equalTo(experienceLabel.snp.bottom).offset(5)
+            $0.leading.trailing.equalTo(contentView).inset(20)
+        }
+        
         pickerView.snp.makeConstraints {
             $0.centerY.equalTo(imageButton)
             $0.height.equalTo(imageButton)
@@ -206,7 +232,7 @@ class DetailView: BaseView {
         }
         
         imageButton.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom).offset(10)
+            $0.top.equalTo(slider.snp.bottom)
             $0.leading.equalTo(contentView.snp.centerX)
             $0.trailing.equalTo(self)
             $0.bottom.equalTo(contentView)

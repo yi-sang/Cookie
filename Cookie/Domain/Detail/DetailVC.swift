@@ -122,64 +122,34 @@ final class DetailVC: BaseVC, View {
             .drive(onNext: { [weak self] totalCookie in
                 guard let self = self else { return }
                 guard let totalCookie = totalCookie else { return }
-                if totalCookie.personal.contains(Cookie(uuid: Storage.shared.uuid, cookieType: 0)) {
-                    self.setButton(button: self.detailView.noCookieButton, isSelected: true)
-                    self.setButton(button: self.detailView.oneCookieButton, isSelected: false)
-                    self.setButton(button: self.detailView.twoCookieButton, isSelected: false)
-                } else if totalCookie.personal.contains(Cookie(uuid: Storage.shared.uuid, cookieType: 1)) {
-                    self.setButton(button: self.detailView.noCookieButton, isSelected: false)
-                    self.setButton(button: self.detailView.oneCookieButton, isSelected: true)
-                    self.setButton(button: self.detailView.twoCookieButton, isSelected: false)
-                } else if totalCookie.personal.contains(Cookie(uuid: Storage.shared.uuid, cookieType: 2)) {
-                    self.setButton(button: self.detailView.noCookieButton, isSelected: false)
-                    self.setButton(button: self.detailView.oneCookieButton, isSelected: false)
-                    self.setButton(button: self.detailView.twoCookieButton, isSelected: true)
+                self.setTotalButton(totalCookie: totalCookie)
+                self.setPickerView(totalCookie: totalCookie)
+                self.setImage(totalCookie: totalCookie)
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.user }
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: User())
+            .drive(onNext: { [weak self] user in
+                guard let self = self else { return }
+                guard let user = user else { return }
+                let level = Int(user.experience / 10) + 1
+                let experience = Float(user.experience % 10)
+                if experience == 0.0 {
+                    self.detailView.slider.value = experience + 10
+                    self.detailView.slider.valueChanged()
+                    self.detailView.experienceLabel.text = "기여도 lv.\(level-1)"
+                    self.shake(view: self.detailView.slider, completion: {
+                        self.detailView.slider.value = experience
+                        self.detailView.slider.valueChanged()
+                        self.detailView.experienceLabel.text = "기여도 lv.\(level)"
+                    })
                 } else {
-                    self.setButton(button: self.detailView.noCookieButton, isSelected: true)
-                    self.setButton(button: self.detailView.oneCookieButton, isSelected: true)
-                    self.setButton(button: self.detailView.twoCookieButton, isSelected: true)
-                }
-                
-                let smallestValue: Int = min(totalCookie.noClue, totalCookie.noCookie, totalCookie.oneCookie, totalCookie.twoCookie)
-                
-                let biggestValue: Int = max(totalCookie.noClue, totalCookie.noCookie, totalCookie.oneCookie, totalCookie.twoCookie)
-                
-                let sumValue = totalCookie.noCookie + totalCookie.oneCookie + totalCookie.twoCookie
-                let difference = biggestValue - smallestValue
-                if sumValue != 0 {
-                    if difference < 3 {
-                        self.detailView.pickerView.selectRow(0, inComponent: 0, animated: true)
-                    } else if difference < 5 {
-                        self.detailView.pickerView.selectRow(1, inComponent: 0, animated: true)
-                    } else if difference < 7 {
-                        self.detailView.pickerView.selectRow(2, inComponent: 0, animated: true)
-                    } else if difference < 15 {
-                        self.detailView.pickerView.selectRow(3, inComponent: 0, animated: true)
-                    } else if difference > 15 {
-                        self.detailView.pickerView.selectRow(4, inComponent: 0, animated: true)
-                    }
-                } else {
-                    self.detailView.pickerView.selectRow(0, inComponent: 0, animated: true)
-                }
-                
-                if biggestValue == totalCookie.noClue {
-                    self.detailView.imageButton.configuration?.title = ""
-                    self.detailView.imageButton.configuration?.attributedTitle!.font =  .jalnan(size: 20)
-                    self.detailView.imageButton.configuration?.image = R.image.noClue()?.resizeImage(size: CGSize(width: 150, height: 150))
-                } else if biggestValue == totalCookie.noCookie {
-                    self.detailView.imageButton.configuration?.title = "쿠키 없음"
-                    self.detailView.imageButton.configuration?.attributedTitle!.font =  .jalnan(size: 20)
-                    self.detailView.imageButton.configuration?.image = R.image.dish()?.resizeImage(size: CGSize(width: 150, height: 150))
-                } else if biggestValue == totalCookie.oneCookie {
-                    self.detailView.imageButton.configuration?.title = "쿠키 하나"
-                    self.detailView.imageButton.configuration?.attributedTitle!.font =  .jalnan(size: 20)
-                    self.detailView.imageButton.configuration?.image = R.image.oneCookie()?.resizeImage(size: CGSize(width: 150, height: 150))
-                } else if biggestValue == totalCookie.twoCookie {
-                    self.detailView.imageButton.configuration?.title = "쿠키 두개"
-                    self.detailView.imageButton.configuration?.attributedTitle!.font =  .jalnan(size: 20)
-                    self.detailView.imageButton.configuration?.image = R.image.twoCookie()?.resizeImage(size: CGSize(width: 150, height: 150))
-
-
+                    self.detailView.slider.value = experience
+                    self.detailView.slider.valueChanged()
+                    self.detailView.experienceLabel.text = "기여도 lv.\(level)"
                 }
             })
             .disposed(by: disposeBag)
@@ -203,8 +173,98 @@ final class DetailVC: BaseVC, View {
         }
     }
     
-    private func scrollRandomly() {        
+    private func setTotalButton(totalCookie: TotalCookie) {
+        if totalCookie.personal.contains(Cookie(uuid: Storage.shared.uuid, cookieType: 0)) {
+            self.setButton(button: self.detailView.noCookieButton, isSelected: true)
+            self.setButton(button: self.detailView.oneCookieButton, isSelected: false)
+            self.setButton(button: self.detailView.twoCookieButton, isSelected: false)
+        } else if totalCookie.personal.contains(Cookie(uuid: Storage.shared.uuid, cookieType: 1)) {
+            self.setButton(button: self.detailView.noCookieButton, isSelected: false)
+            self.setButton(button: self.detailView.oneCookieButton, isSelected: true)
+            self.setButton(button: self.detailView.twoCookieButton, isSelected: false)
+        } else if totalCookie.personal.contains(Cookie(uuid: Storage.shared.uuid, cookieType: 2)) {
+            self.setButton(button: self.detailView.noCookieButton, isSelected: false)
+            self.setButton(button: self.detailView.oneCookieButton, isSelected: false)
+            self.setButton(button: self.detailView.twoCookieButton, isSelected: true)
+        } else {
+            self.setButton(button: self.detailView.noCookieButton, isSelected: true)
+            self.setButton(button: self.detailView.oneCookieButton, isSelected: true)
+            self.setButton(button: self.detailView.twoCookieButton, isSelected: true)
+        }
+    }
+    
+    private func setPickerView(totalCookie: TotalCookie) {
+        let smallestValue: Int = min(totalCookie.noClue, totalCookie.noCookie, totalCookie.oneCookie, totalCookie.twoCookie)
+        
+        let biggestValue: Int = max(totalCookie.noClue, totalCookie.noCookie, totalCookie.oneCookie, totalCookie.twoCookie)
+        
+        let sumValue = totalCookie.noCookie + totalCookie.oneCookie + totalCookie.twoCookie
+        
+        let difference = (biggestValue - smallestValue) % 10
+        if sumValue != 0 {
+            if difference < 1 {
+                self.detailView.pickerView.selectRow(4, inComponent: 0, animated: true)
+            } else if difference < 3 {
+                self.detailView.pickerView.selectRow(0, inComponent: 0, animated: true)
+            } else if difference < 5 {
+                self.detailView.pickerView.selectRow(1, inComponent: 0, animated: true)
+            } else if difference < 7 {
+                self.detailView.pickerView.selectRow(2, inComponent: 0, animated: true)
+            } else if difference < 10 {
+                self.detailView.pickerView.selectRow(3, inComponent: 0, animated: true)
+            } else if difference > 10 {
+                self.detailView.pickerView.selectRow(4, inComponent: 0, animated: true)
+            }
+        } else {
+            self.detailView.pickerView.selectRow(4, inComponent: 0, animated: true)
+        }
+    }
+    
+    private func setImage(totalCookie: TotalCookie) {
+        let biggestValue: Int = max(totalCookie.noClue, totalCookie.noCookie, totalCookie.oneCookie, totalCookie.twoCookie)
+        if biggestValue == totalCookie.noClue {
+            self.detailView.imageButton.configuration?.title = ""
+            self.detailView.imageButton.configuration?.attributedTitle!.font =  .jalnan(size: 20)
+            self.detailView.imageButton.configuration?.image = R.image.noClue()?.resizeImage(size: CGSize(width: 150, height: 150))
+        } else if biggestValue == totalCookie.noCookie {
+            self.detailView.imageButton.configuration?.title = "쿠키 없음"
+            self.detailView.imageButton.configuration?.attributedTitle!.font =  .jalnan(size: 20)
+            self.detailView.imageButton.configuration?.image = R.image.dish()?.resizeImage(size: CGSize(width: 150, height: 150))
+        } else if biggestValue == totalCookie.oneCookie {
+            self.detailView.imageButton.configuration?.title = "쿠키 하나"
+            self.detailView.imageButton.configuration?.attributedTitle!.font =  .jalnan(size: 20)
+            self.detailView.imageButton.configuration?.image = R.image.oneCookie()?.resizeImage(size: CGSize(width: 150, height: 150))
+        } else if biggestValue == totalCookie.twoCookie {
+            self.detailView.imageButton.configuration?.title = "쿠키 두개"
+            self.detailView.imageButton.configuration?.attributedTitle!.font =  .jalnan(size: 20)
+            self.detailView.imageButton.configuration?.image = R.image.twoCookie()?.resizeImage(size: CGSize(width: 150, height: 150))
+        }
+    }
+    
+    private func scrollRandomly() {
         let row:Int = .random(in: 1..<5)
         self.detailView.pickerView.selectRow(row, inComponent: 0, animated: true)
      }
+    
+    private func shake(view: UIView, completion: (@escaping ()->Void)) {
+        UIView.animate(withDuration: 0.2, animations: {
+            view.bounds.origin.y -= 10
+        }, completion: { bool in
+            if bool {
+                UIView.animate(withDuration: 0.2, animations: {
+                    view.bounds.origin.y += 20
+                }, completion: { bool in
+                    if bool {
+                        UIView.animate(withDuration: 0.2, animations: {
+                            view.bounds.origin.y -= 10
+                        }, completion: { bool in
+                            if bool {
+                                completion()
+                            }
+                        })
+                    }
+                })
+            }
+        })
+    }
 }
