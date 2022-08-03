@@ -82,7 +82,7 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
             .filter { $0.isNormal }
             .drive (onNext: { [unowned self] keyboardHeight in
                 let height = keyboardHeight - homeView.safeAreaInsets.bottom
-                self.homeView.updateAdditionalSetup(offset: height+50)
+                self.homeView.updateAdditionalSetup(offset: height+55)
                 self.homeView.bannerView.removeFromSuperview()
                 self.homeView.addBannerViewToView(self.homeView.bannerView, bottomHeight: height)
             })

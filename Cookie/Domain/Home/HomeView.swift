@@ -94,7 +94,7 @@ class HomeView: BaseView {
     override func bindConstraints() {
         scrollView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(self.safeAreaLayoutGuide)
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-50)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-55)
         }
         
         contentView.snp.makeConstraints {

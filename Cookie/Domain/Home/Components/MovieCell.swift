@@ -50,7 +50,7 @@ final class MovieCell: BaseCollectionViewCell {
     override func bindConstraints() {
         self.containerView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview().inset(10)
-            make.bottom.equalTo(titleLabel.snp.top).offset(-10)
+            make.bottom.equalToSuperview().inset(25)
         }
         self.categoryImageView.snp.makeConstraints { make in
             make.edges.equalTo(containerView)
@@ -68,6 +68,7 @@ final class MovieCell: BaseCollectionViewCell {
     }
     
     func bind(movie: Movie) {
+        self.titleLabel.text = movie.title
         if let url = URL(string: movie.posterPath) {
             if url == URL(string: "https://image.tmdb.org/t/p/original") {
                 self.categoryImageView.contentMode = .scaleAspectFit
@@ -79,6 +80,5 @@ final class MovieCell: BaseCollectionViewCell {
             self.categoryImageView.contentMode = .scaleAspectFit
             self.categoryImageView.image = R.image.soloCookie()
         }
-        titleLabel.text = movie.title
     }
 }
