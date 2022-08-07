@@ -10,50 +10,46 @@ import ReactorKit
 import RxSwift
 import RxCocoa
 import RxKeyboard
-import GoogleMobileAds
-import AppTrackingTransparency
-import AdSupport
 
 final class HomeVC: BaseVC, View, HomeCoordinator {
     private weak var coordinator: HomeCoordinator?
-
+    
     private let homeReactor = HomeReactor(
         movieService: MovieService()
     )
     private var homeView = HomeView()
-        
+    
     override func loadView() {
         self.view = self.homeView
-    }  
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.reactor = self.homeReactor
         self.reactor?.action.onNext(.viewDidLoad)
         self.navigationItem.titleView = homeView.searchBar
         self.coordinator = self
-        self.homeView.bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         self.homeView.bannerView.rootViewController = self
-        self.loadAd()
     }
     
     static func instance() -> UINavigationController {
         let viewController = HomeVC.init(nibName: nil, bundle: nil)
-//            .then {
-//            $0.tabBarItem = UITabBarItem (
-//                title: "홈화면",
-//                image: nil,
-//                tag: TabBarTag.home.rawValue
-//            )
-//        }
+        //            .then {
+        //            $0.tabBarItem = UITabBarItem (
+        //                title: "홈화면",
+        //                image: nil,
+        //                tag: TabBarTag.home.rawValue
+        //            )
+        //        }
         return UINavigationController(rootViewController: viewController)
     }
     
     override func bindEvent() {
         homeView.searchBar.rx.textDidBeginEditing
             .asDriver()
-            .drive (onNext: { _ in
+            .drive (onNext: { [weak self] in
+                guard let self = self else { return }
                 self.homeView.additionalSetup()
                 UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
                     self.homeView.searchBar.searchTextField.backgroundColor = UIColor(rgb: 0xCBCBD0)
@@ -64,10 +60,11 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
                     self.homeView.removeSubviews()
                 }
             }).disposed(by: eventDisposeBag)
-                
+        
         homeView.searchBar.rx.cancelButtonClicked
             .asDriver()
-            .drive (onNext: { _ in
+            .drive (onNext: { [weak self] in
+                guard let self = self else { return }
                 self.homeView.searchBar.searchTextField.resignFirstResponder()
                 self.homeView.movieVerticalCollectionView.removeFromSuperview()
                 self.homeView.bannerView.removeFromSuperview()
@@ -80,8 +77,9 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
         RxKeyboard.instance.visibleHeight
             .asDriver()
             .filter { $0.isNormal }
-            .drive (onNext: { [unowned self] keyboardHeight in
-                let height = keyboardHeight - homeView.safeAreaInsets.bottom
+            .drive (onNext: { [weak self] keyboardHeight in
+                guard let self = self else { return }
+                let height = keyboardHeight - self.homeView.safeAreaInsets.bottom
                 self.homeView.updateAdditionalSetup(offset: height+55)
                 self.homeView.bannerView.removeFromSuperview()
                 self.homeView.addBannerViewToView(self.homeView.bannerView, bottomHeight: height)
@@ -101,10 +99,10 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
         
         homeView.movieHorizontalCollectionView.rx.contentOffset
             .filter { [weak self] offset in
-            guard let self = self else { return false }
-            let collectionView = self.homeView.movieHorizontalCollectionView
-            guard collectionView.frame.width > 0 else { return false }
-            return offset.x + collectionView.frame.size.width >= collectionView.contentSize.width - 100
+                guard let self = self else { return false }
+                let collectionView = self.homeView.movieHorizontalCollectionView
+                guard collectionView.frame.width > 0 else { return false }
+                return offset.x + collectionView.frame.size.width >= collectionView.contentSize.width - 100
             }
             .map { _ in Reactor.Action.loadNextPage }
             .bind(to: reactor.action)
@@ -193,18 +191,5 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
                 self.coordinator?.showDetail(movie: movieInfo.data!)
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func loadAd() {
-
-        if #available(iOS 14, *) {
-            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                if status == .authorized {
-                    self.homeView.bannerView.load(GADRequest())
-                }
-            })
-        } else {
-            self.homeView.bannerView.load(GADRequest())
-        }
     }
 }

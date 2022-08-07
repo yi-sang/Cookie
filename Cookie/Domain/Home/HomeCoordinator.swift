@@ -9,7 +9,7 @@ protocol HomeCoordinator: Coordinator, AnyObject {
     func showDetail(movie: Movie)
 }
 
-extension HomeCoordinator {
+extension HomeCoordinator where Self: BaseVC {
     func showDetail(movie: Movie) {
         let viewController = DetailVC.instance(movie: movie)
         

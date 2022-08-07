@@ -9,6 +9,7 @@ import UIKit
 import Then
 import SnapKit
 import GoogleMobileAds
+import AppTrackingTransparency
 
 class HomeView: BaseView {
     var scrollView = UIScrollView().then {
@@ -19,7 +20,9 @@ class HomeView: BaseView {
     
     var virticalCollectionViewBottomConstraint: Constraint? = nil
 
-    var bannerView = GADBannerView(adSize: GADAdSizeBanner)
+    var bannerView = GADBannerView(adSize: GADAdSizeBanner).then {
+        $0.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+    }
     
     let searchBar = UISearchBar().then {
         $0.placeholder = "영화 제목을 검색해보세요"
@@ -89,16 +92,17 @@ class HomeView: BaseView {
             upcomingButton,
             movieHorizontalCollectionView
         )
+        self.loadAd()
     }
     
     override func bindConstraints() {
         scrollView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(self.safeAreaLayoutGuide)
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-55)
+            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-50)
         }
         
         contentView.snp.makeConstraints {
-            $0.top.bottom.width.equalTo(scrollView)
+            $0.edges.width.equalTo(scrollView)
         }
         
         nowPlayingButton.snp.makeConstraints {
@@ -114,9 +118,9 @@ class HomeView: BaseView {
             $0.top.equalTo(nowPlayingButton.snp.bottom).offset(10)
             $0.leading.trailing.equalTo(contentView)
             $0.height.equalTo(((UIScreen.main.bounds.width - 10*4 - 10)/2 * 1.5)*2 + 10)
-            $0.bottom.equalTo(contentView)
+            $0.bottom.equalTo(contentView).offset(-5)
         }
-        addBannerViewToView(self.bannerView, bottomHeight: 0)
+        addBannerViewToView(bannerView, bottomHeight: 0)
     }
     
     func additionalSetup() {
@@ -140,12 +144,27 @@ class HomeView: BaseView {
     
     func addBannerViewToView(_ bannerView: GADBannerView, bottomHeight: CGFloat) {
         self.addSubview(bannerView)
-        
         bannerView.snp.makeConstraints {
             $0.centerX.equalTo(self)
             $0.height.equalTo(50)
             $0.width.equalTo(UIScreen.main.bounds.width)
             $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-bottomHeight)
+        }
+    }
+    
+    private func loadAd() {
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                if status == .authorized {
+                    DispatchQueue.main.async {
+                        self.bannerView.load(GADRequest())
+                    }
+                } else {
+                    self.bannerView.load(GADRequest())
+                }
+            })
+        } else {
+            self.bannerView.load(GADRequest())
         }
     }
 }

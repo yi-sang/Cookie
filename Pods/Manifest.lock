@@ -79,6 +79,7 @@ PODS:
     - KakaoSDKAuth (= 2.8.6)
   - Kingfisher (7.2.0)
   - leveldb-library (1.22.1)
+  - lottie-ios (3.4.1)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -137,6 +138,7 @@ DEPENDENCIES:
   - Google-Mobile-Ads-SDK
   - KakaoSDKCommon
   - Kingfisher
+  - lottie-ios
   - R.swift
   - ReactorKit
   - RxCocoa
@@ -168,6 +170,7 @@ SPEC REPOS:
     - KakaoSDKUser
     - Kingfisher
     - leveldb-library
+    - lottie-ios
     - nanopb
     - PromisesObjC
     - R.swift
@@ -205,6 +208,7 @@ SPEC CHECKSUMS:
   KakaoSDKUser: e79480355fa789f42e628dfba359fc21e9914f4c
   Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
+  lottie-ios: 016449b5d8be0c3dcbcfa0a9988469999cd04c5d
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
   R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
@@ -224,6 +228,6 @@ SPEC CHECKSUMS:
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
   youtube-ios-player-helper: e9b97535e816db3152179d84d999bc1807ecd689
 
-PODFILE CHECKSUM: 8febd200b154ebd0f6eed0bcb6129029d181bfcf
+PODFILE CHECKSUM: 1ac987222bc927d03be33624978af58f822f9293
 
 COCOAPODS: 1.11.2

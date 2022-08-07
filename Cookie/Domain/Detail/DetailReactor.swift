@@ -18,6 +18,8 @@ final class DetailReactor: BaseReactor, Reactor {
         case noCookieClicked(id: Int)
         case oneCookieClicked(id: Int)
         case twoCookieClicked(id: Int)
+        case imageButtonClicked
+        case success
     }
     
     enum Mutation {
@@ -25,6 +27,7 @@ final class DetailReactor: BaseReactor, Reactor {
         case fetchVideo(key: String)
         case fetchCookie(totalCookie: TotalCookie)
         case fetchUser(user: User)
+        case fetchClicked(n: Int)
     }
     
     struct State {
@@ -32,6 +35,7 @@ final class DetailReactor: BaseReactor, Reactor {
         var newKey : String?
         var totalCookie: TotalCookie?
         var user: User?
+        var tapped: Int = 0
     }
     
     let initialState: State
@@ -82,7 +86,14 @@ final class DetailReactor: BaseReactor, Reactor {
                 movieService.postUserInfo(id: id)
                     .map { Mutation.fetchUser(user: $0 ) }
             )
+        case .imageButtonClicked:
+            let cliked = currentState.tapped
+            return Observable.just( Mutation.fetchClicked(n: cliked + 1) )
+        case .success:
+            return movieService.postUserInfo(id: 0)
+                    .map { Mutation.fetchUser(user: $0 ) }
         }
+        
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
@@ -96,6 +107,8 @@ final class DetailReactor: BaseReactor, Reactor {
             newState.totalCookie = totalCookie
         case let .fetchUser(user):
             newState.user = user
+        case let .fetchClicked(n):
+            newState.tapped = n
         }
         return newState
     }

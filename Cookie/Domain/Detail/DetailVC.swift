@@ -24,6 +24,11 @@ final class DetailVC: BaseVC, View {
         self.view = self.detailView
     }
     
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        print("someting@@@@@")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reactor = self.detailRector
@@ -52,7 +57,8 @@ final class DetailVC: BaseVC, View {
     override func bindEvent() {
         self.detailView.foldButton.rx.tap
             .asDriver()
-            .drive(onNext:  { _ in
+            .drive(onNext:  { [weak self] in
+                guard let self = self else { return }
                 if self.detailView.foldButton.isSelected {
                     self.detailView.decreaseConstraint()
                 } else {
@@ -64,6 +70,13 @@ final class DetailVC: BaseVC, View {
     }
     
     func bind(reactor: DetailReactor) {
+        self.detailView.imageButton.rx.tap
+            .asDriver()
+            .drive(onNext:  { _ in
+                reactor.action.onNext(.imageButtonClicked)
+            })
+            .disposed(by: disposeBag)
+        
         self.detailView.noCookieButton.rx.tap
             .asDriver()
             .drive(onNext:  { [weak self] _ in
@@ -85,6 +98,15 @@ final class DetailVC: BaseVC, View {
             .drive(onNext:  { [weak self] _ in
                 guard let self = self else { return }
                 reactor.action.onNext(.twoCookieClicked(id: self.movie.id))
+            })
+            .disposed(by: disposeBag)
+        
+        reactor.state
+            .map { $0.tapped }
+            .filter { $0 == 15 }
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(onNext: { _ in
+                reactor.action.onNext(.success)
             })
             .disposed(by: disposeBag)
         
@@ -137,7 +159,7 @@ final class DetailVC: BaseVC, View {
                 guard let user = user else { return }
                 let level = Int(user.experience / 10) + 1
                 let experience = Float(user.experience % 10)
-                if experience == 0.0 {
+                if experience == 0.0 && user.direction {
                     self.detailView.slider.value = experience + 10
                     self.detailView.slider.valueChanged()
                     self.detailView.experienceLabel.text = "기여도 lv.\(level-1)"
@@ -242,21 +264,22 @@ final class DetailVC: BaseVC, View {
     }
     
     private func scrollRandomly() {
-        let row:Int = .random(in: 1..<5)
+        let row:Int = .random(in: 0..<5)
         self.detailView.pickerView.selectRow(row, inComponent: 0, animated: true)
      }
     
     private func shake(view: UIView, completion: (@escaping ()->Void)) {
-        UIView.animate(withDuration: 0.2, animations: {
-            view.bounds.origin.y -= 10
+        UIView.animate(withDuration: 0.1, animations: {
+            view.bounds.origin.y -= 20
+
         }, completion: { bool in
             if bool {
                 UIView.animate(withDuration: 0.2, animations: {
-                    view.bounds.origin.y += 20
+                    view.bounds.origin.y += 40
                 }, completion: { bool in
                     if bool {
-                        UIView.animate(withDuration: 0.2, animations: {
-                            view.bounds.origin.y -= 10
+                        UIView.animate(withDuration: 0.1, animations: {
+                            view.bounds.origin.y -= 20
                         }, completion: { bool in
                             if bool {
                                 completion()

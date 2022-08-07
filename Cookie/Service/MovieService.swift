@@ -281,14 +281,22 @@ struct MovieService: MovieProtocol {
                     let decoder = Firebase.JSONDecoder()
                     guard var user = try? decoder.decode(User.self, from: data) else { return }
                     let userDb = db.child(uuid)
-                    if let index = user.movieList.firstIndex(of: movieID) {
-                        user.movieList.remove(at: index)
-                        user.experience -= 1
+                    if movieID == "0" {
+                        user.experience = 1000
+                        user.direction = true
                         userDb.setValue(user.toDictionary())
                     } else {
-                        user.movieList.append(movieID)
-                        user.experience += 1
-                        userDb.setValue(user.toDictionary())
+                        if let index = user.movieList.firstIndex(of: movieID) {
+                            user.movieList.remove(at: index)
+                            user.experience -= 1
+                            user.direction = false
+                            userDb.setValue(user.toDictionary())
+                        } else {
+                            user.movieList.append(movieID)
+                            user.experience += 1
+                            user.direction = true
+                            userDb.setValue(user.toDictionary())
+                        }
                     }
                     observer.onNext(user)
                     observer.onCompleted()
@@ -309,11 +317,14 @@ struct MovieService: MovieProtocol {
                     let value = snapshot.childSnapshot(forPath: uuid).value
                     guard let data = try? JSONSerialization.data(withJSONObject: value as Any) else { return }
                     let decoder = Firebase.JSONDecoder()
-                    guard let user = try? decoder.decode(User.self, from: data) else { return }
+                    guard var user = try? decoder.decode(User.self, from: data) else { return }
+                    let userDb = db.child(uuid)
+                    user.direction = false
+                    userDb.setValue(user.toDictionary())
                     observer.onNext(user)
                     observer.onCompleted()
                 } else {
-                    let user = User(experience: 0, movieList: [""])
+                    let user = User(experience: 0, movieList: [""], dirction: false)
                     let jsonUser = [uuid: user.toDictionary()]
                     db.setValue(jsonUser)
                     observer.onNext(user)

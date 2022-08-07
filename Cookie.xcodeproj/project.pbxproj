@@ -25,6 +25,7 @@
 		511C67872892786B004D18C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 511C67862892786B004D18C9 /* GoogleService-Info.plist */; };
 		511C678C28992497004D18C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C678B28992497004D18C9 /* User.swift */; };
 		511C678F28999286004D18C9 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C678E28999286004D18C9 /* Slider.swift */; };
+		511C6797289BC59E004D18C9 /* EatingCookie.json in Resources */ = {isa = PBXBuildFile; fileRef = 511C6796289BC59E004D18C9 /* EatingCookie.json */; };
 		519E21E428733B5700DADA73 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E328733B5700DADA73 /* MovieResponse.swift */; };
 		519E21E72873502F00DADA73 /* TabBarTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E52873502E00DADA73 /* TabBarTag.swift */; };
 		519E21E82873502F00DADA73 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E62873502F00DADA73 /* Movie.swift */; };
@@ -83,6 +84,7 @@
 		511C67862892786B004D18C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		511C678B28992497004D18C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		511C678E28999286004D18C9 /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
+		511C6796289BC59E004D18C9 /* EatingCookie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EatingCookie.json; sourceTree = "<group>"; };
 		519E21E328733B5700DADA73 /* MovieResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		519E21E52873502E00DADA73 /* TabBarTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarTag.swift; sourceTree = "<group>"; };
 		519E21E62873502F00DADA73 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			children = (
 				51BBD1242872E37900BBE992 /* Assets.xcassets */,
 				519E221928736DD500DADA73 /* Colors.xcassets */,
+				511C6796289BC59E004D18C9 /* EatingCookie.json */,
 				519E21E92873516A00DADA73 /* Jalnan.ttf */,
 				519E2238287740CB00DADA73 /* NotoSansKR-Bold.otf */,
 				519E2237287740CB00DADA73 /* NotoSansKR-Medium.otf */,
@@ -446,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				519E22222873756900DADA73 /* Jalnan.ttf in Resources */,
+				511C6797289BC59E004D18C9 /* EatingCookie.json in Resources */,
 				51BBD1282872E37900BBE992 /* LaunchScreen.storyboard in Resources */,
 				519E2239287740DC00DADA73 /* NotoSansKR-Medium.otf in Resources */,
 				511C67872892786B004D18C9 /* GoogleService-Info.plist in Resources */,
@@ -636,7 +640,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -690,7 +694,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

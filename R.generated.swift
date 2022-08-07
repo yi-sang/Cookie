@@ -150,8 +150,10 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.file` struct is generated, and contains static references to 5 files.
+  /// This `R.file` struct is generated, and contains static references to 6 files.
   struct file {
+    /// Resource file `EatingCookie.json`.
+    static let eatingCookieJson = Rswift.FileResource(bundle: R.hostingBundle, name: "EatingCookie", pathExtension: "json")
     /// Resource file `GoogleService-Info.plist`.
     static let googleServiceInfoPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "GoogleService-Info", pathExtension: "plist")
     /// Resource file `Jalnan.ttf`.
@@ -162,6 +164,12 @@ struct R: Rswift.Validatable {
     static let notoSansKRMediumOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "NotoSansKR-Medium", pathExtension: "otf")
     /// Resource file `NotoSansKR-Regular.otf`.
     static let notoSansKRRegularOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "NotoSansKR-Regular", pathExtension: "otf")
+
+    /// `bundle.url(forResource: "EatingCookie", withExtension: "json")`
+    static func eatingCookieJson(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.eatingCookieJson
+      return fileResource.bundle.url(forResource: fileResource)
+    }
 
     /// `bundle.url(forResource: "GoogleService-Info", withExtension: "plist")`
     static func googleServiceInfoPlist(_: Void = ()) -> Foundation.URL? {
@@ -237,12 +245,14 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 7 images.
+  /// This `R.image` struct is generated, and contains static references to 8 images.
   struct image {
     /// Image `cookie`.
     static let cookie = Rswift.ImageResource(bundle: R.hostingBundle, name: "cookie")
     /// Image `dish`.
     static let dish = Rswift.ImageResource(bundle: R.hostingBundle, name: "dish")
+    /// Image `logoCookie`.
+    static let logoCookie = Rswift.ImageResource(bundle: R.hostingBundle, name: "logoCookie")
     /// Image `noClue`.
     static let noClue = Rswift.ImageResource(bundle: R.hostingBundle, name: "noClue")
     /// Image `oneCookie`.
@@ -265,6 +275,13 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "dish", bundle: ..., traitCollection: ...)`
     static func dish(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.dish, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "logoCookie", bundle: ..., traitCollection: ...)`
+    static func logoCookie(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.logoCookie, compatibleWith: traitCollection)
     }
     #endif
 

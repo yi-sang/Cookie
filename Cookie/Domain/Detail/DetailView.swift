@@ -98,7 +98,6 @@ class DetailView: BaseView {
         $0.configuration?.attributedTitle?.font =  .jalnan(size: 20)
         $0.configuration?.baseForegroundColor = .black
         $0.configuration?.imagePlacement = .top
-        $0.isUserInteractionEnabled = false
     }
     
     var scrollView = UIScrollView().then {
@@ -161,7 +160,7 @@ class DetailView: BaseView {
         playerView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide)
             $0.leading.trailing.equalTo(self.safeAreaLayoutGuide)
-            $0.height.equalTo(self.safeAreaLayoutGuide.snp.width).multipliedBy(0.5)
+            $0.height.equalTo(UIScreen.main.bounds.width*9/16)
         }
         
         scrollView.snp.makeConstraints {
@@ -171,7 +170,6 @@ class DetailView: BaseView {
         
         contentView.snp.makeConstraints {
             $0.edges.width.equalTo(scrollView)
-            $0.width.equalTo(scrollView)
         }
         
         titleLabel.snp.makeConstraints {

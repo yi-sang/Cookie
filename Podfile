@@ -22,4 +22,5 @@ target 'Cookie' do
 	pod 'youtube-ios-player-helper'
 	pod 'Firebase/Database'
 	pod 'Google-Mobile-Ads-SDK'
+	pod 'lottie-ios'
 end

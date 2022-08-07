@@ -54,7 +54,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func goToMain() {
         window?.rootViewController = HomeVC.instance()
-      window?.makeKeyAndVisible()
+        window?.makeKeyAndVisible()
     }
     
 //    func goToSignIn() {

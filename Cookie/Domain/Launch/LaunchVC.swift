@@ -36,8 +36,8 @@ class LaunchVC: BaseVC {
     }
     
     private func goToMain() {
-      if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-        sceneDelegate.goToMain()
-      }
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.goToMain()
+        }
     }
 }
