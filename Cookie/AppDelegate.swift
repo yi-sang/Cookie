@@ -8,6 +8,8 @@
 import UIKit
 import FirebaseCore
 import GoogleMobileAds
+import FirebaseAppCheck
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -32,12 +34,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    private func initilizeAppCheck() {
+        let providerFactory = CookieAppCheckProviderFactory()
+        AppCheck.setAppCheckProviderFactory(providerFactory)
+    }
+    
     private func initilizeAdmob() {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
     }
     
     private func initializeFirebase() {
+        initilizeAppCheck()
         FirebaseApp.configure()
+        let user = Auth.auth().currentUser
+
+        // Prompt the user to re-provide their sign-in credentials
+
+        
+        Auth.auth().signInAnonymously()
+        
     }
 }
-

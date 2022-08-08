@@ -159,12 +159,12 @@ class HomeView: BaseView {
                     DispatchQueue.main.async {
                         self.bannerView.load(GADRequest())
                     }
-                } else {
-                    self.bannerView.load(GADRequest())
                 }
             })
         } else {
-            self.bannerView.load(GADRequest())
+            DispatchQueue.main.async {
+                self.bannerView.load(GADRequest())
+            }
         }
     }
 }

@@ -24,11 +24,6 @@ final class DetailVC: BaseVC, View {
         self.view = self.detailView
     }
     
-    override func willMove(toParent parent: UIViewController?) {
-        super.willMove(toParent: parent)
-        print("someting@@@@@")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reactor = self.detailRector
@@ -196,15 +191,16 @@ final class DetailVC: BaseVC, View {
     }
     
     private func setTotalButton(totalCookie: TotalCookie) {
-        if totalCookie.personal.contains(Cookie(uuid: Storage.shared.uuid, cookieType: 0)) {
+        guard let uuid = Storage.shared.uuid else { return }
+        if totalCookie.personal.contains(Cookie(uuid: uuid, cookieType: 0)) {
             self.setButton(button: self.detailView.noCookieButton, isSelected: true)
             self.setButton(button: self.detailView.oneCookieButton, isSelected: false)
             self.setButton(button: self.detailView.twoCookieButton, isSelected: false)
-        } else if totalCookie.personal.contains(Cookie(uuid: Storage.shared.uuid, cookieType: 1)) {
+        } else if totalCookie.personal.contains(Cookie(uuid: uuid, cookieType: 1)) {
             self.setButton(button: self.detailView.noCookieButton, isSelected: false)
             self.setButton(button: self.detailView.oneCookieButton, isSelected: true)
             self.setButton(button: self.detailView.twoCookieButton, isSelected: false)
-        } else if totalCookie.personal.contains(Cookie(uuid: Storage.shared.uuid, cookieType: 2)) {
+        } else if totalCookie.personal.contains(Cookie(uuid: uuid, cookieType: 2)) {
             self.setButton(button: self.detailView.noCookieButton, isSelected: false)
             self.setButton(button: self.detailView.oneCookieButton, isSelected: false)
             self.setButton(button: self.detailView.twoCookieButton, isSelected: true)

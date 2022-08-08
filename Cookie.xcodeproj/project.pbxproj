@@ -22,10 +22,11 @@
 		511C677D288E7E9D004D18C9 /* VideoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677C288E7E9D004D18C9 /* VideoResponse.swift */; };
 		511C677F288EEF89004D18C9 /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C677E288EEF88004D18C9 /* Key.swift */; };
 		511C67852891C4A4004D18C9 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C67842891C4A4004D18C9 /* Cookie.swift */; };
-		511C67872892786B004D18C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 511C67862892786B004D18C9 /* GoogleService-Info.plist */; };
 		511C678C28992497004D18C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C678B28992497004D18C9 /* User.swift */; };
 		511C678F28999286004D18C9 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C678E28999286004D18C9 /* Slider.swift */; };
 		511C6797289BC59E004D18C9 /* EatingCookie.json in Resources */ = {isa = PBXBuildFile; fileRef = 511C6796289BC59E004D18C9 /* EatingCookie.json */; };
+		516919C128A09DCA00625974 /* CookieAppCheckProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516919C028A09DCA00625974 /* CookieAppCheckProviderFactory.swift */; };
+		516919C328A1129000625974 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 516919C228A1129000625974 /* GoogleService-Info.plist */; };
 		519E21E428733B5700DADA73 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E328733B5700DADA73 /* MovieResponse.swift */; };
 		519E21E72873502F00DADA73 /* TabBarTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E52873502E00DADA73 /* TabBarTag.swift */; };
 		519E21E82873502F00DADA73 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E62873502F00DADA73 /* Movie.swift */; };
@@ -81,10 +82,12 @@
 		511C677C288E7E9D004D18C9 /* VideoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoResponse.swift; sourceTree = "<group>"; };
 		511C677E288EEF88004D18C9 /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		511C67842891C4A4004D18C9 /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
-		511C67862892786B004D18C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		511C678B28992497004D18C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		511C678E28999286004D18C9 /* Slider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slider.swift; sourceTree = "<group>"; };
 		511C6796289BC59E004D18C9 /* EatingCookie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EatingCookie.json; sourceTree = "<group>"; };
+		516919BF28A09D4B00625974 /* CookieRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CookieRelease.entitlements; sourceTree = "<group>"; };
+		516919C028A09DCA00625974 /* CookieAppCheckProviderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieAppCheckProviderFactory.swift; sourceTree = "<group>"; };
+		516919C228A1129000625974 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		519E21E328733B5700DADA73 /* MovieResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		519E21E52873502E00DADA73 /* TabBarTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarTag.swift; sourceTree = "<group>"; };
 		519E21E62873502F00DADA73 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -355,6 +358,8 @@
 		51BBD11A2872E37800BBE992 /* Cookie */ = {
 			isa = PBXGroup;
 			children = (
+				516919BF28A09D4B00625974 /* CookieRelease.entitlements */,
+				516919C028A09DCA00625974 /* CookieAppCheckProviderFactory.swift */,
 				51BBD11B2872E37800BBE992 /* AppDelegate.swift */,
 				51BBD11D2872E37800BBE992 /* SceneDelegate.swift */,
 				519E22332877344400DADA73 /* Extension */,
@@ -365,7 +370,7 @@
 				519E22232873790300DADA73 /* Resource */,
 				51BBD1262872E37900BBE992 /* LaunchScreen.storyboard */,
 				51BBD1292872E37900BBE992 /* Info.plist */,
-				511C67862892786B004D18C9 /* GoogleService-Info.plist */,
+				516919C228A1129000625974 /* GoogleService-Info.plist */,
 			);
 			path = Cookie;
 			sourceTree = "<group>";
@@ -450,9 +455,9 @@
 			files = (
 				519E22222873756900DADA73 /* Jalnan.ttf in Resources */,
 				511C6797289BC59E004D18C9 /* EatingCookie.json in Resources */,
+				516919C328A1129000625974 /* GoogleService-Info.plist in Resources */,
 				51BBD1282872E37900BBE992 /* LaunchScreen.storyboard in Resources */,
 				519E2239287740DC00DADA73 /* NotoSansKR-Medium.otf in Resources */,
-				511C67872892786B004D18C9 /* GoogleService-Info.plist in Resources */,
 				519E221A28736DD500DADA73 /* Colors.xcassets in Resources */,
 				519E223A287740DE00DADA73 /* NotoSansKR-Bold.otf in Resources */,
 				51BBD1252872E37900BBE992 /* Assets.xcassets in Resources */,
@@ -552,6 +557,7 @@
 				519E22322877335700DADA73 /* MovieCell.swift in Sources */,
 				519E221428736AEC00DADA73 /* CommonError.swift in Sources */,
 				511C67682883C970004D18C9 /* HomeVerticalFlowLayout.swift in Sources */,
+				516919C128A09DCA00625974 /* CookieAppCheckProviderFactory.swift in Sources */,
 				511C676228817C7D004D18C9 /* UIColorExtension.swift in Sources */,
 				519E223D2877424400DADA73 /* UIViewExtension.swift in Sources */,
 				519E21FE287360B000DADA73 /* TabBarVC.swift in Sources */,
@@ -716,6 +722,8 @@
 				DEVELOPMENT_TEAM = Z6ZLWTKRJ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cookie/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "쿠키";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "개인에게 최적화된 광고를 제공하기 위해 사용자의 광고 활동 정보를 수집합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -729,7 +737,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -740,11 +748,14 @@
 				API_URL = "https://api.themoviedb.org/";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cookie/CookieRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z6ZLWTKRJ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cookie/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "쿠키";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "개인에게 최적화된 광고를 제공하기 위해 사용자의 광고 활동 정보를 수집합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -758,7 +769,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -21,6 +21,8 @@ target 'Cookie' do
 	pod 'RxKeyboard'
 	pod 'youtube-ios-player-helper'
 	pod 'Firebase/Database'
+	pod 'FirebaseAppCheck'
+	pod 'Firebase/Auth'
 	pod 'Google-Mobile-Ads-SDK'
 	pod 'lottie-ios'
 end

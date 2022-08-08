@@ -23,8 +23,6 @@ protocol MovieProtocol {
 }
 
 struct MovieService: MovieProtocol {
-    let uuid = Storage.shared.uuid
-
     func getMovies(page: Int, section: MovieSection) -> Observable<MovieResponse> {
         return Observable.create { observer -> Disposable in
             let urlString = HTTPUtils.url + "3/movie/\(section.rawValue)"
@@ -162,7 +160,8 @@ struct MovieService: MovieProtocol {
                     observer.onCompleted()
                 }
             }) { error in
-                print(error)
+                let error = CommonError(description: "데이터를 파싱할 수 없습니다.")
+                observer.onError(error)
             }
             return Disposables.create()
         }
@@ -178,7 +177,7 @@ struct MovieService: MovieProtocol {
                     guard let data = try? JSONSerialization.data(withJSONObject: value as Any) else { return }
                     let decoder = Firebase.JSONDecoder()
                     guard var totalCookie = try? decoder.decode(TotalCookie.self, from: data) else { return }
-                    
+                    guard let uuid = Storage.shared.uuid else { return }
                     if let index = totalCookie.personal.firstIndex(of: Cookie(uuid: uuid, cookieType: 0)) {
                         let movie = db.child(movieID)
                         movie.child("personal").child("\(index)").removeValue()
@@ -211,7 +210,8 @@ struct MovieService: MovieProtocol {
                     guard let data = try? JSONSerialization.data(withJSONObject: value as Any) else { return }
                     let decoder = Firebase.JSONDecoder()
                     guard var totalCookie = try? decoder.decode(TotalCookie.self, from: data) else { return }
-                    
+                    guard let uuid = Storage.shared.uuid else { return }
+
                     if let index = totalCookie.personal.firstIndex(of: Cookie(uuid: uuid, cookieType: 1)) {
                         let movie = db.child(movieID)
                         movie.child("personal").child("\(index)").removeValue()
@@ -245,6 +245,8 @@ struct MovieService: MovieProtocol {
                     guard let data = try? JSONSerialization.data(withJSONObject: value as Any) else { return }
                     let decoder = Firebase.JSONDecoder()
                     guard var totalCookie = try? decoder.decode(TotalCookie.self, from: data) else { return }
+                    guard let uuid = Storage.shared.uuid else { return }
+
                     let movie = db.child(movieID)
                     if let index = totalCookie.personal.firstIndex(of: Cookie(uuid: uuid, cookieType: 2)) {
                         movie.child("personal").child("\(index)").removeValue()
@@ -274,6 +276,7 @@ struct MovieService: MovieProtocol {
         return Observable.create { observer -> Disposable in
             let db = Database.database().reference(withPath: "user")
             db.observeSingleEvent(of: .value, with: { snapshot in
+                guard let uuid = Storage.shared.uuid else { return }
                 let movieID = String(id)
                 if snapshot.hasChild(uuid) {
                     let value = snapshot.childSnapshot(forPath: uuid).value
@@ -313,6 +316,7 @@ struct MovieService: MovieProtocol {
         return Observable.create { observer -> Disposable in
             let db = Database.database().reference(withPath: "user")
             db.observeSingleEvent(of: .value, with: { snapshot in
+                guard let uuid = Storage.shared.uuid else { return }
                 if snapshot.hasChild(uuid) {
                     let value = snapshot.childSnapshot(forPath: uuid).value
                     guard let data = try? JSONSerialization.data(withJSONObject: value as Any) else { return }
@@ -325,8 +329,7 @@ struct MovieService: MovieProtocol {
                     observer.onCompleted()
                 } else {
                     let user = User(experience: 0, movieList: [""], dirction: false)
-                    let jsonUser = [uuid: user.toDictionary()]
-                    db.setValue(jsonUser)
+                    db.child(uuid).setValue(user.toDictionary())
                     observer.onNext(user)
                     observer.onCompleted()
                 }
