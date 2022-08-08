@@ -230,7 +230,7 @@ final class DetailVC: BaseVC, View {
                 self.detailView.pickerView.selectRow(2, inComponent: 0, animated: true)
             } else if difference < 10 {
                 self.detailView.pickerView.selectRow(3, inComponent: 0, animated: true)
-            } else if difference > 10 {
+            } else if difference >= 10 {
                 self.detailView.pickerView.selectRow(4, inComponent: 0, animated: true)
             }
         } else {
