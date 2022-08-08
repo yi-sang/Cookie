@@ -26,7 +26,6 @@
 		511C678F28999286004D18C9 /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C678E28999286004D18C9 /* Slider.swift */; };
 		511C6797289BC59E004D18C9 /* EatingCookie.json in Resources */ = {isa = PBXBuildFile; fileRef = 511C6796289BC59E004D18C9 /* EatingCookie.json */; };
 		516919C128A09DCA00625974 /* CookieAppCheckProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516919C028A09DCA00625974 /* CookieAppCheckProviderFactory.swift */; };
-		516919C328A1129000625974 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 516919C228A1129000625974 /* GoogleService-Info.plist */; };
 		519E21E428733B5700DADA73 /* MovieResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E328733B5700DADA73 /* MovieResponse.swift */; };
 		519E21E72873502F00DADA73 /* TabBarTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E52873502E00DADA73 /* TabBarTag.swift */; };
 		519E21E82873502F00DADA73 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E21E62873502F00DADA73 /* Movie.swift */; };
@@ -62,6 +61,7 @@
 		51BBD1282872E37900BBE992 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51BBD1262872E37900BBE992 /* LaunchScreen.storyboard */; };
 		51D8AA5A28A13F99006B56F5 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D8AA5928A13F99006B56F5 /* CommonError.swift */; };
 		51D8AA5C28A13FC0006B56F5 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D8AA5B28A13FC0006B56F5 /* DataStore.swift */; };
+		51D8AA6028A154D1006B56F5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 51D8AA5F28A154D1006B56F5 /* GoogleService-Info.plist */; };
 		5A673F69290BE3589009097E /* Pods_Cookie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD032981DB6DD526641C3940 /* Pods_Cookie.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,7 +87,6 @@
 		511C6796289BC59E004D18C9 /* EatingCookie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EatingCookie.json; sourceTree = "<group>"; };
 		516919BF28A09D4B00625974 /* CookieRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CookieRelease.entitlements; sourceTree = "<group>"; };
 		516919C028A09DCA00625974 /* CookieAppCheckProviderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieAppCheckProviderFactory.swift; sourceTree = "<group>"; };
-		516919C228A1129000625974 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		519E21E328733B5700DADA73 /* MovieResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieResponse.swift; sourceTree = "<group>"; };
 		519E21E52873502E00DADA73 /* TabBarTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarTag.swift; sourceTree = "<group>"; };
 		519E21E62873502F00DADA73 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
@@ -125,6 +124,7 @@
 		51BBD1292872E37900BBE992 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51D8AA5928A13F99006B56F5 /* CommonError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		51D8AA5B28A13FC0006B56F5 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		51D8AA5F28A154D1006B56F5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F8B9C5415B4C8B993136D88E /* Pods-Cookie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cookie.debug.xcconfig"; path = "Target Support Files/Pods-Cookie/Pods-Cookie.debug.xcconfig"; sourceTree = "<group>"; };
 		FD032981DB6DD526641C3940 /* Pods_Cookie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cookie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -362,7 +362,7 @@
 				519E22232873790300DADA73 /* Resource */,
 				51BBD1262872E37900BBE992 /* LaunchScreen.storyboard */,
 				51BBD1292872E37900BBE992 /* Info.plist */,
-				516919C228A1129000625974 /* GoogleService-Info.plist */,
+				51D8AA5F28A154D1006B56F5 /* GoogleService-Info.plist */,
 			);
 			path = Cookie;
 			sourceTree = "<group>";
@@ -447,13 +447,13 @@
 			files = (
 				519E22222873756900DADA73 /* Jalnan.ttf in Resources */,
 				511C6797289BC59E004D18C9 /* EatingCookie.json in Resources */,
-				516919C328A1129000625974 /* GoogleService-Info.plist in Resources */,
 				51BBD1282872E37900BBE992 /* LaunchScreen.storyboard in Resources */,
 				519E2239287740DC00DADA73 /* NotoSansKR-Medium.otf in Resources */,
 				519E221A28736DD500DADA73 /* Colors.xcassets in Resources */,
 				519E223A287740DE00DADA73 /* NotoSansKR-Bold.otf in Resources */,
 				51BBD1252872E37900BBE992 /* Assets.xcassets in Resources */,
 				519E223B287740E000DADA73 /* NotoSansKR-Regular.otf in Resources */,
+				51D8AA6028A154D1006B56F5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
