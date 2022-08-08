@@ -79,17 +79,6 @@ PODS:
   - GoogleUtilities/Reachability (7.7.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.7.2)
-  - KakaoSDKAuth (2.8.6):
-    - KakaoSDKCommon (= 2.8.6)
-  - KakaoSDKCommon (2.8.6):
-    - KakaoSDKCommon/Common (= 2.8.6)
-    - KakaoSDKCommon/Network (= 2.8.6)
-  - KakaoSDKCommon/Common (2.8.6)
-  - KakaoSDKCommon/Network (2.8.6):
-    - Alamofire (~> 5.1)
-    - KakaoSDKCommon/Common (= 2.8.6)
-  - KakaoSDKUser (2.8.6):
-    - KakaoSDKAuth (= 2.8.6)
   - Kingfisher (7.2.0)
   - leveldb-library (1.22.1)
   - lottie-ios (3.4.1)
@@ -105,11 +94,6 @@ PODS:
   - ReactorKit (3.2.0):
     - RxSwift (~> 6.0)
     - WeakMapTable (~> 1.1)
-  - RxAlamofire (6.1.1):
-    - RxAlamofire/Core (= 6.1.1)
-  - RxAlamofire/Core (6.1.1):
-    - Alamofire (~> 5.4)
-    - RxSwift (~> 6.0)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -117,23 +101,6 @@ PODS:
     - Differentiator (~> 5.0)
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
-  - RxKakaoSDKAuth (2.8.6):
-    - KakaoSDKAuth (= 2.8.6)
-    - RxKakaoSDKCommon (= 2.8.6)
-  - RxKakaoSDKCommon (2.8.6):
-    - RxKakaoSDKCommon/Common (= 2.8.6)
-    - RxKakaoSDKCommon/Network (= 2.8.6)
-  - RxKakaoSDKCommon/Common (2.8.6):
-    - KakaoSDKCommon/Common (= 2.8.6)
-    - RxCocoa
-    - RxSwift (~> 6.0)
-  - RxKakaoSDKCommon/Network (2.8.6):
-    - KakaoSDKCommon/Network (= 2.8.6)
-    - RxAlamofire (~> 6.0)
-    - RxKakaoSDKCommon/Common (= 2.8.6)
-  - RxKakaoSDKUser (2.8.6):
-    - KakaoSDKUser (= 2.8.6)
-    - RxKakaoSDKAuth (= 2.8.6)
   - RxKeyboard (2.0.0):
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
@@ -151,15 +118,12 @@ DEPENDENCIES:
   - Firebase/Database
   - FirebaseAppCheck
   - Google-Mobile-Ads-SDK
-  - KakaoSDKCommon
   - Kingfisher
   - lottie-ios
   - R.swift
   - ReactorKit
   - RxCocoa
   - RxDataSources
-  - RxKakaoSDKAuth
-  - RxKakaoSDKUser
   - RxKeyboard
   - RxSwift
   - SnapKit
@@ -183,9 +147,6 @@ SPEC REPOS:
     - GoogleUserMessagingPlatform
     - GoogleUtilities
     - GTMSessionFetcher
-    - KakaoSDKAuth
-    - KakaoSDKCommon
-    - KakaoSDKUser
     - Kingfisher
     - leveldb-library
     - lottie-ios
@@ -194,12 +155,8 @@ SPEC REPOS:
     - R.swift
     - R.swift.Library
     - ReactorKit
-    - RxAlamofire
     - RxCocoa
     - RxDataSources
-    - RxKakaoSDKAuth
-    - RxKakaoSDKCommon
-    - RxKakaoSDKUser
     - RxKeyboard
     - RxRelay
     - RxSwift
@@ -224,9 +181,6 @@ SPEC CHECKSUMS:
   GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
-  KakaoSDKAuth: 53e747a3bf343a3f3e87b14478d5a865d6c2acae
-  KakaoSDKCommon: 7e56600ff4c1bd82bed93fea4299b5a37f47e6a5
-  KakaoSDKUser: e79480355fa789f42e628dfba359fc21e9914f4c
   Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   lottie-ios: 016449b5d8be0c3dcbcfa0a9988469999cd04c5d
@@ -235,12 +189,8 @@ SPEC CHECKSUMS:
   R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   ReactorKit: e8b11d6b9c415405f381669b095c154a05b59eca
-  RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
-  RxKakaoSDKAuth: 9abb572fb44cd9303f8d010c7615ef10d03c3b98
-  RxKakaoSDKCommon: a08944623b38791872926b821332432c17038c55
-  RxKakaoSDKUser: 92efc631442088864466a1c50afca7b86c4f3fbb
   RxKeyboard: 4f5863f43b4ff0cbb2a20b94688d6b80c8a43c14
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
@@ -249,6 +199,6 @@ SPEC CHECKSUMS:
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
   youtube-ios-player-helper: e9b97535e816db3152179d84d999bc1807ecd689
 
-PODFILE CHECKSUM: 02b097f997225748a557632146ed668e8692a2db
+PODFILE CHECKSUM: 63d764e53ceab2b48a075489ab8b2384686bdd4c
 
 COCOAPODS: 1.11.2

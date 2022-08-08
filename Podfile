@@ -7,9 +7,6 @@ target 'Cookie' do
 
   # Pods for Cookie
     pod 'Alamofire'
-	pod 'KakaoSDKCommon'
-    pod 'RxKakaoSDKAuth'
-    pod 'RxKakaoSDKUser'
     pod 'ReactorKit'
     pod 'RxCocoa'
     pod 'RxSwift'
