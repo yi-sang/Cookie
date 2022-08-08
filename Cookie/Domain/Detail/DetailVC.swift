@@ -191,7 +191,7 @@ final class DetailVC: BaseVC, View {
     }
     
     private func setTotalButton(totalCookie: TotalCookie) {
-        guard let uuid = Storage.shared.uuid else { return }
+        guard let uuid = DataStore().uuid else { return }
         if totalCookie.personal.contains(Cookie(uuid: uuid, cookieType: 0)) {
             self.setButton(button: self.detailView.noCookieButton, isSelected: true)
             self.setButton(button: self.detailView.oneCookieButton, isSelected: false)

@@ -44,12 +44,10 @@
 		519E2209287360DD00DADA73 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E2204287360DD00DADA73 /* BaseView.swift */; };
 		519E220C2873613000DADA73 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E220B2873613000DADA73 /* MovieService.swift */; };
 		519E220F2873615D00DADA73 /* HTTPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E220E2873615D00DADA73 /* HTTPUtils.swift */; };
-		519E221428736AEC00DADA73 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E221328736AEC00DADA73 /* CommonError.swift */; };
 		519E221728736B7300DADA73 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E221628736B7300DADA73 /* LoadingView.swift */; };
 		519E221A28736DD500DADA73 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 519E221928736DD500DADA73 /* Colors.xcassets */; };
 		519E22222873756900DADA73 /* Jalnan.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 519E21E92873516A00DADA73 /* Jalnan.ttf */; };
 		519E22272873862B00DADA73 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E22262873862B00DADA73 /* R.generated.swift */; };
-		519E222B2875DE9500DADA73 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E222A2875DE9500DADA73 /* Storage.swift */; };
 		519E222F2877132600DADA73 /* MyLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E222E2877132600DADA73 /* MyLogger.swift */; };
 		519E22322877335700DADA73 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E22312877335700DADA73 /* MovieCell.swift */; };
 		519E22352877347000DADA73 /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519E22342877347000DADA73 /* UIFontExtension.swift */; };
@@ -62,6 +60,8 @@
 		51BBD11E2872E37800BBE992 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BBD11D2872E37800BBE992 /* SceneDelegate.swift */; };
 		51BBD1252872E37900BBE992 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51BBD1242872E37900BBE992 /* Assets.xcassets */; };
 		51BBD1282872E37900BBE992 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51BBD1262872E37900BBE992 /* LaunchScreen.storyboard */; };
+		51D8AA5A28A13F99006B56F5 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D8AA5928A13F99006B56F5 /* CommonError.swift */; };
+		51D8AA5C28A13FC0006B56F5 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D8AA5B28A13FC0006B56F5 /* DataStore.swift */; };
 		5A673F69290BE3589009097E /* Pods_Cookie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD032981DB6DD526641C3940 /* Pods_Cookie.framework */; };
 /* End PBXBuildFile section */
 
@@ -106,11 +106,9 @@
 		519E2204287360DD00DADA73 /* BaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		519E220B2873613000DADA73 /* MovieService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
 		519E220E2873615D00DADA73 /* HTTPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPUtils.swift; sourceTree = "<group>"; };
-		519E221328736AEC00DADA73 /* CommonError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		519E221628736B7300DADA73 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		519E221928736DD500DADA73 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		519E22262873862B00DADA73 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
-		519E222A2875DE9500DADA73 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		519E222E2877132600DADA73 /* MyLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyLogger.swift; sourceTree = "<group>"; };
 		519E22312877335700DADA73 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		519E22342877347000DADA73 /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
@@ -125,6 +123,8 @@
 		51BBD1242872E37900BBE992 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51BBD1272872E37900BBE992 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51BBD1292872E37900BBE992 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51D8AA5928A13F99006B56F5 /* CommonError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
+		51D8AA5B28A13FC0006B56F5 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		F8B9C5415B4C8B993136D88E /* Pods-Cookie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cookie.debug.xcconfig"; path = "Target Support Files/Pods-Cookie/Pods-Cookie.debug.xcconfig"; sourceTree = "<group>"; };
 		FD032981DB6DD526641C3940 /* Pods_Cookie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cookie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -181,7 +181,6 @@
 				511C677A288B0EFA004D18C9 /* RevisionedData.swift */,
 				519E21E52873502E00DADA73 /* TabBarTag.swift */,
 				519E221228736AD400DADA73 /* Error */,
-				519E221328736AEC00DADA73 /* CommonError.swift */,
 				519E21E028733AFF00DADA73 /* Dto */,
 			);
 			path = Model;
@@ -190,17 +189,9 @@
 		519E21E028733AFF00DADA73 /* Dto */ = {
 			isa = PBXGroup;
 			children = (
-				519E21E128733B2100DADA73 /* Request */,
 				519E21E228733B4000DADA73 /* Response */,
 			);
 			path = Dto;
-			sourceTree = "<group>";
-		};
-		519E21E128733B2100DADA73 /* Request */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Request;
 			sourceTree = "<group>";
 		};
 		519E21E228733B4000DADA73 /* Response */ = {
@@ -268,7 +259,7 @@
 			children = (
 				519E220E2873615D00DADA73 /* HTTPUtils.swift */,
 				519E222E2877132600DADA73 /* MyLogger.swift */,
-				519E222A2875DE9500DADA73 /* Storage.swift */,
+				51D8AA5B28A13FC0006B56F5 /* DataStore.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -276,6 +267,7 @@
 		519E221228736AD400DADA73 /* Error */ = {
 			isa = PBXGroup;
 			children = (
+				51D8AA5928A13F99006B56F5 /* CommonError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -538,6 +530,7 @@
 				519E21F92873608C00DADA73 /* LaunchView.swift in Sources */,
 				519E21F32873606A00DADA73 /* HomeVC.swift in Sources */,
 				511C678F28999286004D18C9 /* Slider.swift in Sources */,
+				51D8AA5C28A13FC0006B56F5 /* DataStore.swift in Sources */,
 				519E22442877749300DADA73 /* HomeHorizontalFlowLayout.swift in Sources */,
 				511C67852891C4A4004D18C9 /* Cookie.swift in Sources */,
 				519E21FA2873608C00DADA73 /* LaunchVC.swift in Sources */,
@@ -545,6 +538,7 @@
 				519E2206287360DD00DADA73 /* BaseCollectionViewCell.swift in Sources */,
 				511C677128853FFC004D18C9 /* Coordinator.swift in Sources */,
 				511C677B288B0EFA004D18C9 /* RevisionedData.swift in Sources */,
+				51D8AA5A28A13F99006B56F5 /* CommonError.swift in Sources */,
 				519E2205287360DD00DADA73 /* BaseVC.swift in Sources */,
 				51BBD11C2872E37800BBE992 /* AppDelegate.swift in Sources */,
 				519E21F22873606A00DADA73 /* HomeReactor.swift in Sources */,
@@ -555,7 +549,6 @@
 				519E21E82873502F00DADA73 /* Movie.swift in Sources */,
 				519E22352877347000DADA73 /* UIFontExtension.swift in Sources */,
 				519E22322877335700DADA73 /* MovieCell.swift in Sources */,
-				519E221428736AEC00DADA73 /* CommonError.swift in Sources */,
 				511C67682883C970004D18C9 /* HomeVerticalFlowLayout.swift in Sources */,
 				516919C128A09DCA00625974 /* CookieAppCheckProviderFactory.swift in Sources */,
 				511C676228817C7D004D18C9 /* UIColorExtension.swift in Sources */,
@@ -564,7 +557,6 @@
 				519E2208287360DD00DADA73 /* BaseReactor.swift in Sources */,
 				511C677328854273004D18C9 /* DetailView.swift in Sources */,
 				519E222F2877132600DADA73 /* MyLogger.swift in Sources */,
-				519E222B2875DE9500DADA73 /* Storage.swift in Sources */,
 				511C6775288542DA004D18C9 /* DetailReactor.swift in Sources */,
 				51BBD11E2872E37800BBE992 /* SceneDelegate.swift in Sources */,
 				511C678C28992497004D18C9 /* User.swift in Sources */,

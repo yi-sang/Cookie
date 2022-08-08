@@ -28,10 +28,10 @@ struct MovieService: MovieProtocol {
             let urlString = HTTPUtils.url + "3/movie/\(section.rawValue)"
             let headers = HTTPUtils.jsonHeader()
             let parameters: Parameters = [
-                "api_key" : Storage.shared.apiKey,
-                "language" : Storage.shared.language,
+                "api_key" : DataStore().apiKey,
+                "language" : DataStore().language,
                 "page" : page,
-                "region" : Storage.shared.region
+                "region" : DataStore().region
             ]
             HTTPUtils.defaultSession.request(
                 urlString,
@@ -58,12 +58,12 @@ struct MovieService: MovieProtocol {
             let urlString = HTTPUtils.url + "3/search/movie/"
             let headers = HTTPUtils.jsonHeader()
             let parameters: Parameters = [
-                "api_key" : Storage.shared.apiKey,
-                "language" : Storage.shared.language,
+                "api_key" : DataStore().apiKey,
+                "language" : DataStore().language,
                 "query" : query,
                 "page" : page,
                 "include_adult" : true,
-                "region" : Storage.shared.region
+                "region" : DataStore().region
             ]
             HTTPUtils.defaultSession.request(
                 urlString,
@@ -90,8 +90,8 @@ struct MovieService: MovieProtocol {
             let urlString = HTTPUtils.url + "3/movie/\(id)/videos"
             let headers = HTTPUtils.jsonHeader()
             let parameters: Parameters = [
-                "api_key" : Storage.shared.apiKey,
-                "language" : Storage.shared.language
+                "api_key" : DataStore().apiKey,
+                "language" : DataStore().language
             ]
             HTTPUtils.defaultSession.request(
                 urlString,
@@ -118,7 +118,7 @@ struct MovieService: MovieProtocol {
             let urlString = HTTPUtils.url + "3/movie/\(id)/videos"
             let headers = HTTPUtils.jsonHeader()
             let parameters: Parameters = [
-                "api_key" : Storage.shared.apiKey,
+                "api_key" : DataStore().apiKey,
                 "language" : "en-US"
             ]
             HTTPUtils.defaultSession.request(
@@ -177,7 +177,7 @@ struct MovieService: MovieProtocol {
                     guard let data = try? JSONSerialization.data(withJSONObject: value as Any) else { return }
                     let decoder = Firebase.JSONDecoder()
                     guard var totalCookie = try? decoder.decode(TotalCookie.self, from: data) else { return }
-                    guard let uuid = Storage.shared.uuid else { return }
+                    guard let uuid = DataStore().uuid else { return }
                     if let index = totalCookie.personal.firstIndex(of: Cookie(uuid: uuid, cookieType: 0)) {
                         let movie = db.child(movieID)
                         movie.child("personal").child("\(index)").removeValue()
@@ -210,7 +210,7 @@ struct MovieService: MovieProtocol {
                     guard let data = try? JSONSerialization.data(withJSONObject: value as Any) else { return }
                     let decoder = Firebase.JSONDecoder()
                     guard var totalCookie = try? decoder.decode(TotalCookie.self, from: data) else { return }
-                    guard let uuid = Storage.shared.uuid else { return }
+                    guard let uuid = DataStore().uuid else { return }
 
                     if let index = totalCookie.personal.firstIndex(of: Cookie(uuid: uuid, cookieType: 1)) {
                         let movie = db.child(movieID)
@@ -245,7 +245,7 @@ struct MovieService: MovieProtocol {
                     guard let data = try? JSONSerialization.data(withJSONObject: value as Any) else { return }
                     let decoder = Firebase.JSONDecoder()
                     guard var totalCookie = try? decoder.decode(TotalCookie.self, from: data) else { return }
-                    guard let uuid = Storage.shared.uuid else { return }
+                    guard let uuid = DataStore().uuid else { return }
 
                     let movie = db.child(movieID)
                     if let index = totalCookie.personal.firstIndex(of: Cookie(uuid: uuid, cookieType: 2)) {
@@ -276,7 +276,7 @@ struct MovieService: MovieProtocol {
         return Observable.create { observer -> Disposable in
             let db = Database.database().reference(withPath: "user")
             db.observeSingleEvent(of: .value, with: { snapshot in
-                guard let uuid = Storage.shared.uuid else { return }
+                guard let uuid = DataStore().uuid else { return }
                 let movieID = String(id)
                 if snapshot.hasChild(uuid) {
                     let value = snapshot.childSnapshot(forPath: uuid).value
@@ -316,7 +316,7 @@ struct MovieService: MovieProtocol {
         return Observable.create { observer -> Disposable in
             let db = Database.database().reference(withPath: "user")
             db.observeSingleEvent(of: .value, with: { snapshot in
-                guard let uuid = Storage.shared.uuid else { return }
+                guard let uuid = DataStore().uuid else { return }
                 if snapshot.hasChild(uuid) {
                     let value = snapshot.childSnapshot(forPath: uuid).value
                     guard let data = try? JSONSerialization.data(withJSONObject: value as Any) else { return }

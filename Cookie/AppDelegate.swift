@@ -46,12 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func initializeFirebase() {
         initilizeAppCheck()
         FirebaseApp.configure()
-        let user = Auth.auth().currentUser
-
-        // Prompt the user to re-provide their sign-in credentials
-
-        
         Auth.auth().signInAnonymously()
-        
     }
 }
