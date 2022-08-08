@@ -35,7 +35,7 @@ class DetailView: BaseView {
         $0.textColor = .black
         $0.textAlignment = .center
         $0.lineBreakMode = .byWordWrapping
-        $0.numberOfLines = 5
+        $0.numberOfLines = 3
     }
     
     var foldButton = UIButton().then {
@@ -242,7 +242,7 @@ class DetailView: BaseView {
     }
     
     func decreaseConstraint() {
-        overViewLabel.numberOfLines = 5
+        overViewLabel.numberOfLines = 3
     }
 }
 
