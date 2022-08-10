@@ -53,7 +53,6 @@ class HomeView: BaseView {
         collectionViewLayout: UICollectionViewFlowLayout()
     ).then {
         let layout = HomeHorizontalFlowLayout()
-        
         layout.scrollDirection = .horizontal
         layout.itemSize = MovieCell.itemSize
         $0.showsHorizontalScrollIndicator = false

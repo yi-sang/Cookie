@@ -9,5 +9,4 @@
 import RxCocoa
 
 class BaseReactor {
-//    let retryPublisher = PublishRelay<Bool>()
 }

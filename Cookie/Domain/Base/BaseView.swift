@@ -12,7 +12,7 @@ import RxSwift
 class BaseView: UIView {
     let disposeBag = DisposeBag()
     
-    private let loadingView = LoadingView()
+//    private let loadingView = LoadingView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,14 +30,14 @@ class BaseView: UIView {
     
     func bindConstraints() { }
     
-    func showLoading(isShow: Bool) {
-        if isShow {
-            addSubview(loadingView)
-            loadingView.snp.makeConstraints { (make) in
-                make.edges.equalTo(0)
-            }
-            isUserInteractionEnabled = false
-        }
-    }
+//    func showLoading(isShow: Bool) {
+//        if isShow {
+//            addSubview(loadingView)
+//            loadingView.snp.makeConstraints { (make) in
+//                make.edges.equalTo(0)
+//            }
+//            isUserInteractionEnabled = false
+//        }
+//    }
 }
 
