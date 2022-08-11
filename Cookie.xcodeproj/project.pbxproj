@@ -10,7 +10,6 @@
 		511C676228817C7D004D18C9 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C676128817C7C004D18C9 /* UIColorExtension.swift */; };
 		511C676428819557004D18C9 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C676328819557004D18C9 /* UIImageExtension.swift */; };
 		511C676628819662004D18C9 /* SearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C676528819662004D18C9 /* SearchButton.swift */; };
-		511C67682883C970004D18C9 /* HomeVerticalFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C67672883C970004D18C9 /* HomeVerticalFlowLayout.swift */; };
 		511C676A2883CCD2004D18C9 /* SearchMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C67692883CCD2004D18C9 /* SearchMovieCell.swift */; };
 		511C676D28853F9A004D18C9 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C676C28853F9A004D18C9 /* DetailVC.swift */; };
 		511C676F28853FB6004D18C9 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511C676E28853FB6004D18C9 /* HomeCoordinator.swift */; };
@@ -70,7 +69,6 @@
 		511C676128817C7C004D18C9 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		511C676328819557004D18C9 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		511C676528819662004D18C9 /* SearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchButton.swift; sourceTree = "<group>"; };
-		511C67672883C970004D18C9 /* HomeVerticalFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVerticalFlowLayout.swift; sourceTree = "<group>"; };
 		511C67692883CCD2004D18C9 /* SearchMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieCell.swift; sourceTree = "<group>"; };
 		511C676C28853F9A004D18C9 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		511C676E28853FB6004D18C9 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -301,7 +299,6 @@
 				519E22312877335700DADA73 /* MovieCell.swift */,
 				511C67692883CCD2004D18C9 /* SearchMovieCell.swift */,
 				519E22432877749300DADA73 /* HomeHorizontalFlowLayout.swift */,
-				511C67672883C970004D18C9 /* HomeVerticalFlowLayout.swift */,
 				511C676528819662004D18C9 /* SearchButton.swift */,
 			);
 			path = Components;
@@ -549,7 +546,6 @@
 				519E21E82873502F00DADA73 /* Movie.swift in Sources */,
 				519E22352877347000DADA73 /* UIFontExtension.swift in Sources */,
 				519E22322877335700DADA73 /* MovieCell.swift in Sources */,
-				511C67682883C970004D18C9 /* HomeVerticalFlowLayout.swift in Sources */,
 				516919C128A09DCA00625974 /* CookieAppCheckProviderFactory.swift in Sources */,
 				511C676228817C7D004D18C9 /* UIColorExtension.swift in Sources */,
 				519E223D2877424400DADA73 /* UIViewExtension.swift in Sources */,
@@ -720,11 +716,12 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.github.yi-sang.Cookie";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -752,11 +749,12 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.github.yi-sang.Cookie";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

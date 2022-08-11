@@ -10,6 +10,8 @@ import ReactorKit
 import RxSwift
 import RxCocoa
 import RxKeyboard
+import AppTrackingTransparency
+import GoogleMobileAds
 
 final class HomeVC: BaseVC, View, HomeCoordinator {
     private weak var coordinator: HomeCoordinator?
@@ -31,6 +33,7 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
         self.navigationItem.titleView = homeView.searchBar
         self.coordinator = self
         self.homeView.bannerView.rootViewController = self
+        self.loadAd()
     }
     
     static func instance() -> UINavigationController {
@@ -50,45 +53,60 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
             .asDriver()
             .drive (onNext: { [weak self] in
                 guard let self = self else { return }
-                self.homeView.additionalSetup()
                 UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
                     self.homeView.searchBar.searchTextField.backgroundColor = UIColor(rgb: 0xCBCBD0)
+                    self.homeView.removeOriginSubviews()
+                    if ATTrackingManager.trackingAuthorizationStatus == .authorized {
+                        self.homeView.setupAdditionalSubviews(status: 3)
+                    } else {
+                        self.homeView.setupAdditionalSubviews(status: -1)
+                    }
                 } completion: { Bool in
                     self.homeView.searchBar.searchTextField.backgroundColor = UIColor(rgb: 0xECECEE)
                     self.homeView.searchBar.showsCancelButton = true
                     self.homeView.searchBar.searchTextField.tintColor = .darkGray
-                    self.homeView.removeSubviews()
                 }
             }).disposed(by: eventDisposeBag)
+        
+        RxKeyboard.instance.visibleHeight
+            .filter { $0.isNormal }
+            .asDriver()
+            .drive (onNext: { [weak self] in
+                guard let self = self else { return }
+                let height = $0 - self.homeView.safeAreaInsets.bottom
+                if ATTrackingManager.trackingAuthorizationStatus == .authorized {
+                    self.homeView.updateAdditionalSubviews(status: 3, offset: height)
+                } else {
+                    self.homeView.updateAdditionalSubviews(status: -1, offset: height)
+                }
+                UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut) {
+                    self.homeView.layoutIfNeeded()
+                }
+            })
+            .disposed(by: eventDisposeBag)
+
         
         homeView.searchBar.rx.cancelButtonClicked
             .asDriver()
             .drive (onNext: { [weak self] in
                 guard let self = self else { return }
                 self.homeView.searchBar.searchTextField.resignFirstResponder()
-                self.homeView.movieVerticalCollectionView.removeFromSuperview()
-                self.homeView.bannerView.removeFromSuperview()
+                self.homeView.removeAdditionalSubviews()
                 self.homeView.searchBar.text = ""
                 self.homeView.searchBar.showsCancelButton = false
                 self.homeView.setup()
                 self.homeView.bindConstraints()
+                if ATTrackingManager.trackingAuthorizationStatus == .authorized {
+                    self.homeView.loadAdView()
+                } else {
+                    self.homeView.loadNoAdView()
+                }
+                self.loadAd()
             }).disposed(by: eventDisposeBag)
-        
-        RxKeyboard.instance.visibleHeight
-            .asDriver()
-            .filter { $0.isNormal }
-            .drive (onNext: { [weak self] keyboardHeight in
-                guard let self = self else { return }
-                let height = keyboardHeight - self.homeView.safeAreaInsets.bottom
-                self.homeView.updateAdditionalSetup(offset: height+55)
-                self.homeView.bannerView.removeFromSuperview()
-                self.homeView.addBannerViewToView(self.homeView.bannerView, bottomHeight: height)
-            })
-            .disposed(by: eventDisposeBag)
     }
     
     func bind(reactor: HomeReactor) {
-        // Action
+        // Action        
         homeView.searchBar.rx.text
             .orEmpty
             .filter { $0 != "" }
@@ -191,5 +209,15 @@ final class HomeVC: BaseVC, View, HomeCoordinator {
                 self.coordinator?.showDetail(movie: movieInfo.data!)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func loadAd() {
+        ATTrackingManager.requestTrackingAuthorization(completionHandler: { [self] status in
+            if status == .authorized {
+                self.homeView.loadAdView()
+            } else {
+                self.homeView.loadNoAdView()
+            }
+        })
     }
 }

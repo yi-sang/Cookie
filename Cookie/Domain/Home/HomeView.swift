@@ -9,7 +9,6 @@ import UIKit
 import Then
 import SnapKit
 import GoogleMobileAds
-import AppTrackingTransparency
 
 class HomeView: BaseView {
     var scrollView = UIScrollView().then {
@@ -18,10 +17,14 @@ class HomeView: BaseView {
     
     var contentView = UIView()
     
-    var virticalCollectionViewBottomConstraint: Constraint? = nil
-
-    var bannerView = GADBannerView(adSize: GADAdSizeBanner).then {
-        $0.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+    var scrollViewConstraint: Constraint? = nil
+        
+    var verticalViewConstraint: Constraint? = nil
+    
+    var bannerViewConstraint: Constraint? = nil
+    
+    var bannerView = GADBannerView(adSize: GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(UIScreen.main.bounds.width)).then {
+        $0.adUnitID = "ca-app-pub-1284586647851041/8398666241"
     }
     
     let searchBar = UISearchBar().then {
@@ -68,7 +71,6 @@ class HomeView: BaseView {
         collectionViewLayout: UICollectionViewFlowLayout()
     ).then {
         let layout = UICollectionViewFlowLayout()
-        
         layout.scrollDirection = .vertical
         layout.itemSize = SearchMovieCell.itemSize
         $0.showsVerticalScrollIndicator = false
@@ -91,13 +93,12 @@ class HomeView: BaseView {
             upcomingButton,
             movieHorizontalCollectionView
         )
-        self.loadAd()
     }
     
     override func bindConstraints() {
         scrollView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(self.safeAreaLayoutGuide)
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-50)
+            scrollViewConstraint = $0.bottom.equalTo(self.safeAreaLayoutGuide).constraint
         }
         
         contentView.snp.makeConstraints {
@@ -119,51 +120,81 @@ class HomeView: BaseView {
             $0.height.equalTo(((UIScreen.main.bounds.width - 10*4 - 10)/2 * 1.5)*2 + 10)
             $0.bottom.equalTo(contentView).offset(-5)
         }
-        addBannerViewToView(bannerView, bottomHeight: 0)
     }
     
-    func additionalSetup() {
-        self.addSubview(self.movieVerticalCollectionView)
+    private func setupVerticalView(offset: CGFloat) {
         movieVerticalCollectionView.snp.makeConstraints {
             $0.top.equalTo(self.safeAreaLayoutGuide).offset(10)
-            $0.leading.trailing.width.equalTo(self.safeAreaLayoutGuide)
-            virticalCollectionViewBottomConstraint = $0.bottom.equalTo(self.safeAreaLayoutGuide).constraint
+            $0.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            verticalViewConstraint = $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-offset).constraint
         }
     }
     
-    func updateAdditionalSetup(offset: CGFloat) {
-        self.virticalCollectionViewBottomConstraint?.update(inset: offset)
+    private func updateVerticalViewSubviews(offset: CGFloat) {
+        verticalViewConstraint?.update(offset: -offset)
     }
     
-    func removeSubviews() {
-        self.nowPlayingButton.removeFromSuperview()
-        self.upcomingButton.removeFromSuperview()
-        self.movieHorizontalCollectionView.removeFromSuperview()
+    private func updateAdditionalBannerView(bottomHeight: CGFloat) {
+        bannerViewConstraint?.update(offset: -bottomHeight)
     }
     
-    func addBannerViewToView(_ bannerView: GADBannerView, bottomHeight: CGFloat) {
-        self.addSubview(bannerView)
-        bannerView.snp.makeConstraints {
+    private func setupBannerView() {
+        self.bannerView.snp.makeConstraints {
             $0.centerX.equalTo(self)
             $0.height.equalTo(50)
             $0.width.equalTo(UIScreen.main.bounds.width)
-            $0.bottom.equalTo(self.safeAreaLayoutGuide).offset(-bottomHeight)
+            bannerViewConstraint = $0.bottom.equalTo(self.safeAreaLayoutGuide).constraint
         }
     }
     
-    private func loadAd() {
-        if #available(iOS 14, *) {
-            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-                if status == .authorized {
-                    DispatchQueue.main.async {
-                        self.bannerView.load(GADRequest())
-                    }
-                }
-            })
+    private func scrollViewSetup(inset: CGFloat) {
+        scrollViewConstraint?.update(offset: -inset)
+    }
+    
+    func removeAdditionalSubviews() {
+        self.movieVerticalCollectionView.removeFromSuperview()
+        self.bannerView.removeFromSuperview()
+    }
+    
+    func removeOriginSubviews() {
+        self.contentView.removeFromSuperview()
+        self.scrollView.removeFromSuperview()
+        self.nowPlayingButton.removeFromSuperview()
+        self.upcomingButton.removeFromSuperview()
+        self.movieHorizontalCollectionView.removeFromSuperview()
+        self.bannerView.removeFromSuperview()
+    }
+
+    func loadAdView() {
+        self.bannerView.load(GADRequest())
+        DispatchQueue.main.async {
+            self.addSubview(self.bannerView)
+            self.setupBannerView()
+            self.scrollViewSetup(inset: 55)
+        }
+    }
+    
+    func loadNoAdView() {
+            self.scrollViewSetup(inset: 0)
+    }
+    
+    func setupAdditionalSubviews(status: Int) {
+        self.addSubview(self.movieVerticalCollectionView)
+        if status == 3 {
+            self.addSubview(self.bannerView)
+            self.setupVerticalView(offset: 55)
+            self.setupBannerView()
         } else {
-            DispatchQueue.main.async {
-                self.bannerView.load(GADRequest())
-            }
+            self.setupVerticalView(offset: 5)
+        }
+    }
+    
+    func updateAdditionalSubviews(status: Int, offset: CGFloat) {
+        if status == 3 {
+            self.updateVerticalViewSubviews(offset: offset+55)
+            self.updateAdditionalBannerView(bottomHeight: offset)
+        } else {
+            self.updateVerticalViewSubviews(offset: offset+5)
         }
     }
 }

@@ -12,16 +12,16 @@ final class SearchMovieCell: BaseCollectionViewCell {
     
     static let registerId = "\(MovieCell.self)"
     
-    static let itemSize: CGSize = CGSize(width: (UIScreen.main.bounds.width - 10*4 - 10)/3,
-                                         height: (UIScreen.main.bounds.width - 10*4 - 10)/3 * 1.5)
-    
+    static let itemSize: CGSize = CGSize(width: (UIScreen.main.bounds.width-10*2)/3,
+                                         height: (UIScreen.main.bounds.width-10*2)/3 * 1.5)
+        
     private let containerView = UIView().then {
         $0.layer.cornerRadius = 30
         $0.backgroundColor = .white
         $0.layer.shadowColor = UIColor.black.cgColor
         $0.layer.shadowOffset = CGSize(width: 5, height: 5)
-        $0.layer.shadowRadius = 5.0
-        $0.layer.shadowOpacity = 0.4
+        $0.layer.shadowRadius = 5
+        $0.layer.shadowOpacity = 0.3
     }
     
     private let categoryImageView = UIImageView().then {
@@ -69,19 +69,17 @@ final class SearchMovieCell: BaseCollectionViewCell {
     }
     
     func bind(movie: Movie) {
-        DispatchQueue.main.async {
-            self.titleLabel.text = movie.title
-            if let url = URL(string: movie.posterPath) {
-                if url == URL(string: "https://image.tmdb.org/t/p/original") {
-                    self.categoryImageView.contentMode = .scaleAspectFit
-                    self.categoryImageView.image = R.image.soloCookie()
-                } else {
-                    self.categoryImageView.kf.setImage(with: url)
-                }
-            } else {
+        self.titleLabel.text = movie.title
+        if let url = URL(string: movie.posterPath) {
+            if url == URL(string: "https://image.tmdb.org/t/p/original") {
                 self.categoryImageView.contentMode = .scaleAspectFit
                 self.categoryImageView.image = R.image.soloCookie()
+            } else {
+                self.categoryImageView.kf.setImage(with: url)
             }
+        } else {
+            self.categoryImageView.contentMode = .scaleAspectFit
+            self.categoryImageView.image = R.image.soloCookie()
         }
     }
 }

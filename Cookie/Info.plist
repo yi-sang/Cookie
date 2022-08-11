@@ -5,7 +5,7 @@
 	<key>API_URL</key>
 	<string>$(API_URL)</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3182825691049544~4250214856</string>
+	<string>ca-app-pub-1284586647851041~2024829589</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -169,8 +169,6 @@
 		<string>NotoSansKR-Regular.otf</string>
 		<string>Jalnan.ttf</string>
 	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
